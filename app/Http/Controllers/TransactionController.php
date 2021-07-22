@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class TransactionController extends Controller
 {
@@ -11,9 +15,17 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $data = DB::table('transactions')->where($id)->orderBy('created_at', 'desc')->limit(5)->get();
+
+        $status = 1;
+
+        return response()->json(compact(
+            'status',
+            'data'
+        ));
+        
     }
 
     /**
@@ -21,9 +33,79 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request, $id)
     {
-        //
+        $saldo = 100000;
+        $validator = Validator::make($request->all(), [
+            'type' => 'required|integer',
+            'total' => 'required|integer',
+            'gram' => 'required'|'integer'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+        $transactionType = $request->get('type');
+        switch ($transactionType) {
+            case 1:
+               $currentSaldo = $saldo + $request->get('gram');
+                break;
+            case 2:
+                $currentSaldo = $saldo - $request->get('gram');
+                break;
+            case 3:
+                $currentSaldo = $saldo - $request->get('gram');
+                // $destionationUser = User::where('nohp', $request->get('destinationNumber'))->first();
+                // $prevDesintySaldo = $destionationUser->saldo;
+                // $newDestinySaldo = $prevDesintySaldo + $request->get('gram');
+                // $destionationUser->update(['saldo' => $newDestinySaldo]);
+                break;
+            case 4:
+                $currentSaldo = $saldo + $request->get('gram');
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+
+        $transaction = Transaction::create([
+            'userId' => $id,
+            'type' => $request->get('type'),
+            'gram' => $request->get('gram'),
+            'prevSaldo' => $request->get('prevSaldo'),
+            'currentSaldo' => $currentSaldo,
+            'biayaAdmin' => $request->get('biayaAdmin'),
+            'price' => $request->get('price'),
+            'total' => $request->get('total'),
+            'discount' => $request->get('discount'),
+            'destinationNumber' => $request->get('destinationNumber'),
+            'message' => $request->get('message'),
+        ]);
+
+        $user = User::find($id);
+        $updateUserSaldo = $user->update(['saldo'=>$currentSaldo]);
+
+        if ($updateUserSaldo && $transaction) {
+            return response()->json([
+                'data' => $transaction,
+                'status' => 1,
+                'message' => 'sukses'
+            ], 201);
+        }else {
+            return response()->json([
+                'data' => $transaction,
+                'status' => 0,
+                'message' => 'gagal'
+            ], 201);
+        }
+
+    }
+
+    protected function saldoCalculation($type,$prevSaldo, $currentSaldo){
+        // case 'value':
+        //     # code...
+        //     break;
     }
 
     /**
