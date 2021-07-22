@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\BuyPriceController;
 use App\Http\Controllers\PromoController;
+use App\Http\Controllers\SellPriceController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,5 +34,13 @@ Route::group([
         Route::post('/transactions/{id}', [TransactionController::class, 'create']);
         // Route::patch('/transactions/{id}', [TransactionController::class, 'update']);
         // Route::delete('/transactions/{id}', [TransactionController::class, 'destroy']);
+
+        Route::get('/buyPrices', [BuyPriceController::class, 'index']);
+        Route::get('/currentBuyPrice', [BuyPriceController::class, 'getCurrentPrice']);
+        Route::post('/buyprice', [BuyPriceController::class, 'create']);
+
+        Route::get('/sellPrices', [SellPriceController::class, 'index']);
+        Route::get('/currentSellPrice', [SellPriceController::class, 'getCurrentPrice']);
+        Route::post('/sellPrice', [SellPriceController::class, 'create']);
     }
 );

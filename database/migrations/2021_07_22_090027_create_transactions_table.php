@@ -22,6 +22,7 @@ class CreateTransactionsTable extends Migration
             $table->integer('currentSaldo');
             $table->integer('biayaAdmin');
             $table->integer('price');
+            $table->boolean('status');
             $table->integer('total');
             $table->integer('discount')->nullable();
             $table->string('destinationNumber')->nullable();

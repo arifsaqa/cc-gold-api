@@ -78,6 +78,7 @@ class TransactionController extends Controller
             'biayaAdmin' => $request->get('biayaAdmin'),
             'price' => $request->get('price'),
             'total' => $request->get('total'),
+            'status' => false,
             'discount' => $request->get('discount'),
             'destinationNumber' => $request->get('destinationNumber'),
             'message' => $request->get('message'),

@@ -14,6 +14,7 @@ class Transaction extends Model
         'type',
         'price',
         'total',
+        'status',
         'gram',
         'discount',
         'destinationNumber',
