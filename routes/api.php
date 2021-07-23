@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BuyPriceController;
 use App\Http\Controllers\PromoController;
 use App\Http\Controllers\SellPriceController;
@@ -23,6 +24,15 @@ Route::group([
     'prefix' => 'v1'],
      function()
     {
+
+        Route::post('/login',[AuthController::class, 'login']);
+        Route::post('/register', [AuthController::class, 'register']);
+        Route::get('/checkToken', [AuthController::class, 'isTokenValid']);
+        Route::post('/reloginWithPin', [AuthController::class, 'reloginWithPin']);
+        Route::get('/getAllUsers', [AuthController::class, 'getAllUsers']);
+        Route::post('/user/upload', [AuthController::class, 'upload']);
+        Route::post('/logout', [AuthController::class, 'logout']);
+
         Route::get('/promos', [PromoController::class, 'index']);
         Route::post('/promos/upload', [PromoController::class, 'upload']);
         Route::post('/promos', [PromoController::class, 'create']);

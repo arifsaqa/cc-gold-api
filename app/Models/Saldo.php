@@ -10,6 +10,7 @@ class Saldo extends Model
     use HasFactory;
 
     protected $fillable = [
+        'userId',
         'gram'
     ];
 }

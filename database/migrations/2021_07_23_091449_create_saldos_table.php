@@ -15,6 +15,7 @@ class CreateSaldosTable extends Migration
     {
         Schema::create('saldos', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('userId');
             $table->double('gram', 8, 1);
             $table->timestamps();
         });

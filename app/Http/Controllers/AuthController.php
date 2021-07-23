@@ -2,15 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Saldo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Namshi\JOSE\JWS;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
+/**
+ *register 
+ *  createUser -> update token to db && isLogin true
+ *login(phone and pin)
+ **if isLogin?False -> run Auth -> get token push to db && update isLogin True to db;
+ **if isLogin?True -> get token 
+ ****isTokenValid?true -> invalidate token ->run auth -> run Auth -> get token update user token to db
+ ****isTokenValid?false-> ->run auth -> run Auth -> get token update user token to db, update isLoginFalse
+
+ *logout -> **just invalidate the token and update isLogin:false and redirect whatever happen
+
+ *if
+ *
+ *refreshTokentoDb 
+ *relogin(withpin)without token
+ *relogin(withpin)with token
+ *private 
+ *   isTokenValid?
+ */
 class AuthController extends Controller
 {
     /**
@@ -38,8 +59,8 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        $credentials = $request->only('phone', 'pin');
-
+        $credentials = $request->only('phone', 'password');
+        $requestedDeviceId = $request->get('deviceId');
         try {
             if (!$token = JWTAuth::attempt($credentials)) {
                 return response()->json(['error' => 'invalid_credentials'], 400);
@@ -49,9 +70,16 @@ class AuthController extends Controller
         }
 
         $user = JWTAuth::user();
+        $dbDeviceId = $user->deviceId;
+        $isDeviceMatch= false;
+        if($requestedDeviceId == $dbDeviceId){
+            $isDeviceMatch = true;
+        }else{
+            $updateDeviceId = User::find($user->id)->first();
+            $updateDeviceId->update(['deviceId' => $requestedDeviceId]);
+        }
         $status = 1;
-        return response()->json(compact('status', 'user', 'token'));
-
+        return response()->json(compact('status', 'user', 'token', 'isDeviceMatch'));
     }
 
     /**
@@ -65,9 +93,9 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
-            'pin' => 'required|max:255|unique:users',
+            'password' => 'required|max:255',
             'phone' => 'required|string|max:255',
+            'deviceId' =>'required'
         ]);
 
         if ($validator->fails()) {
@@ -79,25 +107,52 @@ class AuthController extends Controller
             'email' => $request->get('email'),
             'phone' => $request->get('phone'),
             'image' => $request->get('image'),
-            'isLogin' => true,
             'isVerified' => false,
             'role' => 0,
             'password' => Hash::make($request->get('password')),
-            'pin' => Hash::make($request->get('pin')),
-            'token' => ''
+            'deviceId' => $request->get('deviceId'),
         ]);
 
         $token = JWTAuth::fromUser($user);
-
-        $updateToken = User::find($user->id)->first();
-        $updateToken->update(['token' =>$token]);
-        
-
         $status = 1;
 
-        return response()->json(['status'=> $status, 'data'=>$user]);
-
+        return response()->json(['status'=> $status, 'data'=>$user, 'token'=>$token]);
     }
+
+    public function isTokenValid(){
+        try {
+            if (JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['message' => 'The token still good', 'status' => 1], 200);
+            }
+        } catch (TokenExpiredException $e) {
+
+            $message = 'token_expired';
+            return response()->json(['message' => $message,'status'=> 0]);
+        } catch (TokenInvalidException $e) {
+            $message = 'token_invalid';
+            return response()->json(['message' => $message,'status'=> 0]);
+        } catch (JWTException $e) {
+            $message = 'token_absent';
+            return response()->json(['message' => $message,'status'=> 0]);
+        }
+        ;
+    }
+
+    public function reloginWithPin(Request $request){
+        $credentials = $request->only('phone', 'password');
+        $requestedDeviceId = $request->get('deviceId');
+        try {
+            if (!$token = JWTAuth::attempt($credentials)) {
+                return response()->json(['error' => 'invalid_credentials', 'status'=>0], 400);
+            }
+        } catch (JWTException $e) {
+            return response()->json(['error' => 'could_not_create_token'], 500);
+        }
+        $status = 1;
+        return response()->json(compact('status', 'token'));
+    }
+
+
 
     public function getAllUsers()
     {
@@ -105,7 +160,7 @@ class AuthController extends Controller
         $failed = 0;
         $user = JWTAuth::parseToken()->authenticate();
         try {
-            if (!$user || $user->role) {
+            if (!$user || $user->role==0) {
                 return response()->json(['message' => 'Your not allowed to get the data', 'status' => $failed], 404);
             }
         } catch (TokenExpiredException $e) {
@@ -115,7 +170,6 @@ class AuthController extends Controller
 
             return response()->json(['token_invalid'], $e->getCode());
         } catch (JWTException $e) {
-
             return response()->json(['token_absent'], $e->getCode());
         }
         $users = User::where('role', 0)->get();
@@ -127,13 +181,10 @@ class AuthController extends Controller
 
 
 
-    public function logout(Request $request, $id)
+    public function logout(Request $request)
     {
 
         $token = $request->header('Authorization');
-        $user = User::find($id)->first();
-        $user->update(['isLogin' => false]);
-        // $loginStatus = false;
         try {
             JWTAuth::parseToken()->invalidate($token);
             return response()->json(['message'=>'you are logged out', ], 200);
@@ -169,33 +220,45 @@ class AuthController extends Controller
      */
     public function upload(Request $request)
     {
-       
-    }
 
-    public function refresh(Request $request)
-    {
-        $credentials = $request->only('pin');
-        $token = JWTAuth::attempt($credentials);
-        $this->createNewToken($token);
-    }
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+        if ($files = $request->file('image')) {
+            $destinationPath = 'images/profile/'; // upload path
+            $imageName = date('YmdHis') . "." . $files->getClientOriginalExtension();
+            // $ikan['image'] = "$imageName";
+            $files->move($destinationPath, $imageName);
 
-    protected function createNewToken($token)
-    {
+            $forDB = $destinationPath . $imageName;
+        }
         return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'user' => auth()->user()
-        ]);
+            "status" => 1,
+            "message" => "sukses",
+            "location" => $forDB
+        ], 201);
     }
 
     public function destroy($id)
     {
-        //
+        $isAdmin = JWTAuth::parseToken()->authenticate();
+        if ($isAdmin->role == 0) {
+            return response()->json([
+                "status" => 0,
+                "message" => "You are not an admin",
+            ], 400);
+        }
+
+        $user = User::find($id);
+        if ($user == null) {
+            return response()->json([
+                "status" => 0,
+                "message" => "gagal",
+            ], 400);
+        }
+        $user->delete();
+
+        return response()->json([
+            "status" => 1,
+            "message" => "sukses",
+        ], 201);
+
     }
 }
