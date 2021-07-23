@@ -52,5 +52,11 @@ Route::group([
         Route::get('/sellPrices', [SellPriceController::class, 'index']);
         Route::get('/currentSellPrice', [SellPriceController::class, 'getCurrentPrice']);
         Route::post('/sellPrice', [SellPriceController::class, 'create']);
+
+        Route::get('/paymentMethods', [PromoController::class, 'index']);
+        Route::post('/paymentMethods/upload', [PromoController::class, 'upload']);
+        Route::post('/paymentMethods', [PromoController::class, 'create']);
+        Route::patch('/paymentMethods/{id}', [PromoController::class, 'update']);
+        // Route::delete('/paymentMethods/{id}', [PromoController::class, 'destroy']);
     }
 );

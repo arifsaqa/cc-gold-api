@@ -17,7 +17,7 @@ class TransactionController extends Controller
      */
     public function index($id)
     {
-        $data = DB::table('transactions')->where($id)->orderBy('created_at', 'desc')->limit(5)->get();
+        $data = DB::table('transactions')->where(['userId'=> $id,'status'=>1])->orderBy('created_at', 'desc')->limit(5)->get();
 
         $status = 1;
 
@@ -151,7 +151,10 @@ class TransactionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       $transaction =  Transaction::find($id)->first();
+
+       $total = $transaction->total; 
+       
     }
 
     /**

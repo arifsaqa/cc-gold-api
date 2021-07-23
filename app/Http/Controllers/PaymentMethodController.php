@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PaymentMethod;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PaymentMethodController extends Controller
 {
@@ -13,7 +15,10 @@ class PaymentMethodController extends Controller
      */
     public function index()
     {
-        //
+        PaymentMethod::all();
+        $data = PaymentMethod::all();
+        $status = 1;
+        return response()->json(compact('status', 'data'));
     }
 
     /**
@@ -21,9 +26,24 @@ class PaymentMethodController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'logo' => 'required|string',
+            'name' => 'required|string'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
+        $data = PaymentMethod::create([
+            'name' => $request->get('name'),
+            'logo' => $request->get('logo'),
+        ]);
+
+        $status = 1;
+        return response()->json(compact(['status', 'data']));
     }
 
     /**
@@ -54,9 +74,21 @@ class PaymentMethodController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function upload(Request $request)
     {
-        //
+        if ($files = $request->file('image')) {
+            $destinationPath = 'images/paymen-method/'; // upload path
+            $imageName = date('YmdHis') . "." . $files->getClientOriginalExtension();
+            // $ikan['image'] = "$imageName";
+            $files->move($destinationPath, $imageName);
+
+            $forDB = $destinationPath . $imageName;
+        }
+        return response()->json([
+            "status" => 1,
+            "message" => "sukses",
+            "location" => $forDB
+        ], 201);
     }
 
     /**
@@ -68,7 +100,14 @@ class PaymentMethodController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $saldo = PaymentMethod::find($id);
+        $saldo->update([
+            'name' => $request->get('name'), 
+            'image' => $request->get('image'),
+        ]);
+
+        return response()->json(['status' => 1, 'message' => 'success']);
     }
 
     /**
