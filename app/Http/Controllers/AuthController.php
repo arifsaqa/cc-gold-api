@@ -74,9 +74,6 @@ class AuthController extends Controller
         $isDeviceMatch= false;
         if($requestedDeviceId == $dbDeviceId){
             $isDeviceMatch = true;
-        }else{
-            $updateDeviceId = User::find($user->id)->first();
-            $updateDeviceId->update(['deviceId' => $requestedDeviceId]);
         }
         $status = 1;
         return response()->json(compact('status', 'user', 'token', 'isDeviceMatch'));
@@ -136,6 +133,13 @@ class AuthController extends Controller
             return response()->json(['message' => $message,'status'=> 0]);
         }
         ;
+    }
+
+    public function getUserById($id){
+
+        $user = User::find($id)->first();
+        // $status = 1;
+        return response()->json(compact( 'user'));
     }
 
     public function reloginWithPin(Request $request){
@@ -206,9 +210,11 @@ class AuthController extends Controller
      * @return \Illuminate\Http\Response
      */
   
-    public function edit($id)
+    public function updateDevice(Request $request ,$id)
     {
-        //
+        $updateDeviceId = User::find($id)->first();
+        $requestedDeviceId = $request->get('deviceId');
+        $updateDeviceId->update(['deviceId' => $requestedDeviceId]);
     }
 
     /**

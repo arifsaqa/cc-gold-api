@@ -26,11 +26,13 @@ Route::group([
     {
 
         Route::post('/login',[AuthController::class, 'login']);
+        Route::get('/getUserById/{id}', [AuthController::class, 'getUserById']);
         Route::post('/register', [AuthController::class, 'register']);
         Route::get('/checkToken', [AuthController::class, 'isTokenValid']);
         Route::post('/reloginWithPin', [AuthController::class, 'reloginWithPin']);
         Route::get('/getAllUsers', [AuthController::class, 'getAllUsers']);
         Route::post('/user/upload', [AuthController::class, 'upload']);
+        Route::post('/updateDevice/{id}', [AuthController::class, 'updateDevice']);
         Route::post('/logout', [AuthController::class, 'logout']);
 
         Route::get('/promos', [PromoController::class, 'index']);
