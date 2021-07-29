@@ -77,7 +77,7 @@ class PaymentMethodController extends Controller
     public function upload(Request $request)
     {
         if ($files = $request->file('image')) {
-            $destinationPath = 'images/paymen-method/'; // upload path
+            $destinationPath = 'public/images/paymen-method/'; // upload path
             $imageName = date('YmdHis') . "." . $files->getClientOriginalExtension();
             // $ikan['image'] = "$imageName";
             $files->move($destinationPath, $imageName);

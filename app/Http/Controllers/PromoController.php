@@ -128,7 +128,7 @@ class PromoController extends Controller
     public function upload(Request $request){
 
         if ($files = $request->file('image')) {
-            $destinationPath = 'images/promo/'; // upload path
+            $destinationPath = 'public/images/promo/'; // upload path
             $imageName = date('YmdHis') . "." . $files->getClientOriginalExtension();
             // $ikan['image'] = "$imageName";
             $files->move($destinationPath, $imageName);

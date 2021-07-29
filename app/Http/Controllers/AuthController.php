@@ -228,7 +228,7 @@ class AuthController extends Controller
     {
 
         if ($files = $request->file('image')) {
-            $destinationPath = 'images/profile/'; // upload path
+            $destinationPath = 'public/images/profile/'; // upload path
             $imageName = date('YmdHis') . "." . $files->getClientOriginalExtension();
             // $ikan['image'] = "$imageName";
             $files->move($destinationPath, $imageName);
