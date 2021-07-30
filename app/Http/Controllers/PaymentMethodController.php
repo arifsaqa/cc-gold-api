@@ -15,7 +15,6 @@ class PaymentMethodController extends Controller
      */
     public function index()
     {
-        PaymentMethod::all();
         $data = PaymentMethod::all();
         $status = 1;
         return response()->json(compact('status', 'data'));
@@ -76,14 +75,21 @@ class PaymentMethodController extends Controller
      */
     public function upload(Request $request)
     {
-        if ($files = $request->file('image')) {
-            $destinationPath = 'public/images/paymen-method/'; // upload path
-            $imageName = date('YmdHis') . "." . $files->getClientOriginalExtension();
-            // $ikan['image'] = "$imageName";
-            $files->move($destinationPath, $imageName);
-
-            $forDB = $destinationPath . $imageName;
+        $validator = Validator::make($request->all(), ["image" => 'required']);
+        if ($validator->fails()) {
+            return response()->json([
+                "status" => 0,
+                "message" => "gagal",
+                "location" => null
+            ], 400);
         }
+        $files = $request->file('image');
+        $destinationPath = 'public/images/paymen-method/'; // upload path
+        $imageName = date('YmdHis') . "." . $files->getClientOriginalExtension();
+        // $ikan['image'] = "$imageName";
+        $files->move($destinationPath, $imageName);
+
+        $forDB = $destinationPath . $imageName;
         return response()->json([
             "status" => 1,
             "message" => "sukses",
@@ -103,7 +109,7 @@ class PaymentMethodController extends Controller
 
         $saldo = PaymentMethod::find($id);
         $saldo->update([
-            'name' => $request->get('name'), 
+            'name' => $request->get('name'),
             'image' => $request->get('image'),
         ]);
 

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BuyPriceController;
+use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\PromoController;
 use App\Http\Controllers\SellPriceController;
 use App\Http\Controllers\TransactionController;
@@ -55,10 +56,10 @@ Route::group([
         Route::get('/currentSellPrice', [SellPriceController::class, 'getCurrentPrice']);
         Route::post('/sellPrice', [SellPriceController::class, 'create']);
 
-        Route::get('/paymentMethods', [PromoController::class, 'index']);
-        Route::post('/paymentMethods/upload', [PromoController::class, 'upload']);
-        Route::post('/paymentMethods', [PromoController::class, 'create']);
-        Route::patch('/paymentMethods/{id}', [PromoController::class, 'update']);
+        Route::get('/paymentMethods', [PaymentMethodController::class, 'index']);
+        Route::post('/paymentMethods/upload', [PaymentMethodController::class, 'upload']);
+        Route::post('/paymentMethods', [PaymentMethodController::class, 'create']);
+        Route::patch('/paymentMethods/{id}', [PaymentMethodController::class, 'update']);
         // Route::delete('/paymentMethods/{id}', [PromoController::class, 'destroy']);
     }
 );
