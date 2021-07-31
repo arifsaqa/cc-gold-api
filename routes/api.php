@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BuyPriceController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\PromoController;
+use App\Http\Controllers\SaldoController;
 use App\Http\Controllers\SellPriceController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Http\Request;
@@ -47,6 +48,9 @@ Route::group([
         Route::post('/transactions/{id}', [TransactionController::class, 'create']);
         // Route::patch('/transactions/{id}', [TransactionController::class, 'update']);
         // Route::delete('/transactions/{id}', [TransactionController::class, 'destroy']);
+        Route::get('/saldo/{id}', [SaldoController::class, 'index']);
+        Route::post('/saldo', [SaldoController::class, 'create']);
+        Route::post('/saldo/delete', [BuyPriceController::class, 'destroy']);
 
         Route::get('/buyPrices', [BuyPriceController::class, 'index']);
         Route::get('/currentBuyPrice', [BuyPriceController::class, 'getCurrentPrice']);

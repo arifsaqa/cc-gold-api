@@ -55,17 +55,11 @@ class TransactionController extends Controller
                 break;
             case 3:
                 $currentSaldo = $saldo - $request->get('gram');
-                // $destionationUser = User::where('nohp', $request->get('destinationNumber'))->first();
-                // $prevDesintySaldo = $destionationUser->saldo;
-                // $newDestinySaldo = $prevDesintySaldo + $request->get('gram');
-                // $destionationUser->update(['saldo' => $newDestinySaldo]);
                 break;
             case 4:
                 $currentSaldo = $saldo + $request->get('gram');
                 break;
-            
             default:
-                # code...
                 break;
         }
 

@@ -15,13 +15,18 @@ class SaldoController extends Controller
      */
     public function index($id)
     {
-        $saldo = Saldo::where("userId",$id)->first();
+        $saldo = Saldo::where("userId", $id)->first();
+        if ($saldo) {
 
+            return response()->json([
+                "status" => 1,
+                "saldo" => $saldo,
+            ], 200);
+        }
         return response()->json([
-            "status" => 1,
-            "saldo" => $saldo,
+            "status" => 0,
+            "saldo" => null,
         ], 200);
-
     }
 
     /**
@@ -31,12 +36,12 @@ class SaldoController extends Controller
      */
     public function create(Request $request)
     {
-       Saldo::create([
-           'userId' => $request->get('userId'),
-           'gram' => $request->get('gram'),
-       ]);
+        Saldo::create([
+            'userId' => $request->get('userId'),
+            'gram' => $request->get('gram'),
+        ]);
 
-       return response()->json(['status'=>1, 'mesage'=>'sukses']);
+        return response()->json(['status' => 1, 'mesage' => 'sukses']);
     }
 
     /**
@@ -91,9 +96,9 @@ class SaldoController extends Controller
         }
 
         $saldo = Saldo::find($id);
-        $saldo->update(['gram'=>$request->get('gram')]);
-        
-        return response()->json(['status'=>1, 'message'=>'success']);
+        $saldo->update(['gram' => $request->get('gram')]);
+
+        return response()->json(['status' => 1, 'message' => 'success']);
     }
 
     /**
@@ -116,6 +121,6 @@ class SaldoController extends Controller
         $saldo = Saldo::find($id);
         $saldo->delete();
 
-        return response()->json(['status'=>1, 'message'=>'berhasil']);
+        return response()->json(['status' => 1, 'message' => 'berhasil']);
     }
 }
