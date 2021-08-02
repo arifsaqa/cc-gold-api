@@ -104,7 +104,7 @@ class AuthController extends Controller
             'email' => $request->get('email'),
             'phone' => $request->get('phone'),
             'image' => $request->get('image'),
-            'isVerified' => false,
+            'isVerified' => 0,
             'role' => 0,
             'password' => Hash::make($request->get('password')),
             'deviceId' => $request->get('deviceId'),
@@ -113,7 +113,7 @@ class AuthController extends Controller
         $token = JWTAuth::fromUser($user);
         $status = 1;
 
-        return response()->json(['status'=> $status, 'data'=>$user, 'token'=>$token]);
+        return response()->json(['status'=> $status, 'user'=>$user, 'token'=>$token]);
     }
 
     public function isTokenValid(){
@@ -137,7 +137,7 @@ class AuthController extends Controller
 
     public function getUserById($id){
 
-        $user = User::find($id)->first();
+        $user = User::find($id);
         // $status = 1;
         return response()->json(compact( 'user'));
     }

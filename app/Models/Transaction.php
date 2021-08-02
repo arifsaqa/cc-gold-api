@@ -12,12 +12,17 @@ class Transaction extends Model
     protected $fillable = [
         'userId',
         'type',
-        'price',
+        'gram',
+        'adminFee',
+        'priceId',
+        'nominal',
         'total',
         'status',
-        'gram',
         'discount',
         'destinationNumber',
-        'message'
+        'message',
+        'barcode'
     ];
 }
+
+ 

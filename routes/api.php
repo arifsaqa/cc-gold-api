@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BankAccountController;
 use App\Http\Controllers\BuyPriceController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\PromoController;
@@ -46,6 +47,7 @@ Route::group([
 
         Route::get('/transactions/{id}', [TransactionController::class, 'index']);
         Route::post('/transactions/{id}', [TransactionController::class, 'create']);
+        Route::post('/transactions/uploadBarcode', [TransactionController::class, 'uploadBarcode']);
         // Route::patch('/transactions/{id}', [TransactionController::class, 'update']);
         // Route::delete('/transactions/{id}', [TransactionController::class, 'destroy']);
         Route::get('/saldo/{id}', [SaldoController::class, 'index']);
@@ -55,6 +57,9 @@ Route::group([
         Route::get('/buyPrices', [BuyPriceController::class, 'index']);
         Route::get('/currentBuyPrice', [BuyPriceController::class, 'getCurrentPrice']);
         Route::post('/buyprice', [BuyPriceController::class, 'create']);
+
+        Route::get('/bankAccounts/{id}', [BankAccountController::class, 'index']);
+        Route::post('/bankAccounts/{id}', [BankAccountController::class, 'create']);
 
         Route::get('/sellPrices', [SellPriceController::class, 'index']);
         Route::get('/currentSellPrice', [SellPriceController::class, 'getCurrentPrice']);

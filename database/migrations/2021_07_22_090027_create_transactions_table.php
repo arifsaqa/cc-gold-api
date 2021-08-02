@@ -18,25 +18,18 @@ class CreateTransactionsTable extends Migration
             $table->integer('userId');
             $table->integer('type');
             $table->integer('gram');
-            $table->integer('prevSaldo');
-            $table->integer('currentSaldo');
-            $table->integer('biayaAdmin');
-            $table->integer('price');
+            $table->integer('priceId');
+            $table->integer('adminFee');
+            $table->integer('nominal');
             $table->boolean('status');
-            $table->integer('total');
-            $table->integer('discount')->nullable();
+            $table->integer('discount');
+            $table->string('barcode');
             $table->string('destinationNumber')->nullable();
             $table->string('message')->nullable();
             $table->timestamps();
         });
     }
 
-    //  'userId',
-    //     'type',
-    //     'price',
-    //     'total',
-    //     'destinationNumber',
-    //     'message'
 
     /**
      * Reverse the migrations.
