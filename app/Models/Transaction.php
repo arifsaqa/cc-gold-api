@@ -13,6 +13,7 @@ class Transaction extends Model
         'userId',
         'type',
         'gram',
+        'payment',
         'adminFee',
         'priceId',
         'nominal',

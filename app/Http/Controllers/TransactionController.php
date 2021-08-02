@@ -35,7 +35,7 @@ class TransactionController extends Controller
     public function create(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-
+            'payment' => 'required|integer',
             'type' => 'required|integer',
             'gram' => 'required|integer',
             'priceId' => 'required|integer',
@@ -49,6 +49,7 @@ class TransactionController extends Controller
         }
         $data = Transaction::create([
             'userId' => $id,
+            'payment' => $request->get('payment'),
             'type' => $request->get('type'),
             'gram' => $request->get('gram'),
             'adminFee' => $request->get('adminFee'),

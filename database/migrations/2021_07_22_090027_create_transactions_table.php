@@ -17,6 +17,7 @@ class CreateTransactionsTable extends Migration
             $table->id();
             $table->integer('userId');
             $table->integer('type');
+            $table->integer('payment');
             $table->integer('gram');
             $table->integer('priceId');
             $table->integer('adminFee');
