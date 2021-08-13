@@ -35,7 +35,7 @@ Route::group([
         Route::post('/reloginWithPin', [AuthController::class, 'reloginWithPin']);
         Route::get('/getAllUsers', [AuthController::class, 'getAllUsers']);
         Route::post('/user/upload', [AuthController::class, 'upload']);
-        Route::post('/updateDevice/{id}', [AuthController::class, 'updateDevice']);
+        Route::post('/updateIsVerified/{id}', [AuthController::class, 'updateIsVerified']);
         Route::post('/logout', [AuthController::class, 'logout']);
 
         Route::get('/promos', [PromoController::class, 'index']);

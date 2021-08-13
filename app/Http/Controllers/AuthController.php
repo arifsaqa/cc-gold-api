@@ -104,7 +104,7 @@ class AuthController extends Controller
             'email' => $request->get('email'),
             'phone' => $request->get('phone'),
             'image' => $request->get('image'),
-            'isVerified' => 0,
+            'isVerified' => $request->get('isVerified')?1:0,
             'role' => 0,
             'password' => Hash::make($request->get('password')),
             'deviceId' => $request->get('deviceId'),
@@ -210,11 +210,28 @@ class AuthController extends Controller
      * @return \Illuminate\Http\Response
      */
   
-    public function updateDevice(Request $request ,$id)
+    public function updateIsVerified(Request $request ,$id)
     {
-        $updateDeviceId = User::find($id)->first();
-        $requestedDeviceId = $request->get('deviceId');
-        $updateDeviceId->update(['deviceId' => $requestedDeviceId]);
+        $user = JWTAuth::parseToken()->authenticate();
+        try {
+            if (!$user || $user->role == 0) {
+                return response()->json(['message' => 'Your not allowed to update user', 'status' => 0], 404);
+            }
+        } catch (TokenExpiredException $e) {
+
+            return response()->json(['token_expired'], $e->getCode());
+        } catch (TokenInvalidException $e) {
+
+            return response()->json(['token_invalid'], $e->getCode());
+        } catch (JWTException $e) {
+            return response()->json(['token_absent'], $e->getCode());
+        }
+        
+        $updateIsVerified = User::find($id);
+        $updateUserVerification = $request->get('isVerified');
+        $updateIsVerified->update(['isVerified' => $updateUserVerification]);
+
+        return response('Berhasil', 200)->json(['status' => 1, 'data' => 'berhasil']);
     }
 
     /**
