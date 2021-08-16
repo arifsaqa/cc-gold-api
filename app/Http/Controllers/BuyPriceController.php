@@ -6,6 +6,7 @@ use App\Models\BuyPrice;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
 class BuyPriceController extends Controller
@@ -71,23 +72,12 @@ class BuyPriceController extends Controller
         }
 
         if ($nowFormat && $lastCreated) {
-            return response()->json(
-                [
-                    'message' => "You only can create new price per day",
-                    'status' => 0,
-                ]
-            );
+            return Redirect::back()->with('error', 'Maksimal perubahan harga sehari sekali');
         }
         $price = BuyPrice::create([
             'price' => $request->get('price')
         ]);
-        return response()->json(
-            [
-                'message' => "success",
-                'price' => $price,
-                'status' => 1,
-            ]
-        );
+        return redirect()->back()->with('success', 'Berhasil menambah harga');
     }
 
     /**

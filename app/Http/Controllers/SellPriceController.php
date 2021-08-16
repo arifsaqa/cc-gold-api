@@ -7,6 +7,7 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
 
 class SellPriceController extends Controller
 {
@@ -69,23 +70,12 @@ class SellPriceController extends Controller
         }
 
         if ($nowFormat && $lastCreated) {
-            return response()->json(
-                [
-                    'message' => "You only can create new price per day",
-                    'status' => 0,
-                ]
-            );
+            return Redirect::back()->with('error', 'Maksimal perubahan harga sehari sekali');
         }
         $price = SellPrice::create([
             'price' => $request->get('price')
         ]);
-        return response()->json(
-            [
-                'message' => "success",
-                'price' => $price,
-                'status' => 1,
-            ]
-        );
+        return redirect()->back()->with('success', 'Berhasil menambah harga');
     }
 
     /**

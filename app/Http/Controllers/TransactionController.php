@@ -139,7 +139,13 @@ class TransactionController extends Controller
 
         $total = $transaction->total;
     }
-
+    public function updateStatus($id)
+    {
+        $transaction =  Transaction::find($id)->first();
+        $transaction->status = 1;
+        $transaction->save();
+        return redirect()->back()->with('success', 'Status berhasil diubah');
+    }
     /**
      * Remove the specified resource from storage.
      *

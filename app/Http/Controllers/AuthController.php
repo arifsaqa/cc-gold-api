@@ -14,11 +14,11 @@ use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 /**
- *register 
+ *register
  *  createUser -> update token to db && isLogin true
  *login(phone and pin)
  **if isLogin?False -> run Auth -> get token push to db && update isLogin True to db;
- **if isLogin?True -> get token 
+ **if isLogin?True -> get token
  ****isTokenValid?true -> invalidate token ->run auth -> run Auth -> get token update user token to db
  ****isTokenValid?false-> ->run auth -> run Auth -> get token update user token to db, update isLoginFalse
 
@@ -26,10 +26,10 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
  *if
  *
- *refreshTokentoDb 
+ *refreshTokentoDb
  *relogin(withpin)without token
  *relogin(withpin)with token
- *private 
+ *private
  *   isTokenValid?
  */
 class AuthController extends Controller
@@ -139,7 +139,7 @@ class AuthController extends Controller
 
         $user = User::find($id);
         // $status = 1;
-        return response()->json(compact( 'user'));
+        return response()->json($user);
     }
 
     public function reloginWithPin(Request $request){
@@ -209,7 +209,7 @@ class AuthController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-  
+
     public function updateIsVerified(Request $request ,$id)
     {
         $user = JWTAuth::parseToken()->authenticate();
@@ -226,7 +226,7 @@ class AuthController extends Controller
         } catch (JWTException $e) {
             return response()->json(['token_absent'], $e->getCode());
         }
-        
+
         $updateIsVerified = User::find($id);
         $updateUserVerification = $request->get('isVerified');
         $updateIsVerified->update(['isVerified' => $updateUserVerification]);
