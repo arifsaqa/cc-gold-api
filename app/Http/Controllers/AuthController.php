@@ -156,7 +156,28 @@ class AuthController extends Controller
         return response()->json(compact('status', 'token'));
     }
 
+    public function verifiedByOTP(){
+        $user = JWTAuth::parseToken()->authenticate();
+        try {
+            if (!$user || $user->isVerified == 1) {
+                return response()->json(['message' => 'You are verified', 'status' => 0], 404);
+            }
+        } catch (TokenExpiredException $e) {
 
+            return response()->json(['token_expired'], $e->getCode());
+        } catch (TokenInvalidException $e) {
+
+            return response()->json(['token_invalid'], $e->getCode());
+        } catch (JWTException $e) {
+            return response()->json(['token_absent'], $e->getCode());
+        }
+
+        $updateIsVerified = User::find($user->id);
+        // $updateUserVerification = $request->get('isVerified');
+        $updateIsVerified->update(['isVerified' => 1]);
+
+        return response('Berhasil', 200)->json(['status' => 1, 'message' => 'berhasil']);
+    }
 
     public function getAllUsers()
     {

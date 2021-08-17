@@ -37,6 +37,8 @@ Route::group([
         Route::post('/user/upload', [AuthController::class, 'upload']);
         Route::post('/updateIsVerified/{id}', [AuthController::class, 'updateIsVerified']);
         Route::post('/logout', [AuthController::class, 'logout']);
+        Route::post('/verifiedByOTP', [AuthController::class, 'verifiedByOTP']);
+
 
         Route::get('/promos', [PromoController::class, 'index']);
         Route::post('/promos/upload', [PromoController::class, 'upload']);
