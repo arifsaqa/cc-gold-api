@@ -176,7 +176,7 @@ class AuthController extends Controller
         // $updateUserVerification = $request->get('isVerified');
         $updateIsVerified->update(['isVerified' => 1]);
 
-        return response('Berhasil', 200)->json(['status' => 1, 'message' => 'berhasil']);
+        return response()->json(['status' => 1, 'message' => 'berhasil'], 200);
     }
 
     public function getAllUsers()
@@ -252,7 +252,7 @@ class AuthController extends Controller
         $updateUserVerification = $request->get('isVerified');
         $updateIsVerified->update(['isVerified' => $updateUserVerification]);
 
-        return response('Berhasil', 200)->json(['status' => 1, 'data' => 'berhasil']);
+        return response()->json(['status' => 1, 'data' => 'berhasil']);
     }
 
     /**

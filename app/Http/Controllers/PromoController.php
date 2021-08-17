@@ -134,12 +134,12 @@ class PromoController extends Controller
             $files->move($destinationPath, $imageName);
 
             $forDB = $destinationPath . $imageName;
+            return response()->json([
+                "status" => 1,
+                "message" => "sukses",
+                "location" => $forDB
+            ], 201);
         }
-        return response()->json([
-            "status" => 1,
-            "message" => "sukses",
-            "location" => $forDB
-        ], 201);
 
     }
 
