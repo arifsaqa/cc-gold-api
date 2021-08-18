@@ -175,8 +175,20 @@ class AuthController extends Controller
         $updateIsVerified = User::find($user->id);
         // $updateUserVerification = $request->get('isVerified');
         $updateIsVerified->update(['isVerified' => 1]);
-
         return response()->json(['status' => 1, 'message' => 'berhasil'], 200);
+    }
+
+    public function resetPasswordOTP(Request $request){
+        $validator = Validator::make($request->all(), [
+            'phone' => 'required|string|max:255',
+            'password' => 'required|max:255',
+        ]);
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+        $user = User::where('phone', $request->get('phone'));
+        $user->update(['password' => Hash::make($request->get('password'))]);
+        return response()->json(['status' =>1, 'message' => 'berhasil'], 200);
     }
 
     public function getAllUsers()
