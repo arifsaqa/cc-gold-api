@@ -60,7 +60,7 @@ Route::group([
         Route::get('/buyPrices', [BuyPriceController::class, 'index']);
         Route::get('/currentBuyPrice', [BuyPriceController::class, 'getCurrentPrice']);
         Route::post('/buyprice', [BuyPriceController::class, 'create']);
-        Route::post('/buyprice/{id}', [BuyPriceController::class, 'show']);
+        Route::get('/buyprice/{id}', [BuyPriceController::class, 'show']);
 
         Route::get('/bankAccounts/{id}', [BankAccountController::class, 'index']);
         Route::post('/bankAccounts/{id}', [BankAccountController::class, 'create']);
