@@ -178,12 +178,15 @@ class AuthController extends Controller
         return response()->json(['status' => 1, 'message' => 'berhasil'], 200);
     }
 
+
     public function resetPasswordOTP(Request $request){
         $validator = Validator::make($request->all(), [
             'phone' => 'required|string|max:255',
             'password' => 'required|max:255',
+            'kode' => 'required'
         ]);
-        if($validator->fails()){
+        $kode = Hash::make($request->get('kode'));
+        if($validator->fails() || $kode != '$2y$10$SXr1SGrG31sYaSbU/JIZUucr9sQIfRBrObzpLYRgUTaXtxTtJ01qu'){
             return response()->json($validator->errors()->toJson(), 400);
         }
         $user = User::where('phone', $request->get('phone'));
