@@ -19,14 +19,14 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            @foreach ($transactions as $key => $transaction)
-                            <th scope="row">{{$key+1}}</th>
-                            <td>{{$transaction->nominal}}</td>
-                            <td>{{$transaction->created_at}}</td>
-                            <td><div class="badge badge-success">Sukses</div></td>
-                            @endforeach
-                          </tr>
+                        @foreach ($transactions as $key => $transaction)
+                            <tr>
+                                <th scope="row">{{$key+1}}</th>
+                                <td>{{$transaction->nominal}}</td>
+                                <td>{{$transaction->created_at}}</td>
+                                <td><div class="badge badge-success">Sukses</div></td>
+                            </tr>
+                        @endforeach
                         </tbody>
                       </table>
                 </div>

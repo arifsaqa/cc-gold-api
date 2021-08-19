@@ -23,13 +23,13 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            @foreach ($buy_price as $key => $buy)
-                            <th scope="row">{{$key+1}}</th>
-                            <td>{{$buy->price}}</td>
-                            <td>{{$buy->created_at}}</td>
-                            @endforeach
-                          </tr>
+                        @foreach ($buy_price as $key => $buy)
+                            <tr>
+                                <th scope="row">{{$key+1}}</th>
+                                <td>{{$buy->price}}</td>
+                                <td>{{$buy->created_at}}</td>
+                            </tr>
+                        @endforeach
                         </tbody>
                       </table>
                 </div>

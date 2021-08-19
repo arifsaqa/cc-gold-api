@@ -181,6 +181,39 @@ class TransactionController extends Controller
                     $transaction->save();
                     return redirect()->back()->with('success', 'Status berhasil diubah');
                     break;
+                    case 2:
+                    $saldo = Saldo::where('userId', '=', $transaction->userId)->get();
+                    $saldo->sum('gram');
+                    if ($saldo->sum('gram')<$transaction->gram) {
+                        return redirect()->back()->with('error', 'Gagal saldo tidak mencukupi');
+                    }
+                    Saldo::create([
+                        'userId' => $transaction->userId,
+                        'gram' => -$transaction->gram,
+                    ]);
+                    $transaction->status = 1;
+                    $transaction->save();
+                    return redirect()->back()->with('success', 'Status berhasil diubah');
+                    break;
+                case 3:
+                    $destination = User::where('phone', '=', $transaction->destinationNumber)->first();
+                    $saldo = Saldo::where('userId', '=', $transaction->userId)->get();
+                    $saldo->sum('gram');
+                    if ($saldo->sum('gram')<$transaction->gram) {
+                        return redirect()->back()->with('error', 'Gagal saldo tidak mencukupi');
+                    }
+                    Saldo::create([
+                        'userId' => $transaction->userId,
+                        'gram' => -$transaction->gram,
+                    ]);
+                    Saldo::create([
+                        'userId' => $destination->id,
+                        'gram' => -$transaction->gram,
+                    ]);
+                    $transaction->status = 1;
+                    $transaction->save();
+                    return redirect()->back()->with('success', 'Status berhasil diubah');
+                    break;
             }
         } catch (\Throwable $th) {
             //throw $th;
