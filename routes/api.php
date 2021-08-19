@@ -38,6 +38,7 @@ Route::group([
         Route::post('/updateIsVerified/{id}', [AuthController::class, 'updateIsVerified']);
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::post('/verifiedByOTP', [AuthController::class, 'verifiedByOTP']);
+        Route::post('/resetPasswordOTP', [AuthController::class, 'resetPasswordOTP']);
 
 
         Route::get('/promos', [PromoController::class, 'index']);
@@ -59,6 +60,7 @@ Route::group([
         Route::get('/buyPrices', [BuyPriceController::class, 'index']);
         Route::get('/currentBuyPrice', [BuyPriceController::class, 'getCurrentPrice']);
         Route::post('/buyprice', [BuyPriceController::class, 'create']);
+        Route::get('/buyprice/{id}', [BuyPriceController::class, 'show']);
 
         Route::get('/bankAccounts/{id}', [BankAccountController::class, 'index']);
         Route::post('/bankAccounts/{id}', [BankAccountController::class, 'create']);
@@ -66,6 +68,7 @@ Route::group([
         Route::get('/sellPrices', [SellPriceController::class, 'index']);
         Route::get('/currentSellPrice', [SellPriceController::class, 'getCurrentPrice']);
         Route::post('/sellPrice', [SellPriceController::class, 'create']);
+        Route::get('/sellPrice/{id}', [SellPriceController::class, 'show']);
 
         Route::get('/paymentMethods', [PaymentMethodController::class, 'index']);
         Route::post('/paymentMethods/upload', [PaymentMethodController::class, 'upload']);

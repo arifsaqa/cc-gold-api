@@ -97,7 +97,8 @@ class SellPriceController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = SellPrice::find($id);
+        return response()->json($data, 200);
     }
 
     /**

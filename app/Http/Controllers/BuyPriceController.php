@@ -99,7 +99,8 @@ class BuyPriceController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = BuyPrice::find($id);
+        return response()->json($data, 200);
     }
 
     /**

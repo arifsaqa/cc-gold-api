@@ -175,8 +175,23 @@ class AuthController extends Controller
         $updateIsVerified = User::find($user->id);
         // $updateUserVerification = $request->get('isVerified');
         $updateIsVerified->update(['isVerified' => 1]);
+        return response()->json(['status' => 1, 'message' => 'berhasil'], 200);
+    }
 
-        return response('Berhasil', 200)->json(['status' => 1, 'message' => 'berhasil']);
+
+    public function resetPasswordOTP(Request $request){
+        $validator = Validator::make($request->all(), [
+            'phone' => 'required|string|max:255',
+            'password' => 'required|max:255',
+            'kode' => 'required'
+        ]);
+        $kode = Hash::make($request->get('kode'));
+        if($validator->fails() || $kode != '$2y$10$SXr1SGrG31sYaSbU/JIZUucr9sQIfRBrObzpLYRgUTaXtxTtJ01qu'){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+        $user = User::where('phone', $request->get('phone'));
+        $user->update(['password' => Hash::make($request->get('password'))]);
+        return response()->json(['status' =>1, 'message' => 'berhasil'], 200);
     }
 
     public function getAllUsers()
@@ -252,7 +267,7 @@ class AuthController extends Controller
         $updateUserVerification = $request->get('isVerified');
         $updateIsVerified->update(['isVerified' => $updateUserVerification]);
 
-        return response('Berhasil', 200)->json(['status' => 1, 'data' => 'berhasil']);
+        return response()->json(['status' => 1, 'data' => 'berhasil']);
     }
 
     /**

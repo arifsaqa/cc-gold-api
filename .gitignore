@@ -6,7 +6,7 @@
 /storage/app/postman
 /vendor
 .env
-.env.backup
+.env.*
 .phpunit.result.cache
 docker-compose.override.yml
 Homestead.json
@@ -15,3 +15,4 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+*.zip
