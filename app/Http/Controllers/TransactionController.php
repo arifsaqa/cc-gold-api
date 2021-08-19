@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Saldo;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -34,7 +35,7 @@ class TransactionController extends Controller
      */
     public function create(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
+        $rules = [
             'payment' => 'required|integer',
             'type' => 'required|integer',
             'gram' => 'required|integer',
@@ -43,10 +44,21 @@ class TransactionController extends Controller
             'nominal' => 'required|integer',
             'discount' => 'required|integer',
             'barcode' => 'required|string',
-        ]);
-        if ($validator->fails()) {
-            return response()->json($validator->errors()->toJson(), 400);
+        ];
+        if ($request->get('type') == 3) {
+            $rulesplus = [
+                'destinationNumber' => 'required|string',
+            ];
+            $rules = array_merge($rules, $rulesplus);
+            $userNumber = User::where('phone', '=', $request->get('destinationNumber'))->first();
+            if ($userNumber == null) {
+                return response()->json([
+                    "status" => 0,
+                    "message" => "Nomor tujuan tidak terdaftar",
+                ], 200);
+            }
         }
+        $request->validate($rules);
         $data = Transaction::create([
             'userId' => $id,
             'payment' => $request->get('payment'),
@@ -141,10 +153,39 @@ class TransactionController extends Controller
     }
     public function updateStatus($id)
     {
-        $transaction =  Transaction::find($id)->first();
-        $transaction->status = 1;
-        $transaction->save();
-        return redirect()->back()->with('success', 'Status berhasil diubah');
+        try {
+            $transaction =  Transaction::where('id', '=', $id)->first();
+            $type = $transaction->type;
+            switch ($type) {
+                case 1:
+                        Saldo::create([
+                            'userId' => $transaction->userId,
+                            'gram' => $transaction->gram,
+                        ]);
+                        $transaction->status = 1;
+                        $transaction->save();
+                        return redirect()->back()->with('success', 'Status berhasil diubah');
+                    break;
+
+                case 2:
+                    $saldo = Saldo::where('userId', '=', $transaction->userId)->get();
+                    $saldo->sum('gram');
+                    if ($saldo->sum('gram')<$transaction->gram) {
+                        return redirect()->back()->with('error', 'Gagal saldo tidak mencukupi');
+                    }
+                    Saldo::create([
+                        'userId' => $transaction->userId,
+                        'gram' => -$transaction->gram,
+                    ]);
+                    $transaction->status = 1;
+                    $transaction->save();
+                    return redirect()->back()->with('success', 'Status berhasil diubah');
+                    break;
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
     }
     /**
      * Remove the specified resource from storage.

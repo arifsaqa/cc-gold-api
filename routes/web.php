@@ -26,6 +26,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/buy/price', [HomeController::class, 'buyPrice'])->name('buyprice');
+Route::get('/promo', [HomeController::class, 'promotions'])->name('promotions');
 Route::get('/transaction/pending', [HomeController::class, 'transactionPending'])->name('transaction.pending');
 Route::get('/transaction/completed', [HomeController::class, 'transactionCompleted'])->name('transaction.completed');
 Route::get('/transaction/confirm/{id}', [TransactionController::class, 'updateStatus'])->name('confirmation.transaction');

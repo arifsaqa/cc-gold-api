@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BuyPrice;
+use App\Models\Promo;
 use App\Models\SellPrice;
 use App\Models\Transaction;
 use App\Models\User;
@@ -64,5 +65,10 @@ class HomeController extends Controller
     {
         $transactions = Transaction::where('status', 1)->get();
         return view('pages.transaction.completed', compact('transactions'));
+    }
+    public function promotions()
+    {
+        $promos = Promo::all();
+        return view('pages.promo.index', compact('promo'));
     }
 }
