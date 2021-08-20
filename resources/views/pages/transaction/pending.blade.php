@@ -19,6 +19,11 @@
                           </tr>
                         </thead>
                         <tbody>
+                            @if (!$transactions->toArray())
+                                <tr>
+                                    <td colspan="5" class="text-center">Data Tidak Ada</td>
+                                </tr>
+                            @endif
                         @foreach ($transactions as $key => $transaction)
                             <tr>
                                 <th scope="row">{{$key+1}}</th>

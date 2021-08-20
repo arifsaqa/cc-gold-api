@@ -69,6 +69,11 @@ class HomeController extends Controller
     public function promotions()
     {
         $promos = Promo::all();
-        return view('pages.promo.index', compact('promo'));
+        return view('pages.promo.index', compact('promos'));
+    }
+    public function users()
+    {
+        $users = User::where('role', '!=', 1)->get();
+        return view('pages.pengaturan.users', compact('users'));
     }
 }

@@ -17,17 +17,17 @@ class PromoController extends Controller
      */
     public function index()
     {
-        
-            
+
+
         $data = DB::table('promos')->orderBy('created_at', 'desc')->limit(5)->get();
 
         $status = 1;
-         
+
         return response()->json(compact(
             'status',
             'data'
         ));
-        
+
     }
 
     /**
@@ -38,25 +38,22 @@ class PromoController extends Controller
     public function create(Request $request)
     {
 
-        $validator = Validator::make($request->all(), [
-            'title' => 'required|string', 
+        $request->validate([
+            'title' => 'required|string',
             'description' => 'required|string',
-            'image'=> 'required|string']);
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors()->toJson(), 400);
-        }
-
+            'discount' => 'required|integer',
+            'image'=> 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+        $imageName = time().'.'.$request->image->extension();
+        $request->image->move(public_path('images'), $imageName);
         $promo = Promo::create([
             'title' => $request->get('title'),
             'description' => $request->get('description'),
-            'image' =>  $request->get('image'),
+            'discount' => $request->get('discount'),
+            'image' =>  $imageName,
         ]);
 
-        return response()->json([
-            'data' => $promo, 
-            'status' => 1, 
-            'message' => 'sukses'], 201);
+        return redirect()->back()->with('success', 'Upload Promo berhasil');
 
     }
 
@@ -90,7 +87,7 @@ class PromoController extends Controller
      */
     public function edit($id)
     {
-       
+
     }
 
     /**
@@ -154,12 +151,12 @@ class PromoController extends Controller
             return response()->json([
                 "status" => 1,
                 "message" => "sukses",
-            ], 200); 
+            ], 200);
         }else{
             return response()->json([
                 "status" => 0,
                 "message" => "gagal",
-            ], 200); 
+            ], 200);
         }
 
     }

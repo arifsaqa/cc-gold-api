@@ -15,9 +15,9 @@ class SaldoController extends Controller
      */
     public function index($id)
     {
-        $saldo = Saldo::where("userId", $id)->first();
+        $saldo = Saldo::where('userId', '=', $id)->get();
+        $saldo = $saldo->sum('gram');
         if ($saldo) {
-
             return response()->json([
                 "status" => 1,
                 "saldo" => $saldo,
@@ -36,12 +36,7 @@ class SaldoController extends Controller
      */
     public function create(Request $request)
     {
-        Saldo::create([
-            'userId' => $request->get('userId'),
-            'gram' => $request->get('gram'),
-        ]);
-
-        return response()->json(['status' => 1, 'mesage' => 'sukses']);
+        //
     }
 
     /**

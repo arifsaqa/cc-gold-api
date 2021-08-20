@@ -3,7 +3,7 @@
     <div class="main-content">
         <section class="section">
         <div class="section-header">
-            <h1>Buy Price</h1>
+            <h1>Promotions</h1>
         </div>
         <div class="row">
             <div class="col-12">
@@ -11,23 +11,29 @@
                     <div class="card-header">
                         <button class="btn btn-primary" id="addprice">
                             <i class="fas fa-plus"></i>
-                            <span>Tambah Harga</span>
+                            <span>Tambah Promo</span>
                         </button>
                     </div>
                     <table class="table">
                         <thead>
                           <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Harga</th>
-                            <th scope="col">Tanggal Update Harga</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Diskon</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Action</th>
                           </tr>
                         </thead>
                         <tbody>
-                        @foreach ($buy_price as $key => $buy)
+                        @foreach ($promos as $key => $promo)
                             <tr>
                                 <th scope="row">{{$key+1}}</th>
-                                <td>{{$buy->price}}</td>
-                                <td>{{$buy->created_at}}</td>
+                                <td>{{$promo->title}}</td>
+                                <td>{{$promo->description}}</td>
+                                <td>{{$promo->discount}}</td>
+                                <td><img src="{{ asset('images/'. $promo->image) }}" style="max-width: 100px"></td>
+                                <td>Actions</td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -41,19 +47,29 @@
         <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title" id="modal-set-resiLabel">Tambah Harga Beli</h5>
+            <h5 class="modal-title" id="modal-set-resiLabel">Tambah Promo</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>
-            <form action="{{route('buycreate')}}" method="POST" id="form-add-inbox-data" enctype="multipart/form-data">
-            <input type="text" class="form-control" name="user_id" value="{{Auth::id()}}" hidden>
-            <input type="text" class="form-control" name="inbox_origin" value="{{Auth::user()->name}}" hidden>
+            <form action="{{route('promo.create')}}" method="POST" id="form-add-inbox-data" enctype="multipart/form-data">
             @csrf
             <div class="modal-body row">
+                <div class="form-group col-md-12">
+                    <label for="">Judul</label>
+                    <input type="text" class="form-control" name="title">
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="">Deskripsi</label>
+                    <textarea name="description" class="form-control" placeholder="Isi deskripsi disini"></textarea>
+                </div>
                 <div class="form-group col-md-6">
-                <label for="">Harga Terbaru</label>
-                <input type="text" class="form-control" name="price">
+                    <label for="">Diskon (dalam nominal)</label>
+                    <input type="number" class="form-control" name="discount">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="">Gambar (resolusi 480x480)</label>
+                    <input type="file" name="image" class="form-control">
                 </div>
             </div>
             <div class="modal-footer">

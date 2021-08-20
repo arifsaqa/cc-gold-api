@@ -12,6 +12,8 @@ class Promo extends Model
     protected $fillable = [
         'title',
         'description',
-        'image'
+        'image',
+        'discount',
+        'user_list',
     ];
 }

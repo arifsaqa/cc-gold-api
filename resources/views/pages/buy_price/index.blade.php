@@ -23,13 +23,18 @@
                           </tr>
                         </thead>
                         <tbody>
-                        @foreach ($buy_price as $key => $buy)
-                            <tr>
-                                <th scope="row">{{$key+1}}</th>
-                                <td>{{$buy->price}}</td>
-                                <td>{{$buy->created_at}}</td>
-                            </tr>
-                        @endforeach
+                            @if (!$buy_price->toArray())
+                                <tr>
+                                    <td colspan="3" class="text-center">Data Tidak Ada</td>
+                                </tr>
+                            @endif
+                            @foreach ($buy_price as $key => $buy)
+                                <tr>
+                                    <th scope="row">{{$key+1}}</th>
+                                    <td>{{$buy->price}}</td>
+                                    <td>{{$buy->created_at}}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                       </table>
                 </div>

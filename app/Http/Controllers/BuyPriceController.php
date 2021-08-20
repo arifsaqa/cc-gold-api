@@ -66,12 +66,12 @@ class BuyPriceController extends Controller
         if ($latestPrice) {
             # code...
             $timestamp = strtotime($latestPrice->created_at);
-            $lastCreated = date('Ymd', $timestamp);
+            $lastCreated = date('d', $timestamp);
             $now = new DateTime();
-            $nowFormat = $now->format('Ymd');
+            $nowFormat = $now->format('d');
         }
 
-        if ($nowFormat && $lastCreated) {
+        if ($nowFormat == $lastCreated) {
             return Redirect::back()->with('error', 'Maksimal perubahan harga sehari sekali');
         }
         $price = BuyPrice::create([
