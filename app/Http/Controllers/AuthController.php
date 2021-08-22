@@ -88,7 +88,7 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|max:255',
@@ -96,30 +96,34 @@ class AuthController extends Controller
             'deviceId' =>'required'
         ]);
 
-        if ($validator->fails()) {
-            return response()->json($validator->errors()->toJson(), 400);
-        }
-
         $user = User::create([
-            'name' => $request->get('name'),
-            'email' => $request->get('email'),
-            'phone' => $request->get('phone'),
-            'image' => $request->get('image'),
-            'isVerified' => $request->get('isVerified')?1:0,
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'image' => $request->image,
+            'isVerified' => $request->isVerified?1:0,
             'role' => 0,
-            'password' => Hash::make($request->get('password')),
-            'deviceId' => $request->get('deviceId'),
+            'password' => Hash::make($request->password),
+            'deviceId' => $request->deviceId,
         ]);
-        $bank_account = BankAccount::create([
+        BankAccount::create([
             'userId' => $user->id,
-            'numberAccount' => $request->get('numberAccount'),
-            'paymentMethodId' => $request->get('paymentMethodId'),
+            'numberAccount' => $request->numberAccount,
+            'paymentMethodId' => $request->paymentMethodId,
+        ]);
+        Saldo::create([
+            'userId' => $user->id,
+            'gram' => 0,
         ]);
 
         $token = JWTAuth::fromUser($user);
         $status = 1;
 
-        return response()->json(['status'=> $status, 'user'=>$user, 'token'=>$token]);
+        return response()->json([
+            'status'=> $status,
+            'user'=>$user,
+            'token'=>$token
+        ]);
     }
 
     public function isTokenValid(){

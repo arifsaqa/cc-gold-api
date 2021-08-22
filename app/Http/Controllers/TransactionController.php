@@ -158,33 +158,34 @@ class TransactionController extends Controller
             $type = $transaction->type;
             switch ($type) {
                 case 1:
-                        Saldo::create([
-                            'userId' => $transaction->userId,
-                            'gram' => $transaction->gram,
-                        ]);
-                        $transaction->status = 1;
-                        $transaction->save();
-                        return redirect()->back()->with('success', 'Status berhasil diubah');
+                    $saldo = Saldo::where('userId', '=', $transaction->userId)->get();
+
+                    $saldo->gram = $saldo+$transaction->gram;
+                    $saldo->save();
+
+                    $transaction->status = 1;
+                    $transaction->save();
+                    return redirect()->back()->with('success', 'Status berhasil diubah');
                     break;
 
                 case 2:
                     $saldo = Saldo::where('userId', '=', $transaction->userId)->get();
-                    $saldo->sum('gram');
-                    if ($saldo->sum('gram')<$transaction->gram) {
+
+                    if ($saldo<$transaction->gram) {
                         return redirect()->back()->with('error', 'Gagal saldo tidak mencukupi');
                     }
-                    Saldo::create([
-                        'userId' => $transaction->userId,
-                        'gram' => -$transaction->gram,
-                    ]);
+
+                    $saldo->gram = $saldo-$transaction->gram;
+                    $saldo->save();
+
                     $transaction->status = 1;
                     $transaction->save();
                     return redirect()->back()->with('success', 'Status berhasil diubah');
                     break;
                     case 2:
                     $saldo = Saldo::where('userId', '=', $transaction->userId)->get();
-                    $saldo->sum('gram');
-                    if ($saldo->sum('gram')<$transaction->gram) {
+
+                    if ($saldo<$transaction->gram) {
                         return redirect()->back()->with('error', 'Gagal saldo tidak mencukupi');
                     }
                     Saldo::create([
@@ -196,23 +197,26 @@ class TransactionController extends Controller
                     return redirect()->back()->with('success', 'Status berhasil diubah');
                     break;
                 case 3:
-                    $destination = User::where('phone', '=', $transaction->destinationNumber)->first();
-                    $saldo = Saldo::where('userId', '=', $transaction->userId)->get();
-                    $saldo->sum('gram');
-                    if ($saldo->sum('gram')<$transaction->gram) {
+                    $destination = User::where('phone', '=',$transaction->destinationNumber)->first();
+                    $saldoFrom = Saldo::where('userId', '=', $transaction->userId)->get();
+                    $saldoTo = Saldo::where('userId', '=', $destination->userId)->get();
+
+                    $saldoFrom->sum('gram');
+                    if ($saldoFrom->sum('gram')<$transaction->gram) {
                         return redirect()->back()->with('error', 'Gagal saldo tidak mencukupi');
                     }
-                    Saldo::create([
-                        'userId' => $transaction->userId,
-                        'gram' => -$transaction->gram,
-                    ]);
-                    Saldo::create([
-                        'userId' => $destination->id,
-                        'gram' => -$transaction->gram,
-                    ]);
+
+                    $saldoFrom->gram = $saldoFrom-$transaction->gram;
+                    $saldoFrom->save();
+
+                    $saldoTo->gram = $saldoTo+$transaction->gram;
+                    $saldoTo->save();
+
                     $transaction->status = 1;
                     $transaction->save();
+
                     return redirect()->back()->with('success', 'Status berhasil diubah');
+
                     break;
             }
         } catch (\Throwable $th) {
