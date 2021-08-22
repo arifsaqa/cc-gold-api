@@ -16,7 +16,10 @@ class SaldoController extends Controller
     public function index($id)
     {
         $saldo = Saldo::where('userId', '=', $id)->first();
-        $saldo = $saldo->gram ?? 0;
+        $saldo = $saldo->gram;
+        if (is_null($saldo)) {
+            $saldo = 0;
+        }
         if ($saldo) {
             return response()->json([
                 "status" => 1,
