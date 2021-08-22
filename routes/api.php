@@ -58,6 +58,7 @@ Route::group([
         Route::post('/saldo/delete', [BuyPriceController::class, 'destroy']);
 
         Route::get('/buyPrices', [BuyPriceController::class, 'index']);
+        Route::get('/buyGraph/{timeline}', [BuyPriceController::class, 'graph']);
         Route::get('/currentBuyPrice', [BuyPriceController::class, 'getCurrentPrice']);
         Route::post('/buyprice', [BuyPriceController::class, 'create']);
         Route::get('/buyprice/{id}', [BuyPriceController::class, 'show']);

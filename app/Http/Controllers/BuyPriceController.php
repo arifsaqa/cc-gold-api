@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\BuyPrice;
+use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use PHPUnit\Util\Json;
 
 class BuyPriceController extends Controller
 {
@@ -135,5 +137,63 @@ class BuyPriceController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function graph($timeline)
+    {
+        switch ($timeline) {
+            case 'weekly':
+                $data = BuyPrice::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
+                return response()->json(
+                    [
+                        'message' => "success",
+                        'data' => $data,
+                        'status' => 1,
+                    ]
+                );
+                break;
+            case 'monthly':
+                $data = BuyPrice::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfWeek()])->get();
+                return response()->json(
+                    [
+                        'message' => "success",
+                        'data' => $data,
+                        'status' => 1,
+                    ]
+                );
+                break;
+            case 'yearly':
+                $data = BuyPrice::whereBetween('created_at', [Carbon::now()->startOfYear(), Carbon::now()->endOfWeek()])->get();
+                return response()->json(
+                    [
+                        'message' => "success",
+                        'data' => $data,
+                        'status' => 1,
+                    ]
+                );
+                break;
+            case '3years':
+                $data = BuyPrice::where( 'created_at', '>', Carbon::now()->subYears(3))->get();
+                return response()->json(
+                    [
+                        'message' => "success",
+                        'data' => $data,
+                        'status' => 1,
+                    ]
+                );
+                break;
+            case '6years':
+                $data = BuyPrice::where( 'created_at', '>', Carbon::now()->subYears(3))->get();
+                return response()->json(
+                    [
+                        'message' => "success",
+                        'data' => $data,
+                        'status' => 1,
+                    ]
+                );
+
+            default:
+                # code...
+                break;
+        }
     }
 }
