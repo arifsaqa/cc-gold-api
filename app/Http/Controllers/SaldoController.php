@@ -17,7 +17,7 @@ class SaldoController extends Controller
     {
         $saldo = Saldo::where('userId', '=', $id)->first();
         $saldo = $saldo->gram;
-        if (is_null($saldo)) {
+        if ($saldo == null) {
             $saldo = 0;
         }
         if ($saldo) {
