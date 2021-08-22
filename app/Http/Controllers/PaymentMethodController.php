@@ -38,7 +38,7 @@ class PaymentMethodController extends Controller
             'logo' =>  $imageName,
         ]);
 
-        return redirect()->back()->with('success', 'Upload Promo berhasil');
+        return redirect()->back()->with('success', 'Upload Metode Pembayaran berhasil');
     }
 
     /**
