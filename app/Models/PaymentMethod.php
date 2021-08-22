@@ -13,4 +13,9 @@ class PaymentMethod extends Model
         'name',
          'logo'
     ];
+
+    public function bankaccount()
+    {
+        return $this->hasMany(BankAccount::class);
+    }
 }

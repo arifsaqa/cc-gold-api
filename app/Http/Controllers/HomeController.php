@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BuyPrice;
+use App\Models\PaymentMethod;
 use App\Models\Promo;
 use App\Models\SellPrice;
 use App\Models\Transaction;
@@ -75,5 +76,10 @@ class HomeController extends Controller
     {
         $users = User::where('role', '!=', 1)->get();
         return view('pages.pengaturan.users', compact('users'));
+    }
+    public function paymentMethods()
+    {
+        $payment_methods = PaymentMethod::all();
+        return view('pages.pengaturan.payment', compact('payment_methods'));
     }
 }

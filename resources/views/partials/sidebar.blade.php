@@ -37,7 +37,8 @@
             <li class="nav-item dropdown">
               <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Pengaturan</span></a>
               <ul class="dropdown-menu">
-                <li><a class="nav-link" href="/pengaturan/user">User</a></li>
+                <li><a class="nav-link" href="{{ route('users') }}">User</a></li>
+                <li><a class="nav-link" href="{{ route('paymentMethod') }}">Payment Method</a></li>
               </ul>
             </li>
       </ul>

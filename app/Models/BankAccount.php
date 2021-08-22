@@ -10,6 +10,10 @@ class BankAccount extends Model
     use HasFactory;
     protected $fillable = [
         'userId',
-        'numberAccount'
+        'numberAccount',
+        'paymentMethodId'
     ];
+    public function paymentmethod(){
+        return $this->belongsTo(PaymentMethod::class, 'paymentMethodId');
+    }
 }

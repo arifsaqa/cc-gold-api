@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BuyPriceController;
+use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\PromoController;
 use App\Http\Controllers\SellPriceController;
 use App\Http\Controllers\TransactionController;
@@ -29,7 +30,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/buy/price', [HomeController::class, 'buyPrice'])->name('buyprice');
 Route::get('/promo', [HomeController::class, 'promotions'])->name('promotions');
 Route::post('/promos', [PromoController::class, 'create'])->name('promo.create');
-Route::get('/pengaturan/user', [HomeController::class, 'users'])->name('pengaturan.user');
+Route::get('/payment-method', [HomeController::class, 'paymentMethods'])->name('paymentMethod');
+Route::post('/payment-method/create', [PaymentMethodController::class, 'create'])->name('paymentMethod.create');
+Route::get('/user', [HomeController::class, 'users'])->name('users');
 Route::get('/transaction/pending', [HomeController::class, 'transactionPending'])->name('transaction.pending');
 Route::get('/transaction/completed', [HomeController::class, 'transactionCompleted'])->name('transaction.completed');
 Route::get('/transaction/confirm/{id}', [TransactionController::class, 'updateStatus'])->name('confirmation.transaction');

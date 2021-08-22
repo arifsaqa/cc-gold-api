@@ -27,22 +27,18 @@ class PaymentMethodController extends Controller
      */
     public function create(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'logo' => 'required|string',
-            'name' => 'required|string'
+        $request->validate([
+            'name' => 'required|string',
+            'image'=> 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors()->toJson(), 400);
-        }
-
-        $data = PaymentMethod::create([
+        $imageName = time().'.'.$request->image->extension();
+        $request->image->move(public_path('payments'), $imageName);
+        PaymentMethod::create([
             'name' => $request->get('name'),
-            'logo' => $request->get('logo'),
+            'logo' =>  $imageName,
         ]);
 
-        $status = 1;
-        return response()->json(compact(['status', 'data']));
+        return redirect()->back()->with('success', 'Upload Promo berhasil');
     }
 
     /**

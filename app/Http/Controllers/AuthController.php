@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BankAccount;
 use App\Models\Saldo;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -108,6 +109,11 @@ class AuthController extends Controller
             'role' => 0,
             'password' => Hash::make($request->get('password')),
             'deviceId' => $request->get('deviceId'),
+        ]);
+        $bank_account = BankAccount::create([
+            'userId' => $user->id,
+            'numberAccount' => $request->get('numberAccount'),
+            'paymentMethodId' => $request->get('paymentMethodId'),
         ]);
 
         $token = JWTAuth::fromUser($user);
