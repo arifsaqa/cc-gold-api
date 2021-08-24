@@ -50,7 +50,7 @@ class RefferalController extends Controller
         $refferal = Refferal::where('refferal', '=', $request->refferal)->first();
         return response()->json([
             'status'=> 1,
-            'user'=>$refferal,
+            'user'=>$refferal->id,
         ]);
         $userList = $refferal->userList;
         $userList['key'] = 'value';
