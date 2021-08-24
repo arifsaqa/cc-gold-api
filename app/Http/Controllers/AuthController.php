@@ -213,7 +213,7 @@ class AuthController extends Controller
     }
     public function getAllNumbers()
     {
-        $numbers = User::pluck('phone')->all();
+        $numbers = User::where('role', 0)->pluck('phone')->all();
         return response()->json([
             'status' => 0,
             'numbers' => $numbers
