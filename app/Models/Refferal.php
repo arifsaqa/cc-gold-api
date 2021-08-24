@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Refferal extends Model
 {
     use HasFactory;
+    protected $cast = [
+        'userList' => 'array'
+    ];
     protected $fillable= [
         'userId',
         'refferal',
