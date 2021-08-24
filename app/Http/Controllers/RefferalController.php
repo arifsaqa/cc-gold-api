@@ -49,7 +49,7 @@ class RefferalController extends Controller
     {
         $refferal = Refferal::where('refferal', '=', $request->refferal)->first();
         $users = $refferal->userList;
-        $users['user'] = 'value';
+        $users['key'] = 'value';
         $refferal->save();
 
         return response()->json([
