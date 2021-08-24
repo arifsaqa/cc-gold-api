@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Refferal;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -33,6 +34,8 @@ class RefferalController extends Controller
         Refferal::create([
             'userId' => $user->id,
             'refferal' => Str::random($length = 10),
+            "created_at" =>  Carbon::now(),
+            "updated_at" => Carbon::now(),
         ]);
     }
 

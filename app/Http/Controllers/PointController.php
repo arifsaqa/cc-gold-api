@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Point;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PointController extends Controller
@@ -32,6 +33,8 @@ class PointController extends Controller
         Point::create([
             'userId' => $user->id,
             'point' => 0,
+            "created_at" =>  Carbon::now(),
+            "updated_at" => Carbon::now(),
         ]);
     }
 

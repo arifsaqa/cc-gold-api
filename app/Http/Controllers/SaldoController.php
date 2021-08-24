@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Saldo;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -39,6 +40,8 @@ class SaldoController extends Controller
         Saldo::create([
             'userId' => $user->id,
             'gram' => 0,
+            "created_at" =>  Carbon::now(),
+            "updated_at" => Carbon::now(),
         ]);
     }
 
