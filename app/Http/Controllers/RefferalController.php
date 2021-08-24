@@ -54,7 +54,7 @@ class RefferalController extends Controller
         // //     array_push($userList, $request->userId);
         // //     $refferal->update(['userList' => $userList]);
         // // }
-        $refferal->userList = json_encode("1");
+        $refferal->userList = json_encode(1);
         $refferal->save();
 
         return response()->json([
