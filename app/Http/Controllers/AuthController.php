@@ -116,10 +116,6 @@ class AuthController extends Controller
                 'paymentMethodId' => $request->paymentMethodId,
             ]);
 
-            app('App\Http\Controllers\SaldoController')->create($user);
-            app('App\Http\Controllers\RefferalController')->create($user);
-            app('App\Http\Controllers\PointController')->create($user);
-
             $token = JWTAuth::fromUser($user);
             $status = 1;
 
