@@ -17,7 +17,7 @@ class CreateRefferalsTable extends Migration
             $table->id();
             $table->string('refferal');
             $table->integer('userId');
-            $table->string('userList')->nullable();
+            $table->json('userList')->nullable();
             $table->timestamps();
         });
     }
