@@ -53,7 +53,7 @@ class RefferalController extends Controller
         }else{
             $reff = $request->id;
         }
-        $refupdate = Refferal::where('refferal', '=', $request->refferal)->update(['userList' => $reff]);
+        Refferal::where('refferal', '=', $request->refferal)->update(['userList' => $reff]);
         $refferal = Refferal::where('refferal', '=', $request->refferal)->first();
 
         return response()->json([
