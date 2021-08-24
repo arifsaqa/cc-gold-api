@@ -49,7 +49,7 @@ class RefferalController extends Controller
     {
         $refferal = Refferal::where('refferal', '=', $request->refferal)->first();
         $array = [];
-        if ($refferal->userList) {
+        if ($refferal->userList != null) {
             array_push($array, $refferal->userList);
         }
         array_push($array, $request->id);
