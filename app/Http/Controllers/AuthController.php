@@ -91,45 +91,47 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         try {
-            $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users',
-                'password' => 'required|max:255',
-                'phone' => 'required|string|max:255',
-                'deviceId' =>'required'
-            ]);
-
-            $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'image' => $request->image,
-                'isVerified' => $request->isVerified?1:0,
-                'role' => 0,
-                'password' => Hash::make($request->password),
-                'deviceId' => $request->deviceId,
-            ]);
-
-            BankAccount::create([
-                'userId' => $user->id,
-                'numberAccount' => $request->numberAccount,
-                'paymentMethodId' => $request->paymentMethodId,
-            ]);
-
-            $token = JWTAuth::fromUser($user);
-            $status = 1;
-
-            return response()->json([
-                'status'=> $status,
-                'user'=>$user,
-                'token'=>$token
-            ]);
+            //code...
         } catch (\Throwable $th) {
-            return response()->json([
-                'status'=> 0,
-                'message'=>$request->validated()
-            ], 400);
+            //throw $th;
         }
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|max:255',
+            'phone' => 'required|string|max:255',
+            'deviceId' =>'required'
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'image' => $request->image,
+            'isVerified' => $request->isVerified?1:0,
+            'role' => 0,
+            'password' => Hash::make($request->password),
+            'deviceId' => $request->deviceId,
+        ]);
+
+        BankAccount::create([
+            'userId' => $user->id,
+            'numberAccount' => $request->numberAccount,
+            'paymentMethodId' => $request->paymentMethodId,
+        ]);
+
+        app('App\Http\Controllers\SaldoController')->create($user);
+        app('App\Http\Controllers\RefferalController')->create($user);
+        app('App\Http\Controllers\PointController')->create($user);
+
+        $token = JWTAuth::fromUser($user);
+        $status = 1;
+
+        return response()->json([
+            'status'=> $status,
+            'user'=>$user,
+            'token'=>$token
+        ]);
     }
 
     public function isTokenValid(){
