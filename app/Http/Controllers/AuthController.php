@@ -159,6 +159,7 @@ class AuthController extends Controller
         return response()->json($user);
     }
 
+
     public function reloginWithPin(Request $request){
         $credentials = $request->only('phone', 'password');
         $requestedDeviceId = $request->get('deviceId');
@@ -210,7 +211,14 @@ class AuthController extends Controller
         $user->update(['password' => Hash::make($request->get('password'))]);
         return response()->json(['status' =>1, 'message' => 'berhasil'], 200);
     }
-
+    public function getAllNumbers()
+    {
+        $numbers = User::pluck('phone')->all();
+        return response()->json([
+            'status' => 0,
+            'numbers' => $numbers
+        ]);
+    }
     public function getAllUsers()
     {
         $succes = 1;
