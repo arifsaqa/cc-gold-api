@@ -49,9 +49,18 @@ class RefferalController extends Controller
     {
         $refferal = Refferal::where('refferal', '=', $request->refferal)->first();
         $userList = $refferal->userList;
+
         if ($userList == null) {
             $refferal->userList = json_encode([$request->userId]);
         }else{
+            foreach ($refferal->userList as $value) {
+                if ($value == $request->userId) {
+                    return response()->json([
+                        'status' => 0,
+                        'message' => "User sudah menggunakan referral ini"
+                    ]);
+                }
+            }
             $userList = json_decode($refferal->userList);
             array_push($userList, $request->userId);
             $refferal->update(['userList' => $userList]);
