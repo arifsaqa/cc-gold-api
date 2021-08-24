@@ -215,7 +215,7 @@ class AuthController extends Controller
     {
         $numbers = User::where('role', 0)->pluck('phone')->all();
         return response()->json([
-            'status' => 0,
+            'status' => 1,
             'numbers' => $numbers
         ]);
     }
