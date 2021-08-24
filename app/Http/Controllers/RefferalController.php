@@ -49,9 +49,12 @@ class RefferalController extends Controller
     {
         $refferal = Refferal::where('refferal', '=', $request->refferal)->first();
         $array = [];
-        $reff = array_push($array, $refferal->userList);
+        if ($refferal->userList) {
+            array_push($array, $refferal->userList);
+        }
+        array_push($array, $request->id);
 
-        $refferal->userList = json_encode($reff);
+        $refferal->userList = json_encode($array);
         $refferal->save();
 
         return response()->json([
