@@ -127,7 +127,7 @@ class AuthController extends Controller
         } catch (\Throwable $th) {
             return response()->json([
                 'status'=> 0,
-                'message'=>$th
+                'message'=>$request->validated()
             ], 400);
         }
     }
