@@ -15,11 +15,11 @@ class PointController extends Controller
      */
     public function index($id)
     {
-        $points = Point::where('id', '=', $id)->first();
+        $points = Point::where('userId', '=', $id)->first();
 
         return response()->json([
             "status" => 1,
-            "saldo" => $points,
+            "point" => $points,
         ], 200);
     }
 
