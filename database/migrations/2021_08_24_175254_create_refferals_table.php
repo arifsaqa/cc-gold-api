@@ -15,7 +15,7 @@ class CreateRefferalsTable extends Migration
     {
         Schema::create('refferals', function (Blueprint $table) {
             $table->id();
-            $table->integer('refferal');
+            $table->string('refferal');
             $table->integer('userId');
             $table->string('userList')->nullable();
             $table->timestamps();
