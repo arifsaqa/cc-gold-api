@@ -48,7 +48,7 @@ class RefferalController extends Controller
     public function store(Request $request)
     {
         $refferal = Refferal::where('refferal', '=', $request->refferal)->first();
-        $userList = $refferal->userList;
+        $userList = array($refferal->userList);
         if ($userList != null) {
             $refferal->userList = array_push($userList, $request->id);
         }
