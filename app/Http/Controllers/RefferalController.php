@@ -47,7 +47,8 @@ class RefferalController extends Controller
      */
     public function store(Request $request)
     {
-        $refferal = Refferal::find($request->refferal);
+        $refferalId = Refferal::where('refferal', '=', $request->refferal)->first();
+        $refferal = Refferal::find($refferalId->id);
         $userList = $refferal->userList;
         $userList['key'] = 'value';
         $refferal->userList = $userList;
