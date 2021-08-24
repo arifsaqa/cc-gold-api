@@ -49,12 +49,13 @@ class RefferalController extends Controller
     {
         $refferal = Refferal::where('refferal', '=', $request->refferal)->first();
         $userList = $refferal->userList;
-        if ($userList != null) {
+        if ($userList == null) {
+            $refferal->userList = json_encode([$request->userId]);
+        }else{
             $userList = json_decode($refferal->userList);
             array_push($userList, $request->userId);
             $refferal->update(['userList' => $userList]);
         }
-        // $refferal->userList = json_encode([1]);
         $refferal->save();
 
         return response()->json([
