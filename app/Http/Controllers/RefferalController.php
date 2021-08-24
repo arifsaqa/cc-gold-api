@@ -50,7 +50,8 @@ class RefferalController extends Controller
         $refferal = Refferal::where('refferal', '=', $request->refferal)->first();
         $userList = array($request->userList);
         if ($userList != null) {
-            $refferal->userList = array_push($userList, $request->id);
+            $reff = array_push($userList, $request->id);
+            $refferal->userList = $reff;
         }else{
             $refferal->userList = $request->id;
         }
