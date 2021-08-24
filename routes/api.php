@@ -40,7 +40,7 @@ Route::group([
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::post('/verifiedByOTP', [AuthController::class, 'verifiedByOTP']);
         Route::post('/resetPasswordOTP', [AuthController::class, 'resetPasswordOTP']);
-        Route::post('/numbers', [AuthController::class, 'getAllNumbers']);
+        Route::get('/numbers', [AuthController::class, 'getAllNumbers']);
 
         Route::post('/refferal', [RefferalController::class, 'store']);
 
