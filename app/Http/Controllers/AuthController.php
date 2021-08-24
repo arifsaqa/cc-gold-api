@@ -230,7 +230,7 @@ class AuthController extends Controller
             return response()->json(['token_absent'], $e->getCode());
         }
         $numbers = User::where('role', 0)->pluck('phone')->all();
-        return response($numbers, 200)->json(['status'=> $succes, 'data'=>$numbers]);
+        return response()->json(['status'=> $succes, 'data'=>$numbers]);
 
     }
     public function getAllUsers()
