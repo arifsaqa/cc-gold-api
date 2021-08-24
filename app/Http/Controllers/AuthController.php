@@ -213,11 +213,25 @@ class AuthController extends Controller
     }
     public function getAllNumbers()
     {
+        $succes = 1;
+        $failed = 0;
+        $user = JWTAuth::parseToken()->authenticate();
+        try {
+            if (!$user) {
+                return response()->json(['message' => 'Your not allowed to get the data', 'status' => $failed], 404);
+            }
+        } catch (TokenExpiredException $e) {
+
+            return response()->json(['token_expired'], $e->getCode());
+        } catch (TokenInvalidException $e) {
+
+            return response()->json(['token_invalid'], $e->getCode());
+        } catch (JWTException $e) {
+            return response()->json(['token_absent'], $e->getCode());
+        }
         $numbers = User::where('role', 0)->pluck('phone')->all();
-        return response()->json([
-            'status' => 1,
-            'numbers' => $numbers
-        ]);
+        return response($numbers, 200)->json(['status'=> $succes, 'data'=>$numbers]);
+
     }
     public function getAllUsers()
     {
