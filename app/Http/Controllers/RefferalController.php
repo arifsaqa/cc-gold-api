@@ -50,7 +50,7 @@ class RefferalController extends Controller
         $refferalId = Refferal::where('refferal', '=', $request->refferal)->first();
         $refferal = Refferal::find($refferalId->id);
         $userList = $refferal->userList;
-        $userList['key'] = 'value';
+        $userList["'" . $request->userId . "'"] = 'true';
         $refferal->userList = $userList;
         $refferal->save();
 
