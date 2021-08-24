@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Saldo;
+use App\Models\Point;
 use Illuminate\Http\Request;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
-class SaldoController extends Controller
+class PointController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,17 +14,11 @@ class SaldoController extends Controller
      */
     public function index($id)
     {
-        $saldo = Saldo::where('userId', '=', $id)->first();
-        $saldo = $saldo->gram;
-        if ($saldo) {
-            return response()->json([
-                "status" => 1,
-                "saldo" => $saldo,
-            ], 200);
-        }
+        $points = Point::where('id', '=', $id)->first();
+
         return response()->json([
-            "status" => 0,
-            "saldo" => null,
+            "status" => 1,
+            "saldo" => $points,
         ], 200);
     }
 
@@ -36,9 +29,9 @@ class SaldoController extends Controller
      */
     public function create($user)
     {
-        Saldo::create([
+        Point::create([
             'userId' => $user->id,
-            'gram' => 0,
+            'point' => 0,
         ]);
     }
 
@@ -84,19 +77,7 @@ class SaldoController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $isLoggedin = JWTAuth::parseToken()->authenticate();
-        if (!$isLoggedin) {
-            return response()->json([
-                "status" => 0,
-                "message" => "You are not allowed to update data",
-            ], 400);
-        }
-
-        $saldo = Saldo::find($id);
-        $saldo->update(['gram' => $request->get('gram')]);
-
-        return response()->json(['status' => 1, 'message' => 'success']);
+        //
     }
 
     /**
@@ -107,18 +88,6 @@ class SaldoController extends Controller
      */
     public function destroy($id)
     {
-
-        $isAdmin = JWTAuth::parseToken()->authenticate();
-        if ($isAdmin->role == 0) {
-            return response()->json([
-                "status" => 0,
-                "message" => "You are not an admin",
-            ], 400);
-        }
-
-        $saldo = Saldo::find($id);
-        $saldo->delete();
-
-        return response()->json(['status' => 1, 'message' => 'berhasil']);
+        //
     }
 }

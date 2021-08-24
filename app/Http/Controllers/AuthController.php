@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\BankAccount;
+use App\Models\Point;
+use App\Models\Refferal;
 use App\Models\Saldo;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -106,16 +108,16 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             'deviceId' => $request->deviceId,
         ]);
+
         BankAccount::create([
             'userId' => $user->id,
             'numberAccount' => $request->numberAccount,
             'paymentMethodId' => $request->paymentMethodId,
         ]);
-        Saldo::create([
-            'userId' => $user->id,
-            'gram' => 0,
-        ]);
 
+        app('App\Http\Controllers\SaldoController')->create($user);
+        app('App\Http\Controllers\RefferalController')->create($user);
+        app('App\Http\Controllers\PointController')->create($user);
         $token = JWTAuth::fromUser($user);
         $status = 1;
 
