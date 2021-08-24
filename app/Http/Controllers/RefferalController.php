@@ -51,8 +51,9 @@ class RefferalController extends Controller
         $userList = $refferal->userList;
         if ($userList != null) {
             $refferal->userList = array_push(array($userList), $request->id);
+        }else{
+            $refferal->userList = $request->id;
         }
-        $refferal->userList = $request->id;
         $refferal->save();
 
         return response()->json([
