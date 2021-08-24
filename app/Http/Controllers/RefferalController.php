@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Point;
 use App\Models\Refferal;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
@@ -48,6 +49,7 @@ class RefferalController extends Controller
     public function store(Request $request)
     {
         $refferal = Refferal::where('refferal', '=', $request->refferal)->first();
+        $points = Point::where('userId', '=', $refferal->id)->first();
 
         $userList = json_decode($refferal->userList);
         if ($userList == null) {
@@ -63,6 +65,8 @@ class RefferalController extends Controller
             }
             array_push($userList, $request->userId);
             $refferal->update(['userList' => $userList]);
+            $points->point += 1;
+            $points->save();
         }
         $refferal->save();
 
