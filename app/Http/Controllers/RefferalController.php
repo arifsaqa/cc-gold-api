@@ -47,7 +47,6 @@ class RefferalController extends Controller
      */
     public function store(Request $request)
     {
-        $refferal = Refferal::where('refferal', '=', $request->refferal)->first();
         $userList = array($request->userList);
         if ($userList != null) {
             $reff = array_push($userList, $request->id);
@@ -55,10 +54,11 @@ class RefferalController extends Controller
             $reff = $request->id;
         }
         $refupdate = Refferal::where('refferal', '=', $request->refferal)->update(['userList' => $reff]);
+        $refferal = Refferal::where('refferal', '=', $request->refferal)->first();
 
         return response()->json([
             'status'=> 1,
-            'user'=>$refupdate,
+            'user'=>$refferal,
         ]);
     }
 
