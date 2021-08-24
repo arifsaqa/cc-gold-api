@@ -47,7 +47,7 @@ class RefferalController extends Controller
      */
     public function store(Request $request)
     {
-        $refferal = Refferal::where('refferal', '=', $request->refferal)->first();
+        $refferal = Refferal::find($request->refferal);
         $array = [];
         $reff = array_push($array, $refferal->userList);
         $refferal->userList = $reff;
