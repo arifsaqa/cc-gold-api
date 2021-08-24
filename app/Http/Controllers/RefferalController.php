@@ -49,7 +49,7 @@ class RefferalController extends Controller
     public function store(Request $request)
     {
         $refferal = Refferal::where('refferal', '=', $request->refferal)->first();
-        $points = Point::where('userId', '=', $refferal->id)->first();
+        $points = Point::where('userId', '=', $refferal->userId)->first();
 
         $userList = json_decode($refferal->userList);
         if ($userList == null) {
