@@ -47,7 +47,15 @@ class RefferalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $refferal = Refferal::where('refferal', '=', $request->refferal)->first();
+        $userList = $refferal->userList;
+        $refferal->userList = array_push($userList, $request->id);
+        $refferal->save();
+
+        return response()->json([
+            'status'=> 1,
+            'user'=>$refferal,
+        ]);
     }
 
     /**

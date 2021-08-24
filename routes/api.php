@@ -5,6 +5,7 @@ use App\Http\Controllers\BankAccountController;
 use App\Http\Controllers\BuyPriceController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\PromoController;
+use App\Http\Controllers\RefferalController;
 use App\Http\Controllers\SaldoController;
 use App\Http\Controllers\SellPriceController;
 use App\Http\Controllers\TransactionController;
@@ -39,6 +40,8 @@ Route::group([
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::post('/verifiedByOTP', [AuthController::class, 'verifiedByOTP']);
         Route::post('/resetPasswordOTP', [AuthController::class, 'resetPasswordOTP']);
+
+        Route::post('/refferal', [RefferalController::class, 'store']);
 
 
         Route::get('/promos', [PromoController::class, 'index']);
