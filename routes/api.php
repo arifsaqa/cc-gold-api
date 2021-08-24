@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BankAccountController;
 use App\Http\Controllers\BuyPriceController;
 use App\Http\Controllers\PaymentMethodController;
+use App\Http\Controllers\PointController;
 use App\Http\Controllers\PromoController;
 use App\Http\Controllers\RefferalController;
 use App\Http\Controllers\SaldoController;
@@ -43,6 +44,8 @@ Route::group([
         Route::get('/numbers', [AuthController::class, 'getAllNumbers']);
 
         Route::post('/refferal', [RefferalController::class, 'store']);
+
+        Route::get('/points/{id}', [PointController::class, 'index']);
 
 
         Route::get('/promos', [PromoController::class, 'index']);
