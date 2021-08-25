@@ -60,14 +60,14 @@ class TransactionController extends Controller
         }
         $request->validate($rules);
         $data = Transaction::create([
-            'userId' => $id,
+            'userId' => (int)$id,
             'payment' => $request->get('payment'),
             'type' => $request->get('type'),
             'gram' => $request->get('gram'),
             'adminFee' => $request->get('adminFee'),
             'priceId' => $request->get('priceId'),
             'nominal' => $request->get('nominal'),
-            'status' => false,
+            'status' => 0,
             'discount' => $request->get('discount'),
             'destinationNumber' => $request->get('destinationNumber'),
             'message' => $request->get('message'),
