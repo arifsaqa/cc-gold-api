@@ -60,7 +60,7 @@ class TransactionController extends Controller
         }
         $request->validate($rules);
         $data = Transaction::create([
-            'userId' => $id,
+            'userId' => (int)$id,
             'payment' => $request->get('payment'),
             'type' => $request->get('type'),
             'gram' => $request->get('gram'),
