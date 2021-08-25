@@ -67,7 +67,7 @@ class TransactionController extends Controller
             'adminFee' => $request->get('adminFee'),
             'priceId' => $request->get('priceId'),
             'nominal' => $request->get('nominal'),
-            'status' => false,
+            'status' => 0,
             'discount' => $request->get('discount'),
             'destinationNumber' => $request->get('destinationNumber'),
             'message' => $request->get('message'),
