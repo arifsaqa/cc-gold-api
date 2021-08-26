@@ -63,9 +63,29 @@ class PromoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        $promo = Promo::find($id);
+        $userList = json_decode($promo->userList);
+        if ($userList == null) {
+            $promo->userList = json_encode([$request->userId]);
+        }else{
+            foreach ($userList as $value) {
+                if ($value == $request->userId) {
+                    return response()->json([
+                        'status' => 0,
+                        'message' => "User sudah menggunakan referral ini"
+                    ]);
+                }
+            }
+            array_push($userList, $request->userId);
+            $promo->update(['userList' => $userList]);
+        }
+        $promo->save();
+        return response()->json([
+            'status'=> 1,
+            'data'=>$promo,
+        ]);
     }
 
     /**

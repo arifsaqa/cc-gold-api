@@ -72,7 +72,7 @@ class RefferalController extends Controller
 
         return response()->json([
             'status'=> 1,
-            'user'=>$refferal,
+            'data'=>$refferal,
         ]);
     }
 
