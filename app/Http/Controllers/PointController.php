@@ -71,6 +71,22 @@ class PointController extends Controller
         //
     }
 
+    public function use(Request $request)
+    {
+        $point = Point::where('userId', '=', $request->userId);
+        if (!$point->point >= 1) {
+            return response()->json([
+                'status' => 0,
+                'message' => 'Point anda kurang'
+            ]);
+        }
+        $point->point -= 1;
+        $point->save();
+        return response()->json([
+            'status' => 1,
+            'data' => $point
+        ]);
+    }
     /**
      * Update the specified resource in storage.
      *
