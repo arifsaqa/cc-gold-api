@@ -60,19 +60,16 @@ class BuyPriceController extends Controller
             return response()->json($validator->errors()->toJson(), 400);
         }
 
-        $latestPrice = DB::table('buy_prices')
-            ->latest()
-            ->first();
+        $latestPrice = BuyPrice::latest()->first();
         $lastCreated = '';
         $nowFormat = '';
+
         if ($latestPrice) {
-            # code...
             $timestamp = strtotime($latestPrice->created_at);
             $lastCreated = date('d', $timestamp);
-            $now = new DateTime();
-            $nowFormat = $now->format('d');
         }
-
+        $now = new DateTime();
+        $nowFormat = $now->format('d');
         if ($nowFormat == $lastCreated) {
             return Redirect::back()->with('error', 'Maksimal perubahan harga sehari sekali');
         }
