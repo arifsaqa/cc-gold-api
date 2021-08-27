@@ -184,7 +184,7 @@ class TransactionController extends Controller
                 case 3:
                     $destination = User::where('phone', '=',$transaction->destinationNumber)->first();
                     $saldoFrom = Saldo::where('userId', '=', $transaction->userId)->first();
-                    $saldoTo = Saldo::where('userId', '=', $destination->userId)->first();
+                    $saldoTo = Saldo::where('userId', '=', $destination->id)->first();
 
                     $saldoFrom = Saldo::where('userId', '=', $transaction->userId)->first();
                     if ($saldoFrom->gram<$transaction->gram) {
