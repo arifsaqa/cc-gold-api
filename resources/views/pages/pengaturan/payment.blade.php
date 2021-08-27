@@ -28,7 +28,7 @@
                             <tr>
                                 <th scope="row">{{$key+1}}</th>
                                 <td>{{$payment_method->name}}</td>
-                                <td><img src="{{ asset('payments/'. $payment_method->logo) }}" style="max-width: 100px"></td>
+                                <td><img src="{{$payment_method->logo}}" style="max-width: 100px"></td>
                                 <td>Actions</td>
                             </tr>
                         @endforeach

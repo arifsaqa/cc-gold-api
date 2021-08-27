@@ -35,7 +35,7 @@ class PaymentMethodController extends Controller
         $request->image->move(public_path('payments'), $imageName);
         PaymentMethod::create([
             'name' => $request->get('name'),
-            'logo' =>  $imageName,
+            'logo' =>  public_path('images/payment/'.$imageName),
         ]);
 
         return redirect()->back()->with('success', 'Upload Metode Pembayaran berhasil');

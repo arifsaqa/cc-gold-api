@@ -32,7 +32,7 @@
                                 <td>{{$promo->title}}</td>
                                 <td>{{$promo->description}}</td>
                                 <td>{{$promo->discount}}</td>
-                                <td><img src="{{ asset('images/'. $promo->image) }}" style="max-width: 100px"></td>
+                                <td><img src="{{$promo->image}}" style="max-width: 100px"></td>
                                 <td>Actions</td>
                             </tr>
                         @endforeach
