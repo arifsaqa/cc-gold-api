@@ -160,7 +160,6 @@ class TransactionController extends Controller
                 case 1:
                     $saldo = Saldo::where('userId', '=', $transaction->userId)->first();
                     $saldoActual = $saldo->gram+$transaction->gram;
-                    dd($saldoActual);
                     $saldo->gram = $saldoActual;
                     $saldo->save();
 
