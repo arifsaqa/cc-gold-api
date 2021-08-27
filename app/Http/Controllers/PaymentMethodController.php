@@ -32,10 +32,10 @@ class PaymentMethodController extends Controller
             'image'=> 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
         $imageName = time().'.'.$request->image->extension();
-        $request->image->move(public_path('payments'), $imageName);
+        $request->image->move(public_path('images/payments'), $imageName);
         PaymentMethod::create([
             'name' => $request->get('name'),
-            'logo' =>  asset('public/payments/'.$imageName),
+            'logo' =>  asset('images/payments/'.$imageName),
         ]);
 
         return redirect()->back()->with('success', 'Upload Metode Pembayaran berhasil');
