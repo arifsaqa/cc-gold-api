@@ -63,7 +63,7 @@
                                 </ul>
                             </div> <!-- navbar collapse -->
                             <div class="button">
-                                <a href="signup.html" class="btn">Sign Up</a>
+                                <a href="#playstore" class="btn">Download Sekarang</a>
                             </div>
                         </nav>
                         <!-- End Navbar -->
