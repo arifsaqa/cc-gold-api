@@ -20,7 +20,6 @@ class PromoController extends Controller
         $data = DB::table('promos')->orderBy('created_at', 'desc')->limit(5)->get();
 
         $status = 1;
-
         return response()->json(compact(
             'status',
             'data'
@@ -72,7 +71,7 @@ class PromoController extends Controller
                 if ($value == $request->userId) {
                     return response()->json([
                         'status' => 0,
-                        'message' => "User sudah menggunakan referral ini"
+                        'message' => "User sudah menggunakan promo ini"
                     ]);
                 }
             }
