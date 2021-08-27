@@ -46,7 +46,7 @@ Route::group([
         Route::post('/refferal', [RefferalController::class, 'store']);
 
         Route::get('/points/{id}', [PointController::class, 'index']);
-        Route::get('/points/use/', [PointController::class, 'use']);
+        Route::post('/points/use/', [PointController::class, 'use']);
 
 
         Route::get('/promos', [PromoController::class, 'index']);
