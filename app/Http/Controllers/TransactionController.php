@@ -159,7 +159,7 @@ class TransactionController extends Controller
             switch ($type) {
                 case 1:
                     $saldo = Saldo::where('userId', '=', $transaction->userId)->get();
-
+                    dd($saldo);
                     $saldoActual = $saldo->gram+$transaction->gram;
                     $saldo->gram = $saldoActual;
                     $saldo->save();
