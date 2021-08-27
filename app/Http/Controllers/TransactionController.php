@@ -195,7 +195,7 @@ class TransactionController extends Controller
                     $saldoFrom->gram = $saldoActualFrom;
                     $saldoFrom->save();
 
-                    $saldoActualTo = $saldoTo->gram-$transaction->gram;
+                    $saldoActualTo = $saldoTo->gram+$transaction->gram;
                     $saldoTo->gram = $saldoActualTo;
                     $saldoTo->save();
 
