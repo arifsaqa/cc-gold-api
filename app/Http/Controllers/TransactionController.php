@@ -158,9 +158,9 @@ class TransactionController extends Controller
             $type = $transaction->type;
             switch ($type) {
                 case 1:
-                    $saldo = Saldo::where('userId', '=', $transaction->userId)->get();
-                    dd($saldo);
+                    $saldo = Saldo::where('userId', '=', $transaction->userId)->first();
                     $saldoActual = $saldo->gram+$transaction->gram;
+                    dd($saldoActual);
                     $saldo->gram = $saldoActual;
                     $saldo->save();
 
@@ -170,7 +170,7 @@ class TransactionController extends Controller
                     break;
 
                 case 2:
-                    $saldo = Saldo::where('userId', '=', $transaction->userId)->get();
+                    $saldo = Saldo::where('userId', '=', $transaction->userId)->first();
 
                     if ($saldo<$transaction->gram) {
                         return redirect()->back()->with('error', 'Gagal saldo tidak mencukupi');
@@ -187,7 +187,7 @@ class TransactionController extends Controller
                     return redirect()->back()->with('success', 'Status berhasil diubah');
                     break;
                     case 2:
-                    $saldo = Saldo::where('userId', '=', $transaction->userId)->get();
+                    $saldo = Saldo::where('userId', '=', $transaction->userId)->first();
 
                     if ($saldo<$transaction->gram) {
                         return redirect()->back()->with('error', 'Gagal saldo tidak mencukupi');
@@ -202,8 +202,8 @@ class TransactionController extends Controller
                     break;
                 case 3:
                     $destination = User::where('phone', '=',$transaction->destinationNumber)->first();
-                    $saldoFrom = Saldo::where('userId', '=', $transaction->userId)->get();
-                    $saldoTo = Saldo::where('userId', '=', $destination->userId)->get();
+                    $saldoFrom = Saldo::where('userId', '=', $transaction->userId)->first();
+                    $saldoTo = Saldo::where('userId', '=', $destination->userId)->first();
 
                     $saldoFrom->sum('gram');
                     if ($saldoFrom->sum('gram')<$transaction->gram) {
