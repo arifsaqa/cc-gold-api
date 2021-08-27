@@ -17,8 +17,6 @@ class PromoController extends Controller
      */
     public function index()
     {
-
-
         $data = DB::table('promos')->orderBy('created_at', 'desc')->limit(5)->get();
 
         $status = 1;
