@@ -170,14 +170,7 @@ class TransactionController extends Controller
 
                 case 2:
                     $saldo = Saldo::where('userId', '=', $transaction->userId)->first();
-
-                    if ($saldo<$transaction->gram) {
-                        return redirect()->back()->with('error', 'Gagal saldo tidak mencukupi');
-                    }
                     $saldoActual = $saldo->gram-$transaction->gram;
-                    if ($saldoActual == null) {
-                        return redirect()->back()->with('error', 'Gagal merubah saldo');
-                    }
                     $saldo->gram = $saldoActual;
                     $saldo->save();
 
