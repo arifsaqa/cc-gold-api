@@ -183,6 +183,7 @@ class TransactionController extends Controller
                     break;
                 case 3:
                     $destination = User::where('phone', '=',$transaction->destinationNumber)->first();
+                    $from = User::where('id', '=',$transaction->userId)->first();
                     $saldoFrom = Saldo::where('userId', '=', $transaction->userId)->first();
                     $saldoTo = Saldo::where('userId', '=', $destination->id)->first();
 
@@ -201,6 +202,21 @@ class TransactionController extends Controller
 
                     $transaction->status = 1;
                     $transaction->save();
+
+                    Transaction::create([
+                        'userId' => $destination->id,
+                        'payment' => $transaction->payment,
+                        'type' => 3,
+                        'gram' => $transaction->gram,
+                        'adminFee' => 0,
+                        'priceId' => $transaction->priceId,
+                        'nominal' => $transaction->nominal,
+                        'status' => 1,
+                        'discount' => $transaction->discount,
+                        'destinationNumber' => $from->id,
+                        'message' => $transaction->message,
+                        'barcode' => $transaction->barcode,
+                    ]);
 
                     return redirect()->back()->with('success', 'Status berhasil diubah');
 
