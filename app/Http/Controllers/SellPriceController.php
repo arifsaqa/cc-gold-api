@@ -62,13 +62,11 @@ class SellPriceController extends Controller
         $lastCreated = '';
         $nowFormat = '';
         if ($latestPrice) {
-            # code...
             $timestamp = strtotime($latestPrice->created_at);
             $lastCreated = date('d', $timestamp);
-            $now = new DateTime();
-            $nowFormat = $now->format('d');
         }
-
+        $now = new DateTime();
+        $nowFormat = $now->format('d');
         if ($nowFormat == $lastCreated) {
             return Redirect::back()->with('error', 'Maksimal perubahan harga sehari sekali');
         }
