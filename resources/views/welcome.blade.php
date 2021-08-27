@@ -83,9 +83,7 @@
                         <h1 class="wow fadeInUp" data-wow-delay=".2s">
                             Platform Investasi Emas Terpercaya
                         </h1>
-                        <p class="wow fadeInUp" data-wow-delay=".4s">Lorem, ipsum dolor sit amet consectetur adipisicing
-                            elit. Molestiae cupiditate quae cum facilis repellendus, ratione in amet! Soluta, nihil
-                            eligendi?</p>
+                        <p class="wow fadeInUp" data-wow-delay=".4s">Beli Emas dengan mudah hanya dalam genggaman anda. Investasi emas termudah yang pernah anda rasakan. Segera download sekarang</p>
                         <div class="button wow zoomIn" data-wow-delay="1s">
                             <a href="#pricing"><i class="lni lni-arrow-down-circle"></i></a>
                         </div>
@@ -112,7 +110,7 @@
                     <div class="single-feature text-center">
                         <img src="{{ asset('assetsHome/images/feature/jual-emas.svg')}}" alt="Fitur">
                         <h3 class="title">Jual Emas</h3>
-                        <p class="des">Lorem ipsum dolor sit amet, conse tetur adipiscing elit.</p>
+                        <p class="des">Fitur untuk menjual emas langsung dari aplikasi tanpa perlu datang ke toko</p>
                     </div>
                     <!-- End Single Feature-->
                 </div>
@@ -121,7 +119,7 @@
                     <div class="single-feature text-center">
                         <img src="{{ asset('assetsHome/images/feature/beli-emas.svg')}}" alt="Fitur">
                         <h3 class="title">Beli Emas</h3>
-                        <p class="des">Lorem ipsum dolor sit amet, conse tetur adipiscing elit.</p>
+                        <p class="des">Beli emas mulai dari pecahan kecil dan tersimpan dalam 1 aplikasi. Emasnya pun dapat dicetak jadi bentuk fisik</p>
                     </div>
                     <!-- End Single Feature-->
                 </div>
@@ -130,7 +128,7 @@
                     <div class="single-feature text-center">
                         <img src="{{ asset('assetsHome/images/feature/transfer-emas.svg')}}" alt="Fitur">
                         <h3 class="title">Transfer Emas</h3>
-                        <p class="des">Lorem ipsum dolor sit amet, conse tetur adipiscing elit.</p>
+                        <p class="des">Memungkinkan anda untuk memberi hadiah orang tersayang dengan transfer saldo emas anda</p>
                     </div>
                     <!-- End Single Feature-->
                 </div>
@@ -184,7 +182,7 @@
                                         <img src="{{ asset('assetsHome/images/logo/logo.svg')}}" alt="#">
                                     </a>
                                 </div>
-                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum voluptas labore voluptatibus unde illo porro mollitia aliquam earum voluptatum vel!
+                                <p>Aplikasi untuk investasi emas paling mudah yang pernah anda rasakan. Start your investment with gold!
                                 </p>
                             </div>
                             <!-- End Single Widget -->
@@ -194,7 +192,7 @@
                             <div class="single-footer f-link">
                                 <h3>Informasi</h3>
                                 <ul>
-                                    <li class="text-white">Email : hello@ccgold.com</li>
+                                    <li class="text-white">Email : hello@ccgold.id</li>
                                     <li class="text-white">Telpon : 0341-4644812</li>
                                     <li class="text-white">HP/Whatsapp : 0812-3456-7890</li>
                                 </ul>
