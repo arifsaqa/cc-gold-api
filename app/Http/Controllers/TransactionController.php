@@ -170,6 +170,9 @@ class TransactionController extends Controller
 
                 case 2:
                     $saldo = Saldo::where('userId', '=', $transaction->userId)->first();
+                    if ($saldo->gram<$transaction->gram) {
+                        return redirect()->back()->with('error', 'Gagal saldo tidak mencukupi');
+                    }
                     $saldoActual = $saldo->gram-$transaction->gram;
                     $saldo->gram = $saldoActual;
                     $saldo->save();
@@ -183,8 +186,8 @@ class TransactionController extends Controller
                     $saldoFrom = Saldo::where('userId', '=', $transaction->userId)->first();
                     $saldoTo = Saldo::where('userId', '=', $destination->userId)->first();
 
-                    $saldoFrom->sum('gram');
-                    if ($saldoFrom->sum('gram')<$transaction->gram) {
+                    $saldoFrom = Saldo::where('userId', '=', $transaction->userId)->first();
+                    if ($saldoFrom->gram<$transaction->gram) {
                         return redirect()->back()->with('error', 'Gagal saldo tidak mencukupi');
                     }
 
