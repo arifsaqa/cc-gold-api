@@ -50,7 +50,7 @@ class PromoController extends Controller
             'title' => $request->get('title'),
             'description' => $request->get('description'),
             'discount' => $request->get('discount'),
-            'image' =>  public_path('images/promo/'.$imageName),
+            'image' =>  asset('images/promo/'.$imageName),
         ]);
 
         return redirect()->back()->with('success', 'Upload Promo berhasil');
