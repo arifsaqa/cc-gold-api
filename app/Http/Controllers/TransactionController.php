@@ -160,7 +160,7 @@ class TransactionController extends Controller
                 case 1:
                     $saldo = Saldo::where('userId', '=', $transaction->userId)->get();
 
-                    $saldo->gram = $saldo+$transaction->gram;
+                    $saldo->gram += $transaction->gram;
                     $saldo->save();
 
                     $transaction->status = 1;
@@ -175,7 +175,7 @@ class TransactionController extends Controller
                         return redirect()->back()->with('error', 'Gagal saldo tidak mencukupi');
                     }
 
-                    $saldo->gram = $saldo-$transaction->gram;
+                    $saldo->gram += $transaction->gram;
                     $saldo->save();
 
                     $transaction->status = 1;
@@ -206,10 +206,10 @@ class TransactionController extends Controller
                         return redirect()->back()->with('error', 'Gagal saldo tidak mencukupi');
                     }
 
-                    $saldoFrom->gram = $saldoFrom-$transaction->gram;
+                    $saldoFrom->gram -= $transaction->gram;
                     $saldoFrom->save();
 
-                    $saldoTo->gram = $saldoTo+$transaction->gram;
+                    $saldoTo->gram += $transaction->gram;
                     $saldoTo->save();
 
                     $transaction->status = 1;
