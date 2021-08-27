@@ -31,8 +31,7 @@
                                 <td>{{$transaction->created_at}}</td>
                                 <td><div class="badge badge-warning">Pending</div></td>
                                 <td>
-                                    <form action="{{ route('confirmation.transaction', ['id'=>$transaction->id]) }}">
-                                        <input type="number" name="id" value="{{$transaction->id}}" hidden>
+                                    <form action="{{ route('confirmation.transaction', ['id'=>$transaction->id]) }}" method="POST">
                                         <button type="submit" class="btn btn-success">Konfirmasi</button>
                                     </form>
                                 </td>
