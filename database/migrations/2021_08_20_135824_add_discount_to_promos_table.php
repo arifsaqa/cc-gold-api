@@ -27,6 +27,7 @@ class AddDiscountToPromosTable extends Migration
     {
         Schema::table('promos', function (Blueprint $table) {
             $table->dropColumn('discount');
+            $table->dropIfExists('user_list');
         });
     }
 }
