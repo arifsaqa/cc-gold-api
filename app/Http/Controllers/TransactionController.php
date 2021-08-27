@@ -220,8 +220,7 @@ class TransactionController extends Controller
                     break;
             }
         } catch (\Throwable $th) {
-            return redirect()->back()->with('success', 'Gagal');
-
+            throw $th;
         }
 
     }
