@@ -14,7 +14,7 @@ class AddUserListToPromosTable extends Migration
     public function up()
     {
         Schema::table('promos', function (Blueprint $table) {
-            $table->json('userList')->nullable()->default(json_encode([]));
+            $table->json('userList')->nullable()->default(json_encode(['']));
         });
     }
 

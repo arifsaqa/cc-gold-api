@@ -15,7 +15,6 @@ class AddDiscountToPromosTable extends Migration
     {
         Schema::table('promos', function (Blueprint $table) {
             $table->integer('discount')->after('image');
-            $table->string('user_list')->after('image')->nullable();
         });
     }
 
@@ -28,7 +27,6 @@ class AddDiscountToPromosTable extends Migration
     {
         Schema::table('promos', function (Blueprint $table) {
             $table->dropColumn('discount');
-            $table->dropColumn('user_list');
         });
     }
 }
