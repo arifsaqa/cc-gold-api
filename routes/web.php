@@ -36,6 +36,6 @@ Route::post('/payment-method/create', [PaymentMethodController::class, 'create']
 Route::get('/user', [HomeController::class, 'users'])->name('users');
 Route::get('/transaction/pending', [HomeController::class, 'transactionPending'])->name('transaction.pending');
 Route::get('/transaction/completed', [HomeController::class, 'transactionCompleted'])->name('transaction.completed');
-Route::get('/transaction/confirm/{id}', [TransactionController::class, 'updateStatus'])->name('confirmation.transaction');
+Route::post('/transaction/confirm/{id}', [TransactionController::class, 'updateStatus'])->name('confirmation.transaction');
 Route::get('/sell/price', [HomeController::class, 'sellPrice'])->name('sellprice');
 Route::post('/sell/create', [SellPriceController::class, 'create'])->name('sellcreate');
