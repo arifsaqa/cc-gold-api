@@ -45,12 +45,12 @@ class PromoController extends Controller
             'image'=> 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
         $imageName = time().'.'.$request->image->extension();
-        $request->image->move(public_path('images'), $imageName);
-        $promo = Promo::create([
+        $request->image->move(public_path('images/promo'), $imageName);
+        Promo::create([
             'title' => $request->get('title'),
             'description' => $request->get('description'),
             'discount' => $request->get('discount'),
-            'image' =>  $imageName,
+            'image' =>  public_path('images/promo/'.$imageName),
         ]);
 
         return redirect()->back()->with('success', 'Upload Promo berhasil');
