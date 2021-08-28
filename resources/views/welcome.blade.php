@@ -40,7 +40,7 @@
                         <!-- Start Navbar -->
                         <nav class="navbar navbar-expand-lg">
                             <a class="navbar-brand" href="index.html">
-                                <img src="{{ asset('assetsHome/images/logo/white-logo.svg')}}" alt="Logo">
+                                <img src="{{ asset('assetsHome/images/logo/logo.svg')}}" alt="Logo">
                             </a>
                             <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -52,7 +52,7 @@
                             <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                                 <ul id="nav" class="navbar-nav ms-auto">
                                     <li class="nav-item">
-                                        <a href="#home" class="active" aria-label="Toggle navigation">Beranda</a>
+                                        <a href="#home" aria-label="Toggle navigation">Beranda</a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="#fitur" aria-label="Toggle navigation">Fitur</a>
@@ -62,9 +62,6 @@
                                     </li>
                                 </ul>
                             </div> <!-- navbar collapse -->
-                            <div class="button">
-                                <a href="#playstore" class="btn">Download Sekarang</a>
-                            </div>
                         </nav>
                         <!-- End Navbar -->
                     </div>
@@ -84,8 +81,8 @@
                             Platform Investasi Emas Terpercaya
                         </h1>
                         <p class="wow fadeInUp" data-wow-delay=".4s">Beli Emas dengan mudah hanya dalam genggaman anda. Investasi emas termudah yang pernah anda rasakan. Segera download sekarang</p>
-                        <div class="button wow zoomIn" data-wow-delay="1s">
-                            <a href="#pricing"><i class="lni lni-arrow-down-circle"></i></a>
+                        <div class="button">
+                            <a class="btn" href="{{ asset('assetsHome/app-cc-gold.apk')}}" download>Download App</a>
                         </div>
                     </div>
                 </div>
