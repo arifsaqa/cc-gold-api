@@ -16,6 +16,20 @@
     <link rel="stylesheet" href="{{ asset('assetsHome/css/tiny-slider.css')}}" />
     <link rel="stylesheet" href="{{ asset('assetsHome/css/glightbox.min.css')}}" />
     <link rel="stylesheet" href="{{ asset('assetsHome/css/dark.css')}}" />
+    <style>
+        .downloadButton {
+            margin-top: 1rem;
+            padding: 1rem 2rem;
+            background-image: linear-gradient(#FEE17E, #AE8D2C);
+            color: #27314F;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 50px;
+        }
+        .downloadButton:hover{
+            color: #27314F;
+        }
+    </style>
 
 </head>
 
@@ -84,9 +98,13 @@
                             Platform Investasi Emas Terpercaya
                         </h1>
                         <p class="wow fadeInUp" data-wow-delay=".4s">Beli Emas dengan mudah hanya dalam genggaman anda. Investasi emas termudah yang pernah anda rasakan. Segera download sekarang</p>
-                        <div class="button wow zoomIn" data-wow-delay="1s">
-                            <a href="{{ asset('assetsHome/app-cc-gold.apk')}}"><i class="lni lni-arrow-down-circle"></i></a>
-                        </div>
+                        {{-- <div --}}
+                         {{-- class="button wow zoomIn"
+                          --}}
+                          {{-- class="downloadButton" --}}
+                         {{-- data-wow-delay="1s"> --}}
+                            <a href="{{ asset('assetsHome/app-cc-gold.apk')}}" class="downloadButton">Download Sekarang</a>
+                        {{-- </div> --}}
                     </div>
                 </div>
             </div>
