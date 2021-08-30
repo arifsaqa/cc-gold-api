@@ -39,6 +39,7 @@ class PromoController extends Controller
             'title' => 'required|string',
             'description' => 'required|string',
             'discount' => 'required|integer',
+            'type' => 'required|integer',
             'image'=> 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
         $imageName = time().'.'.$request->image->extension();
@@ -47,6 +48,7 @@ class PromoController extends Controller
             'title' => $request->get('title'),
             'description' => $request->get('description'),
             'discount' => $request->get('discount'),
+            'type' => $request->get('type'),
             'image' =>  asset('images/promo/'.$imageName),
         ]);
 

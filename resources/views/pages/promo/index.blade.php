@@ -20,6 +20,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Title</th>
                             <th scope="col">Description</th>
+                            <th scope="col">Type</th>
                             <th scope="col">Diskon</th>
                             <th scope="col">Image</th>
                             <th scope="col">Action</th>
@@ -31,6 +32,7 @@
                                 <th scope="row">{{$key+1}}</th>
                                 <td>{{$promo->title}}</td>
                                 <td>{{$promo->description}}</td>
+                                <td>{{$promo->type}}</td>
                                 <td>{{$promo->discount}}</td>
                                 <td><img src="{{$promo->image}}" style="max-width: 100px"></td>
                                 <td>Actions</td>
@@ -63,11 +65,18 @@
                     <label for="">Deskripsi</label>
                     <textarea name="description" class="form-control" placeholder="Isi deskripsi disini"></textarea>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-5">
                     <label for="">Diskon (dalam nominal)</label>
                     <input type="number" class="form-control" name="discount">
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-2">
+                    <label for="">Type</label>
+                    <select name="type" class="form-control">
+                        <option value="1">%</option>
+                        <option value="2">Rp.</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-5">
                     <label for="">Gambar (resolusi 480x480)</label>
                     <input type="file" name="image" class="form-control">
                 </div>
