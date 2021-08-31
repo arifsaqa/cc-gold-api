@@ -139,7 +139,7 @@ class BuyPriceController extends Controller
     {
         switch ($timeline) {
             case 'weekly':
-                $data = BuyPrice::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
+                $data = BuyPrice::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->orderBy('created_at', 'asc')->get();
                 return response()->json(
                     [
                         'message' => "success",
