@@ -84,7 +84,8 @@ class PointController extends Controller
         $point->save();
         return response()->json([
             'status' => 1,
-            'data' => $point
+            'data' => $point,
+            'message' => 'Penukaran point berhasil!'
         ]);
     }
     /**

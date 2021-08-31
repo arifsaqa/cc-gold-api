@@ -6,6 +6,7 @@ use App\Http\Controllers\BuyPriceController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\PointController;
+use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\PromoController;
 use App\Http\Controllers\RefferalController;
 use App\Http\Controllers\SaldoController;
@@ -89,6 +90,6 @@ Route::group([
         // Route::delete('/paymentMethods/{id}', [PromoController::class, 'destroy']);
 
         Route::get('/faqs', [FaqController::class, 'index']);
-        Route::get('/policy', [Policy::class, 'index']);
+        Route::get('/policy', [PolicyController::class, 'index']);
     }
 );
