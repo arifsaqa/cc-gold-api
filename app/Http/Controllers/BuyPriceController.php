@@ -20,7 +20,7 @@ class BuyPriceController extends Controller
      */
     public function index()
     {
-        $prices = DB::table('buy_prices')->orderBy('asc', 'created_at')->get();
+        $prices = DB::table('buy_prices')->orderBy('created_at','asc')->get();
         return response()->json(
             [
                 'message' => "success",
@@ -149,7 +149,7 @@ class BuyPriceController extends Controller
                 );
                 break;
             case 'monthly':
-                $data = BuyPrice::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfWeek()])->orderBy('asc', 'created_at')->get();
+                $data = BuyPrice::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfWeek()])->orderBy('created_at','asc')->get();
                 return response()->json(
                     [
                         'message' => "success",
@@ -159,7 +159,7 @@ class BuyPriceController extends Controller
                 );
                 break;
             case 'yearly':
-                $data = BuyPrice::whereBetween('created_at', [Carbon::now()->startOfYear(), Carbon::now()->endOfWeek()])->orderBy('asc', 'created_at')->get();
+                $data = BuyPrice::whereBetween('created_at', [Carbon::now()->startOfYear(), Carbon::now()->endOfWeek()])->orderBy('created_at','asc')->get();
                 return response()->json(
                     [
                         'message' => "success",
@@ -169,7 +169,7 @@ class BuyPriceController extends Controller
                 );
                 break;
             case '3years':
-                $data = BuyPrice::where( 'created_at', '>', Carbon::now()->subYears(3))->orderBy('asc', 'created_at')->get();
+                $data = BuyPrice::where( 'created_at', '>', Carbon::now()->subYears(3))->orderBy('created_at','asc')->get();
                 return response()->json(
                     [
                         'message' => "success",
@@ -179,7 +179,7 @@ class BuyPriceController extends Controller
                 );
                 break;
             case '6years':
-                $data = BuyPrice::where( 'created_at', '>', Carbon::now()->subYears(6))->orderBy('asc', 'created_at')->get();
+                $data = BuyPrice::where( 'created_at', '>', Carbon::now()->subYears(6))->orderBy('created_at','asc')->get();
                 return response()->json(
                     [
                         'message' => "success",
