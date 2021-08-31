@@ -15,6 +15,6 @@ class Point extends Model
     ];
 
     public function user(){
-        return $this->hasMany(User::class, 'userId');
+        return $this->belongsTo(User::class, 'userId');
     }
 }
