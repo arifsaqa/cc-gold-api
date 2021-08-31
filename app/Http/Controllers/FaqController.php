@@ -17,7 +17,7 @@ class FaqController extends Controller
     public function index()
     {
         $faqs =  Faq::all();
-        if ($faqs == null) {
+        if (!$faqs->first()) {
             return response()->json([
                 'status' => 0,
                 'message' => 'data faq masih kosong',

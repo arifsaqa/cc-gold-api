@@ -16,7 +16,7 @@ class PolicyController extends Controller
     public function index()
     {
         $policies = Policy::all();
-        if ($policies == null) {
+        if (!$policies->first()) {
             return response()->json([
                 'status' => 0,
                 'message' => 'data policy masih kosong',
