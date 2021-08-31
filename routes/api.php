@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BankAccountController;
 use App\Http\Controllers\BuyPriceController;
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\PointController;
 use App\Http\Controllers\PromoController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\RefferalController;
 use App\Http\Controllers\SaldoController;
 use App\Http\Controllers\SellPriceController;
 use App\Http\Controllers\TransactionController;
+use App\Models\Policy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -85,5 +87,8 @@ Route::group([
         Route::post('/paymentMethods', [PaymentMethodController::class, 'create']);
         Route::patch('/paymentMethods/{id}', [PaymentMethodController::class, 'update']);
         // Route::delete('/paymentMethods/{id}', [PromoController::class, 'destroy']);
+
+        Route::get('/faqs', [FaqController::class, 'index']);
+        Route::get('/policy', [Policy::class, 'index']);
     }
 );
