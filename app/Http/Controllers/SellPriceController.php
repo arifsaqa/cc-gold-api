@@ -137,7 +137,7 @@ class SellPriceController extends Controller
     {
         switch ($timeline) {
             case 'weekly':
-                $data = SellPrice::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->orderBy('created_at','asc')->get();
+                $data = SellPrice::where('created_at', '>', Carbon::now()->subWeek(1))->orderBy('created_at','asc')->get();
                 return response()->json(
                     [
                         'message' => "success",
@@ -147,7 +147,7 @@ class SellPriceController extends Controller
                 );
                 break;
             case 'monthly':
-                $data = SellPrice::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfWeek()])->orderBy('created_at','asc')->get();
+                $data = SellPrice::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])->orderBy('created_at','asc')->get();
                 return response()->json(
                     [
                         'message' => "success",
@@ -157,7 +157,7 @@ class SellPriceController extends Controller
                 );
                 break;
             case 'yearly':
-                $data = SellPrice::whereBetween('created_at', [Carbon::now()->startOfYear(), Carbon::now()->endOfWeek()])->orderBy('created_at','asc')->get();
+                $data = SellPrice::whereBetween('created_at', [Carbon::now()->startOfYear(), Carbon::now()->endOfYear()])->orderBy('created_at','asc')->get();
                 return response()->json(
                     [
                         'message' => "success",
