@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SellPrice;
+use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -131,5 +132,63 @@ class SellPriceController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function graph($timeline)
+    {
+        switch ($timeline) {
+            case 'weekly':
+                $data = SellPrice::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->orderBy('asc', 'created_at')->get();
+                return response()->json(
+                    [
+                        'message' => "success",
+                        'data' => $data,
+                        'status' => 1,
+                    ]
+                );
+                break;
+            case 'monthly':
+                $data = SellPrice::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfWeek()])->orderBy('asc', 'created_at')->get();
+                return response()->json(
+                    [
+                        'message' => "success",
+                        'data' => $data,
+                        'status' => 1,
+                    ]
+                );
+                break;
+            case 'yearly':
+                $data = SellPrice::whereBetween('created_at', [Carbon::now()->startOfYear(), Carbon::now()->endOfWeek()])->orderBy('asc', 'created_at')->get();
+                return response()->json(
+                    [
+                        'message' => "success",
+                        'data' => $data,
+                        'status' => 1,
+                    ]
+                );
+                break;
+            case '3years':
+                $data = SellPrice::where('created_at', '>', Carbon::now()->subYears(3))->orderBy('asc', 'created_at')->get();
+                return response()->json(
+                    [
+                        'message' => "success",
+                        'data' => $data,
+                        'status' => 1,
+                    ]
+                );
+                break;
+            case '6years':
+                $data = SellPrice::where('created_at', '>', Carbon::now()->subYears(6))->orderBy('asc', 'created_at')->get();
+                return response()->json(
+                    [
+                        'message' => "success",
+                        'data' => $data,
+                        'status' => 1,
+                    ]
+                );
+
+            default:
+                # code...
+                break;
+        }
     }
 }

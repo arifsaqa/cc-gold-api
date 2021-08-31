@@ -12,8 +12,6 @@ use App\Http\Controllers\RefferalController;
 use App\Http\Controllers\SaldoController;
 use App\Http\Controllers\SellPriceController;
 use App\Http\Controllers\TransactionController;
-use App\Models\Policy;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -81,6 +79,7 @@ Route::group([
         Route::get('/sellPrices', [SellPriceController::class, 'index']);
         Route::get('/currentSellPrice', [SellPriceController::class, 'getCurrentPrice']);
         Route::post('/sellPrice', [SellPriceController::class, 'create']);
+        Route::get('/sellGraph/{timeline}', [SellPriceController::class, 'graph']);
         Route::get('/sellPrice/{id}', [SellPriceController::class, 'show']);
 
         Route::get('/paymentMethods', [PaymentMethodController::class, 'index']);
