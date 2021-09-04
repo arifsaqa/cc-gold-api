@@ -21,7 +21,7 @@
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Promo</span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/promo" class="nav-link"></i><span>Promo</span></a></li>
+                        <li><a href="{{ route('promotions') }}" class="nav-link"></i><span>Promo</span></a></li>
                     </ul>
                 </li>
             </li>
@@ -39,6 +39,8 @@
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="{{ route('users') }}">User</a></li>
                 <li><a class="nav-link" href="{{ route('paymentMethod') }}">Payment Method</a></li>
+                <li><a class="nav-link" href="{{ route('faq') }}">Faq</a></li>
+                <li><a class="nav-link" href="{{ route('policy') }}">Policy</a></li>
               </ul>
             </li>
       </ul>

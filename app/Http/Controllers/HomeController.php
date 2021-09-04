@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\BuyPrice;
+use App\Models\Faq;
 use App\Models\PaymentMethod;
+use App\Models\Policy;
 use App\Models\Promo;
 use App\Models\SellPrice;
 use App\Models\Transaction;
@@ -81,5 +83,15 @@ class HomeController extends Controller
     {
         $payment_methods = PaymentMethod::all();
         return view('pages.pengaturan.payment', compact('payment_methods'));
+    }
+    public function faqs()
+    {
+        $faqs = Faq::all();
+        return view('pages.pengaturan.faq', compact('faqs'));
+    }
+    public function policies()
+    {
+        $policies = Policy::all();
+        return view('pages.pengaturan.policy', compact('policies'));
     }
 }

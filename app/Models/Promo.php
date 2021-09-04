@@ -14,6 +14,7 @@ class Promo extends Model
         'description',
         'image',
         'discount',
-        'user_list',
+        'type',
+        'userList',
     ];
 }

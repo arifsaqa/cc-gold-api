@@ -32,7 +32,7 @@ class PromoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function add(Request $request)
     {
 
         $request->validate([
@@ -54,6 +54,10 @@ class PromoController extends Controller
 
         return redirect()->back()->with('success', 'Upload Promo berhasil');
 
+    }
+    public function create(Request $request)
+    {
+        //
     }
 
     /**
@@ -159,23 +163,22 @@ class PromoController extends Controller
 
     }
 
-    public function destroy($id)
+    public function destroy($promo)
     {
-        $promo = Promo::find($id)->first();
+        $promo = Promo::find($promo)->first();
         $file = $promo->image;
         $deleteImage= File::delete($file);
-        $deleteData = $promo->delete();
 
-        if($deleteImage && $deleteData){
-            return response()->json([
-                "status" => 1,
-                "message" => "sukses",
-            ], 200);
+        if($deleteImage){
+            $deleteData = $promo->delete();
+            if ($deleteData) {
+                return redirect()->back()->with('success', 'Berhasil hapus data');
+            }
+            else{
+                return redirect()->back()->with('error', 'Gagal hapus data');
+            }
         }else{
-            return response()->json([
-                "status" => 0,
-                "message" => "gagal",
-            ], 200);
+            return redirect()->back()->with('error', 'Gagal hapus gambar');
         }
 
     }

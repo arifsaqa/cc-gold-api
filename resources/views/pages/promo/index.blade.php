@@ -9,7 +9,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <button class="btn btn-primary" id="addprice">
+                        <button class="btn btn-primary" id="addpromo">
                             <i class="fas fa-plus"></i>
                             <span>Tambah Promo</span>
                         </button>
@@ -20,7 +20,6 @@
                             <th scope="col">#</th>
                             <th scope="col">Title</th>
                             <th scope="col">Description</th>
-                            <th scope="col">Type</th>
                             <th scope="col">Diskon</th>
                             <th scope="col">Image</th>
                             <th scope="col">Action</th>
@@ -32,10 +31,22 @@
                                 <th scope="row">{{$key+1}}</th>
                                 <td>{{$promo->title}}</td>
                                 <td>{{$promo->description}}</td>
-                                <td>{{$promo->type}}</td>
-                                <td>{{$promo->discount}}</td>
+                                @php
+                                    if ($promo->type == 1) {
+                                        $discount = $promo->discount . '%';
+                                    }else {
+                                        $discount = 'Rp. ' . number_format($promo->discount);
+                                    }
+                                @endphp
+                                <td>{{$discount}}</td>
                                 <td><img src="{{$promo->image}}" style="max-width: 100px"></td>
-                                <td>Actions</td>
+                                <td>
+                                    <form action="{{ route('promo.destroy', ['promo'=>$promo->id]) }}" method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger">Del</button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -45,7 +56,7 @@
     </div>
 @endsection
 @section('modal')
-    <div class="modal fade" id="price" tabindex="-1" role="dialog" aria-labelledby="price" aria-hidden="true">
+    <div class="modal fade" id="promo" tabindex="-1" role="dialog" aria-labelledby="promo" aria-hidden="true">
         <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -54,7 +65,7 @@
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>
-            <form action="{{route('promo.create')}}" method="POST" id="form-add-inbox-data" enctype="multipart/form-data">
+            <form action="{{route('promo.add')}}" method="POST" id="form-add-inbox-data" enctype="multipart/form-data">
             @csrf
             <div class="modal-body row">
                 <div class="form-group col-md-12">
@@ -72,6 +83,50 @@
                 <div class="form-group col-md-2">
                     <label for="">Type</label>
                     <select name="type" class="form-control">
+                        <option value="1" selected>%</option>
+                        <option value="2">Rp.</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="">Gambar (resolusi 480x480)</label>
+                    <input type="file" name="image" class="form-control">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            </form>
+        </div>
+        </div>
+    </div>
+    <div class="modal fade" id="editpromo" tabindex="-1" role="dialog" aria-labelledby="editpromo" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="modal-set-resiLabel">Edit Promo</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <form action="{{route('promo.edit')}}" method="POST" id="form-add-inbox-data" enctype="multipart/form-data">
+            @csrf
+            <div class="modal-body row">
+                <div class="form-group col-md-12">
+                    <label for="">Judul</label>
+                    <input type="text" class="form-control" name="title" id="edit_title">
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="">Deskripsi</label>
+                    <textarea name="description" class="form-control" placeholder="Isi deskripsi disini" id="edit_description"></textarea>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="">Diskon (dalam nominal)</label>
+                    <input type="number" class="form-control" name="discount" id="edit_discount">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="">Type</label>
+                    <select name="type" class="form-control" id="edit_type">
                         <option value="1">%</option>
                         <option value="2">Rp.</option>
                     </select>
@@ -92,8 +147,8 @@
 @endsection
 @section('script')
 <script>
-    $('#addprice').on('click', () => {
-        $('#price').modal('show')
+    $('#addpromo').on('click', () => {
+        $('#promo').modal('show')
     });
 </script>
 @endsection

@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BuyPriceController;
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\PaymentMethodController;
+use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\PromoController;
 use App\Http\Controllers\SellPriceController;
 use App\Http\Controllers\TransactionController;
@@ -27,15 +29,29 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::get('/buy/price', [HomeController::class, 'buyPrice'])->name('buyprice');
 Route::post('/buy/create', [BuyPriceController::class, 'create'])->name('buycreate');
-Route::get('/promo', [HomeController::class, 'promotions'])->name('promotions');
-Route::post('/promos', [PromoController::class, 'create'])->name('promo.create');
+
+Route::get('/sell/price', [HomeController::class, 'sellPrice'])->name('sellprice');
+Route::post('/sell/create', [SellPriceController::class, 'create'])->name('sellcreate');
+
+Route::get('/promos', [HomeController::class, 'promotions'])->name('promotions');
+Route::post('/promos/create', [PromoController::class, 'add'])->name('promo.add');
+Route::resource('promo', PromoController::class);
+
 Route::get('/payment-method', [HomeController::class, 'paymentMethods'])->name('paymentMethod');
 Route::post('/payment-method/create', [PaymentMethodController::class, 'create'])->name('paymentMethod.create');
+
+Route::get('/faqs', [HomeController::class, 'faqs'])->name('faq');
+Route::resource('faq', FaqController::class);
+
+Route::get('/policies', [HomeController::class, 'policies'])->name('policy');
+Route::resource('policy', PolicyController::class);
+
 Route::get('/user', [HomeController::class, 'users'])->name('users');
+
 Route::get('/transaction/pending', [HomeController::class, 'transactionPending'])->name('transaction.pending');
 Route::get('/transaction/completed', [HomeController::class, 'transactionCompleted'])->name('transaction.completed');
 Route::post('/transaction/confirm/{id}', [TransactionController::class, 'updateStatus'])->name('confirmation.transaction');
-Route::get('/sell/price', [HomeController::class, 'sellPrice'])->name('sellprice');
-Route::post('/sell/create', [SellPriceController::class, 'create'])->name('sellcreate');
+
