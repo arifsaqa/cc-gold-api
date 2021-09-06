@@ -50,15 +50,19 @@ class FaqController extends Controller
     public function store(Request $request)
     {
         try {
+            $request->validate([
+                'question' => 'required|string',
+                'answer' => 'required|string'
+            ]);
             Faq::create([
                'question' => $request->question,
                'answer' => $request->answer,
                'created_at' => Carbon::now(),
                'updated_at' => Carbon::now()
             ]);
-            return view()->with('success', 'data Faq sudah tersimpan');
+            return redirect()->back()->with('success', 'Data faq sudah tersimpan');
         } catch (\Throwable $th) {
-            return view()->with('error', $th);
+            return redirect()->back()->with('error', $th);
         }
     }
 

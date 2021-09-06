@@ -100,34 +100,34 @@
         </div>
         </div>
     </div>
-    <div class="modal fade" id="editpromo" tabindex="-1" role="dialog" aria-labelledby="editpromo" aria-hidden="true">
+    <div class="modal fade" id="promo" tabindex="-1" role="dialog" aria-labelledby="promo" aria-hidden="true">
         <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title" id="modal-set-resiLabel">Edit Promo</h5>
+            <h5 class="modal-title" id="modal-set-resiLabel">Tambah Promo</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>
-            <form action="{{route('promo.edit')}}" method="POST" id="form-add-inbox-data" enctype="multipart/form-data">
+            <form action="{{route('promo.add')}}" method="POST" id="form-add-inbox-data" enctype="multipart/form-data">
             @csrf
             <div class="modal-body row">
                 <div class="form-group col-md-12">
                     <label for="">Judul</label>
-                    <input type="text" class="form-control" name="title" id="edit_title">
+                    <input type="text" class="form-control" name="title">
                 </div>
                 <div class="form-group col-md-12">
                     <label for="">Deskripsi</label>
-                    <textarea name="description" class="form-control" placeholder="Isi deskripsi disini" id="edit_description"></textarea>
+                    <textarea name="description" class="form-control" placeholder="Isi deskripsi disini"></textarea>
                 </div>
                 <div class="form-group col-md-5">
                     <label for="">Diskon (dalam nominal)</label>
-                    <input type="number" class="form-control" name="discount" id="edit_discount">
+                    <input type="number" class="form-control" name="discount">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="">Type</label>
-                    <select name="type" class="form-control" id="edit_type">
-                        <option value="1">%</option>
+                    <select name="type" class="form-control">
+                        <option value="1" selected>%</option>
                         <option value="2">Rp.</option>
                     </select>
                 </div>

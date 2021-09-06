@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\PaymentMethod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\File;
+
 
 class PaymentMethodController extends Controller
 {
@@ -118,8 +120,23 @@ class PaymentMethodController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($payment_method)
     {
-        //
+        $payment_method = PaymentMethod::find($payment_method)->first();
+        $file = $payment_method->logo;
+        $file = explode(asset('/'), $file);
+        $deleteImage= File::delete($file[1]);
+
+        if($deleteImage){
+            $deleteData = $payment_method->delete();
+            if ($deleteData) {
+                return redirect()->back()->with('success', 'Berhasil hapus data');
+            }
+            else{
+                return redirect()->back()->with('error', 'Gagal hapus data');
+            }
+        }else{
+            return redirect()->back()->with('error', 'Gagal hapus gambar');
+        }
     }
 }

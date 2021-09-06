@@ -40,8 +40,9 @@ Route::get('/promos', [HomeController::class, 'promotions'])->name('promotions')
 Route::post('/promos/create', [PromoController::class, 'add'])->name('promo.add');
 Route::resource('promo', PromoController::class);
 
-Route::get('/payment-method', [HomeController::class, 'paymentMethods'])->name('paymentMethod');
+Route::get('/payment', [HomeController::class, 'paymentMethods'])->name('paymentMethod');
 Route::post('/payment-method/create', [PaymentMethodController::class, 'create'])->name('paymentMethod.create');
+Route::resource('payment-method', PaymentMethodController::class);
 
 Route::get('/faqs', [HomeController::class, 'faqs'])->name('faq');
 Route::resource('faq', FaqController::class);

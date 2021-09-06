@@ -29,7 +29,13 @@
                                 <th scope="row">{{$key+1}}</th>
                                 <td>{{$payment_method->name}}</td>
                                 <td><img src="{{$payment_method->logo}}" style="max-width: 100px"></td>
-                                <td>Actions</td>
+                                <td>
+                                    <form action="{{ route('payment-method.destroy', ['payment_method'=>$payment_method->id]) }}" method="POST">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger">Del</button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>

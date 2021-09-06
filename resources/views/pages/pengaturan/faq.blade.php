@@ -48,7 +48,7 @@
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>
-            <form action="{{route('faq.create')}}" method="POST" id="form-add-inbox-data" enctype="multipart/form-data">
+            <form action="{{route('faq.store')}}" method="POST" id="form-add-inbox-data" enctype="multipart/form-data">
             @csrf
             <div class="modal-body row">
                 <div class="form-group col-md-12">

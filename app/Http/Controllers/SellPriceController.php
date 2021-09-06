@@ -20,7 +20,7 @@ class SellPriceController extends Controller
     public function index()
     {
         //
-        $prices = DB::table('sell_prices')->latest()->first();
+        $prices = SellPrice::latest()->first();
         return response()->json(
             [
                 'message' => "success",

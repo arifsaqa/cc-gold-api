@@ -49,6 +49,9 @@ class PolicyController extends Controller
     public function store(Request $request)
     {
         try {
+            $request->validate([
+                'policy' => 'required|string'
+            ]);
             Policy::create([
                'policy' => $request->policy,
                'created_at' => Carbon::now(),

@@ -167,7 +167,8 @@ class PromoController extends Controller
     {
         $promo = Promo::find($promo)->first();
         $file = $promo->image;
-        $deleteImage= File::delete($file);
+        $file = explode(asset('/'), $file);
+        $deleteImage= File::delete($file[1]);
 
         if($deleteImage){
             $deleteData = $promo->delete();
