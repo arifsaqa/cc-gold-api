@@ -206,7 +206,7 @@ class TransactionController extends Controller
                     Transaction::create([
                         'userId' => $destination->id,
                         'payment' => $transaction->payment,
-                        'type' => 3,
+                        'type' => 4,
                         'gram' => $transaction->gram,
                         'adminFee' => 0,
                         'priceId' => $transaction->priceId,
