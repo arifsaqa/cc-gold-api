@@ -31,11 +31,15 @@ class SellPriceController extends Controller
     }
 
     public function getCurrentPrice(){
-        $latestPrice = DB::table('sell_prices')->latest()->first();
+        $latestPrice = DB::table('sell_prices')->orderBy('created_at', 'asc')->latest()->first();
+        $diff = SellPrice::orderBy('created_at', 'asc')->limit(2)->get()->toArray();
+        $diffNumb = $diff[1]['price'] - $diff[0]['price'];
+        $percentChange = ($diffNumb / $diff[0]['price']) * 100;
         return response()->json(
             [
                 'message' => "success",
                 'data' => $latestPrice,
+                'diff' => round($percentChange, 2),
                 'status' => 1,
             ]
         );

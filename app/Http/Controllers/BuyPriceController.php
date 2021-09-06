@@ -41,7 +41,7 @@ class BuyPriceController extends Controller
             [
                 'message' => "success",
                 'data' => $latestPrice,
-                'diff' => $percentChange,
+                'diff' => round($percentChange, 2),
                 'status' => 1,
             ]
         );
