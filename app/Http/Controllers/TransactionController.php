@@ -18,7 +18,7 @@ class TransactionController extends Controller
      */
     public function index($id)
     {
-        $data = DB::table('transactions')->where(['userId' => $id])->orderBy('created_at', 'desc')->limit(5)->get();
+        $data = Transaction::with('userDestinationByNumber')->where(['userId' => $id])->orderBy('created_at', 'desc')->limit(5)->get();
 
         $status = 1;
 

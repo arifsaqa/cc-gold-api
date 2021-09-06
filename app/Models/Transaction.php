@@ -28,5 +28,8 @@ class Transaction extends Model
     public function user(){
         return $this->BelongsTo(User::class, 'userId');
     }
+    public function userDestinationByNumber(){
+        return $this->BelongsTo(User::class, 'destinationNumber','phone');
+    }
 }
 
