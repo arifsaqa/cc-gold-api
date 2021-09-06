@@ -33,11 +33,15 @@ class BuyPriceController extends Controller
 
     public function getCurrentPrice()
     {
-        $latestPrice = DB::table('buy_prices')->latest()->first();
+        $latestPrice = DB::table('buy_prices')->orderBy('created_at', 'asc')->latest()->first();
+        $diff = BuyPrice::orderBy('created_at', 'asc')->limit(2)->get()->toArray();
+        $diffNumb = $diff[1]['price'] - $diff[0]['price'];
+        $percentChange = ($diffNumb / $diff[0]['price']) * 100;
         return response()->json(
             [
                 'message' => "success",
                 'data' => $latestPrice,
+                'diff' => $percentChange,
                 'status' => 1,
             ]
         );
