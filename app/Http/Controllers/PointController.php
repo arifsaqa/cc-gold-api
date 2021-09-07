@@ -74,13 +74,13 @@ class PointController extends Controller
     public function use(Request $request)
     {
         $point = Point::where('userId', '=', $request->userId)->first();
-        if (!$point->point >= 1) {
+        if (!$point->point >= $request->point) {
             return response()->json([
                 'status' => 0,
                 'message' => 'Point anda kurang'
             ]);
         }
-        $point->point -= 1;
+        $point->point -= $request->point;
         $point->save();
         return response()->json([
             'status' => 1,
