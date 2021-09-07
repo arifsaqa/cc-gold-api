@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Point;
+use App\Models\Saldo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -73,6 +74,7 @@ class PointController extends Controller
 
     public function use(Request $request)
     {
+        $user = Saldo::where('userId', '=', $request->userId)->first();
         $point = Point::where('userId', '=', $request->userId)->first();
         if (!$point->point >= $request->point) {
             return response()->json([
@@ -81,6 +83,7 @@ class PointController extends Controller
             ]);
         }
         $point->point -= $request->point;
+        $user->gram += $request->point;
         $point->save();
         return response()->json([
             'status' => 1,
