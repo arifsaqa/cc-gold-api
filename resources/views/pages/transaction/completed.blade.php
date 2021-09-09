@@ -9,7 +9,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-footer">
-                        <table class="table">
+                        <table class="table table-bordered">
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
