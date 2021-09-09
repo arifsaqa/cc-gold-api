@@ -64,13 +64,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'role' => 1,
-            'isVerified' => 0,
-            'deviceId' => 0,
-            'password' => Hash::make($data['password']),
-        ]);
+        return redirect()->back()-with('error', 'Penambahan User Silahkan Hubungi Developer');
     }
 }
