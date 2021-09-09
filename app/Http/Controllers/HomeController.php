@@ -61,12 +61,12 @@ class HomeController extends Controller
     }
     public function transactionPending()
     {
-        $transactions = Transaction::where('status', 0)->get();
+        $transactions = Transaction::where('status', 0)->paginate(10);
         return view('pages.transaction.pending', compact('transactions'));
     }
     public function transactionCompleted()
     {
-        $transactions = Transaction::where('status', 1)->get();
+        $transactions = Transaction::where('status', 1)->paginate(10);
         return view('pages.transaction.completed', compact('transactions'));
     }
     public function promotions()
