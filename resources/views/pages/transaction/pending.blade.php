@@ -57,7 +57,7 @@
                                     </td>
                                 </tr>
                                 <td>
-                                        Transfer dari : {{$transaction->user->phone ?? $transaction->user->name}}
+                                        Transfer dari : {{$transaction->user->phone ?? ''}}
                                     </td>
                                 <tr>
                                     <td>
