@@ -26,7 +26,7 @@ class Transaction extends Model
         'barcode'
     ];
     public function user(){
-        return $this->BelongsTo(User::class, 'userId');
+        return $this->BelongsTo(User::class, 'userId', 'id');
     }
     public function userDestinationByNumber(){
         return $this->BelongsTo(User::class, 'destinationNumber','phone');
