@@ -40,7 +40,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-footer overflow-auto">
                         {!!$buy_price->links()!!}
                     </div>
                 </div>

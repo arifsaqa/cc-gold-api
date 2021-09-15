@@ -66,8 +66,10 @@ class HomeController extends Controller
     }
     public function transactionCompleted()
     {
-        $transactions = Transaction::where('status', 1)->paginate(5);
-        return view('pages.transaction.completed', compact('transactions'));
+        $buys = Transaction::where('status', 1)->where('type', 1)->paginate(5);
+        $sells = Transaction::where('status', 1)->where('type', 2)->paginate(5);
+        $transfers = Transaction::where('status', 1)->where('type', 3)->paginate(5);
+        return view('pages.transaction.completed', compact('buys', 'sells', 'transfers'));
     }
     public function promotions()
     {
