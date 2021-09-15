@@ -38,7 +38,7 @@ class TransactionController extends Controller
         $rules = [
             'payment' => 'required|integer',
             'type' => 'required|integer',
-            'gram' => 'required|double',
+            'gram' => 'required',
             'priceId' => 'required|integer',
             'adminFee' => 'required|integer',
             'nominal' => 'required|integer',
