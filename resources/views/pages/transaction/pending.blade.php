@@ -36,7 +36,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if (!$transactions->toArray())
+                                        @if (!$buys->toArray())
                                         <tr>
                                             <td colspan="5" class="text-center">Data Tidak Ada</td>
                                         </tr>
