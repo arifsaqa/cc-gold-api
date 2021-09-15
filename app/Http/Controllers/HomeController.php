@@ -61,8 +61,10 @@ class HomeController extends Controller
     }
     public function transactionPending()
     {
-        $transactions = Transaction::where('status', 0)->paginate(5);
-        return view('pages.transaction.pending', compact('transactions'));
+        $buys = Transaction::where('status', 0)->where('type', 1)->paginate(5);
+        $sells = Transaction::where('status', 0)->where('type', 2)->paginate(5);
+        $transfers = Transaction::where('status', 0)->where('type', 3)->paginate(5);
+        return view('pages.transaction.pending', compact('buys', 'sells', 'transfers'));
     }
     public function transactionCompleted()
     {
