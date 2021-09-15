@@ -51,12 +51,12 @@ class HomeController extends Controller
     }
     public function buyPrice()
     {
-        $buy_price = BuyPrice::all();
+        $buy_price = BuyPrice::paginate(7);
         return view('pages.buy_price.index', compact('buy_price'));
     }
     public function sellPrice()
     {
-        $sell_price = SellPrice::all();
+        $sell_price = SellPrice::paginate(7);
         return view('pages.sell_price.index', compact('sell_price'));
     }
     public function transactionPending()

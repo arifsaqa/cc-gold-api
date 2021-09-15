@@ -36,7 +36,10 @@
                                 </tr>
                             @endforeach
                         </tbody>
-                      </table>
+                    </table>
+                    <div class="card-footer">
+                        {!!$buy_price->links()!!}
+                    </div>
                 </div>
         </div>
     </div>
