@@ -15,6 +15,10 @@ class DropGramFromTransactionsTable extends Migration
     {
         Schema::table('transactions', function (Blueprint $table) {
             $table->dropColumn('gram');
+            // $table->double('gram', 10, 4);
+        });
+        Schema::table('transactions', function (Blueprint $table) {
+            // $table->dropColumn('gram');
             $table->double('gram', 10, 4);
         });
     }
