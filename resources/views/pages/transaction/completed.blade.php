@@ -33,7 +33,6 @@
                                             <th scope="col">Harga</th>
                                             <th scope="col">Informasi</th>
                                             <th scope="col">Status</th>
-                                            <th scope="col">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -61,8 +60,6 @@
                                             </td>
                                             <td rowspan="5">
                                                 <div class="badge badge-success">Selesai</div>
-                                            </td>
-                                            <td rowspan="5">
                                             </td>
                                         </tr>
                                         <tr>
@@ -95,7 +92,6 @@
                                             <th scope="col">Harga</th>
                                             <th scope="col">Informasi</th>
                                             <th scope="col">Status</th>
-                                            <th scope="col">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -123,8 +119,6 @@
                                             </td>
                                             <td rowspan="5">
                                                 <div class="badge badge-success">Selesai</div>
-                                            </td>
-                                            <td rowspan="5">
                                             </td>
                                         </tr>
                                         <tr>
@@ -157,7 +151,6 @@
                                             <th scope="col">Harga</th>
                                             <th scope="col">Informasi</th>
                                             <th scope="col">Status</th>
-                                            <th scope="col">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -185,8 +178,6 @@
                                             </td>
                                             <td rowspan="5">
                                                 <div class="badge badge-success">Selesai</div>
-                                            </td>
-                                            <td rowspan="5">
                                             </td>
                                         </tr>
                                         <tr>
