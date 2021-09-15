@@ -14,30 +14,32 @@
                             <span>Tambah Harga</span>
                         </button>
                     </div>
-                    <table class="table">
-                        <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Harga</th>
-                            <th scope="col">Tanggal Update Harga</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                            @if (!$sell_price->toArray())
-                                <tr>
-                                    <td colspan="3" class="text-center">Data Tidak Ada</td>
-                                </tr>
-                            @endif
-                            @foreach ($sell_price as $key => $sell)
-                                <tr>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Harga</th>
+                                <th scope="col">Tanggal Update Harga</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @if (!$sell_price->toArray())
+                                    <tr>
+                                        <td colspan="3" class="text-center">Data Tidak Ada</td>
+                                    </tr>
+                                @endif
+                                @foreach ($sell_price as $key => $sell)
+                                    <tr>
 
-                                        <th scope="row">{{$key+1}}</th>
-                                        <td>{{$sell->price}}</td>
-                                        <td>{{$sell->created_at}}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                            <th scope="row">{{$key+1}}</th>
+                                            <td>{{$sell->price}}</td>
+                                            <td>{{$sell->created_at}}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="card-footer">
                         {!!$buy_price->links()!!}
                     </div>
