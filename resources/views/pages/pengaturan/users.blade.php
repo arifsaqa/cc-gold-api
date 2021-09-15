@@ -29,7 +29,10 @@
                             </tr>
                         @endforeach
                         </tbody>
-                      </table>
+                    </table>
+                    <div class="card-footer">
+                        {!!$users->links()!!}
+                    </div>
                 </div>
         </div>
     </div>

@@ -14,32 +14,37 @@
                             <span>Tambah Metode Pembayaran</span>
                         </button>
                     </div>
-                    <table class="table">
-                        <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Image</th>
-                            <th scope="col">Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        @foreach ($payment_methods as $key => $payment_method)
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
                             <tr>
-                                <th scope="row">{{$key+1}}</th>
-                                <td>{{$payment_method->name}}</td>
-                                <td><img src="{{$payment_method->logo}}" style="max-width: 100px"></td>
-                                <td>
-                                    <form action="{{ route('payment-method.destroy', ['payment_method'=>$payment_method->id]) }}" method="POST">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger">Del</button>
-                                    </form>
-                                </td>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Image</th>
+                                <th scope="col">Action</th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                      </table>
+                            </thead>
+                            <tbody>
+                            @foreach ($payment_methods as $key => $payment_method)
+                                <tr>
+                                    <th scope="row">{{$key+1}}</th>
+                                    <td>{{$payment_method->name}}</td>
+                                    <td><img src="{{$payment_method->logo}}" style="max-width: 100px"></td>
+                                    <td>
+                                        <form action="{{ route('payment-method.destroy', ['payment_method'=>$payment_method->id]) }}" method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger">Del</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        {!!$payment_methods->links()!!}
+                    </div>
                 </div>
         </div>
     </div>

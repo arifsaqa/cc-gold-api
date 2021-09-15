@@ -14,24 +14,29 @@
                             <span>Tambah Policy</span>
                         </button>
                     </div>
-                    <table class="table">
-                        <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Policy</th>
-                            <th scope="col">Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        @foreach ($policies as $key => $policy)
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
                             <tr>
-                                <th scope="row">{{$key+1}}</th>
-                                <td>{{$policy->policy}}</td>
-                                <td>Actions</td>
+                                <th scope="col">#</th>
+                                <th scope="col">Policy</th>
+                                <th scope="col">Action</th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                      </table>
+                            </thead>
+                            <tbody>
+                            @foreach ($policies as $key => $policy)
+                                <tr>
+                                    <th scope="row">{{$key+1}}</th>
+                                    <td>{{$policy->policy}}</td>
+                                    <td>Actions</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        {!!$policies->links()!!}
+                    </div>
                 </div>
         </div>
     </div>

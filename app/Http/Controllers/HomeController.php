@@ -71,7 +71,7 @@ class HomeController extends Controller
     }
     public function promotions()
     {
-        $promos = Promo::all();
+        $promos = Promo::paginate(5);
         return view('pages.promo.index', compact('promos'));
     }
     public function users()
@@ -81,17 +81,17 @@ class HomeController extends Controller
     }
     public function paymentMethods()
     {
-        $payment_methods = PaymentMethod::all();
+        $payment_methods = PaymentMethod::paginate(5);
         return view('pages.pengaturan.payment', compact('payment_methods'));
     }
     public function faqs()
     {
-        $faqs = Faq::all();
+        $faqs = Faq::paginate(5);
         return view('pages.pengaturan.faq', compact('faqs'));
     }
     public function policies()
     {
-        $policies = Policy::all();
+        $policies = Policy::paginate(5);
         return view('pages.pengaturan.policy', compact('policies'));
     }
 }

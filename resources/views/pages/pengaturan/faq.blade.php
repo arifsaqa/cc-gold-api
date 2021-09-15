@@ -14,26 +14,31 @@
                             <span>Tambah Faq</span>
                         </button>
                     </div>
-                    <table class="table">
-                        <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Question</th>
-                            <th scope="col">Answer</th>
-                            <th scope="col">Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        @foreach ($faqs as $key => $faq)
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
                             <tr>
-                                <th scope="row">{{$key+1}}</th>
-                                <td>{{$faq->question}}</td>
-                                <td>{{$faq->answer}}</td>
-                                <td>Actions</td>
+                                <th scope="col">#</th>
+                                <th scope="col">Question</th>
+                                <th scope="col">Answer</th>
+                                <th scope="col">Action</th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                      </table>
+                            </thead>
+                            <tbody>
+                            @foreach ($faqs as $key => $faq)
+                                <tr>
+                                    <th scope="row">{{$key+1}}</th>
+                                    <td>{{$faq->question}}</td>
+                                    <td>{{$faq->answer}}</td>
+                                    <td>Actions</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        {!!$faqs->links()!!}
+                    </div>
                 </div>
         </div>
     </div>

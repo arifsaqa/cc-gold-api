@@ -14,43 +14,48 @@
                             <span>Tambah Promo</span>
                         </button>
                     </div>
-                    <table class="table">
-                        <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Diskon</th>
-                            <th scope="col">Image</th>
-                            <th scope="col">Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        @foreach ($promos as $key => $promo)
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
                             <tr>
-                                <th scope="row">{{$key+1}}</th>
-                                <td>{{$promo->title}}</td>
-                                <td>{{$promo->description}}</td>
-                                @php
-                                    if ($promo->type == 1) {
-                                        $discount = $promo->discount . '%';
-                                    }else {
-                                        $discount = 'Rp. ' . number_format($promo->discount);
-                                    }
-                                @endphp
-                                <td>{{$discount}}</td>
-                                <td><img src="{{$promo->image}}" style="max-width: 100px"></td>
-                                <td>
-                                    <form action="{{ route('promo.destroy', ['promo'=>$promo->id]) }}" method="POST">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger">Del</button>
-                                    </form>
-                                </td>
+                                <th scope="col">#</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Diskon</th>
+                                <th scope="col">Image</th>
+                                <th scope="col">Action</th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                      </table>
+                            </thead>
+                            <tbody>
+                            @foreach ($promos as $key => $promo)
+                                <tr>
+                                    <th scope="row">{{$key+1}}</th>
+                                    <td>{{$promo->title}}</td>
+                                    <td>{{$promo->description}}</td>
+                                    @php
+                                        if ($promo->type == 1) {
+                                            $discount = $promo->discount . '%';
+                                        }else {
+                                            $discount = 'Rp. ' . number_format($promo->discount);
+                                        }
+                                    @endphp
+                                    <td>{{$discount}}</td>
+                                    <td><img src="{{$promo->image}}" style="max-width: 100px"></td>
+                                    <td>
+                                        <form action="{{ route('promo.destroy', ['promo'=>$promo->id]) }}" method="POST">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger">Del</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        {!!$promos->links()!!}
+                    </div>
                 </div>
         </div>
     </div>
