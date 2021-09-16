@@ -25,7 +25,7 @@
                     <div class="card-body overflow-auto">
                         <div class="tab-content">
                             <div id="beli" class="container tab-pane active"><br>
-                                <table class="table" id="table_data1">
+                                <table class="table" id="table_data">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
@@ -66,7 +66,7 @@
                                 </table>
                             </div>
                             <div id="jual" class="container tab-pane fade"><br>
-                                <table class="table" id="table_data2">
+                                <table class="table" id="table_data">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>

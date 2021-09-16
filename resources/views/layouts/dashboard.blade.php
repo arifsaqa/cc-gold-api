@@ -58,19 +58,14 @@
   @yield('script')
   <script>
     $(document).ready(function() {
-    $('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
-        $.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust();
-    } );
+        $('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
+            $.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust();
+        } );
 
-    $('table.table').DataTable( {
-        scrollY:        200,
-        scrollCollapse: true,
-        paging:         false
-    } );
+        $('table.table').DataTable();
 
-    // Apply a search to the second table for the demo
-    $('#table_data2').DataTable().search( 'New York' ).draw();
-} );
+        // Apply a search to the second table for the demo
+    });
 </script>
 </body>
 </html>
