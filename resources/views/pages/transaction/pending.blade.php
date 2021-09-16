@@ -15,10 +15,10 @@
                             <a class="nav-link active" data-toggle="tab" href="#beli">Transaksi Beli</a>
                             </li>
                             <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#jual" onclick="getTable()">Transaksi Jual</a>
+                            <a class="nav-link" data-toggle="tab" href="#jual">Transaksi Jual</a>
                             </li>
                             <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#transfer" onclick="getTable()">Transaksi Transfer</a>
+                            <a class="nav-link" data-toggle="tab" href="#transfer">Transaksi Transfer</a>
                             </li>
                         </ul>
                     </div>
@@ -66,7 +66,7 @@
                                 </table>
                             </div>
                             <div id="jual" class="container tab-pane fade"><br>
-                                <table class="table" id="table_data">
+                                <table class="table" id="table_data1">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
@@ -107,7 +107,7 @@
                                 </table>
                             </div>
                             <div id="transfer" class="container tab-pane fade"><br>
-                                <table class="table" id="table_data">
+                                <table class="table" id="table_data2">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>

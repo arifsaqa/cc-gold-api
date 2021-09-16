@@ -59,10 +59,9 @@
   <script>
     $(document).ready(function() {
         $('#table_data').DataTable();
+        $('#table_data1').DataTable();
+        $('#table_data2').DataTable();
     });
-    function getTable(){
-        $('#table_data').DataTable();
-    }
 </script>
 </body>
 </html>
