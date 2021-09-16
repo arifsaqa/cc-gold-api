@@ -102,16 +102,6 @@
                                                 </form>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                User yang menjual : {{$sell->user->phone ?? ''}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Waktu Transaksi : {{$sell->created_at}}
-                                            </td>
-                                        </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
