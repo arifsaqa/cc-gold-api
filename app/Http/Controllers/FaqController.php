@@ -85,7 +85,12 @@ class FaqController extends Controller
      */
     public function edit($id)
     {
-        //
+        $faq = Faq::find($id);
+
+        return response()->json([
+            'status' => 1,
+            'data' => $faq
+        ]);
     }
 
     /**
@@ -97,7 +102,18 @@ class FaqController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'question' => 'required|string',
+            'answer' => 'required|string'
+        ]);
+        $faq = Faq::find($id);
+        $faq->question = $request->question;
+        $faq->answer = $request->answer;
+        $savedData = $faq->save();
+
+        if ($savedData) {
+            return redirect()->back()->with('success', 'data telah diubah');
+        }
     }
 
     /**
@@ -108,6 +124,11 @@ class FaqController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $faq = Faq::find($id);
+        $deleteData = $faq->delete();
+
+        if ($deleteData) {
+            return redirect()->back()->with('success', 'Berhasil hapus data');
+        }
     }
 }

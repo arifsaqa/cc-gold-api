@@ -57,9 +57,9 @@ class PolicyController extends Controller
                'created_at' => Carbon::now(),
                'updated_at' => Carbon::now()
             ]);
-            return view()->with('success', 'data Policy sudah tersimpan');
+            return redirect()->back()->with('success', 'data Policy sudah tersimpan');
         } catch (\Throwable $th) {
-            return view()->with('error', $th);
+            return redirect()->back()->with('error', $th);
         }
     }
 
@@ -82,7 +82,12 @@ class PolicyController extends Controller
      */
     public function edit($id)
     {
-        //
+        $policy = Policy::find($id);
+
+        return response()->json([
+            'status'=> 1,
+            'data'=>$policy,
+        ]);
     }
 
     /**
@@ -94,7 +99,17 @@ class PolicyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'policy' => 'required',
+        ]);
+        $policy = Policy::find($id);
+        $policy->policy = $request->policy;
+        $savedData = $policy->save();
+
+        if ($savedData) {
+            return redirect()->back()->with('success', 'data telah diubah');
+        }
+
     }
 
     /**
@@ -105,6 +120,11 @@ class PolicyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $policy = Policy::find($id);
+        $deleteData = $policy->delete();
+
+        if ($deleteData) {
+            return redirect()->back()->with('success', 'Berhasil hapus data');
+        }
     }
 }

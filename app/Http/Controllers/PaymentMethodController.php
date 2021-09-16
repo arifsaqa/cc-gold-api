@@ -95,6 +95,16 @@ class PaymentMethodController extends Controller
         ], 201);
     }
 
+    public function edit($id)
+    {
+        $payment_method = PaymentMethod::find($id);
+
+        return response()->json([
+            'status' => 1,
+            'data' => $payment_method
+        ]);
+    }
+
     /**
      * Update the specified resource in storage.
      *

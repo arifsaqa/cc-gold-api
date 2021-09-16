@@ -110,7 +110,12 @@ class PromoController extends Controller
      */
     public function edit($id)
     {
+        $promo = Promo::find($id);
 
+        return response()->json([
+            'status'=> 1,
+            'data'=>$promo,
+        ]);
     }
 
     /**
@@ -122,20 +127,27 @@ class PromoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $title = $request->title;
-        $image = $request->image;
-        $description = $request->description;
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+        ]);
 
-        $promo = Promo::find($id)->first();
-        $promo->title = $title;
-        $promo->image = $image;
-        $promo->description = $description;
+        $promo = Promo::find($id);
+
+        if($request->hasFile('image')){
+            $request->validate([
+              'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            ]);
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('images/promo'), $imageName);
+            $promo->image = asset('images/promo/'.$imageName);
+        }
+
+        $promo->title = $request->title;
+        $promo->description = $request->description;
         $promo->save();
 
-        return response()->json([
-            "status" => 1,
-            "message" => "sukses",
-        ], 201);
+        return redirect()->back()->with('success', 'Berhasil edit data');
 
     }
 

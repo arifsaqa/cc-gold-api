@@ -15,7 +15,7 @@
                         </button>
                     </div>
                     <div class="card-body overflow-auto">
-                        <table class="table">
+                        <table class="table" id="table_data">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -38,9 +38,6 @@
                                 @endforeach
                             </tbody>
                         </table>
-                    </div>
-                    <div class="card-footer overflow-auto">
-                        {!!$buy_price->links()!!}
                     </div>
                 </div>
             </div>

@@ -25,7 +25,7 @@
                     <div class="card-body overflow-auto">
                         <div class="tab-content">
                             <div id="beli" class="container tab-pane active"><br>
-                                <table class="table table-bordered">
+                                <table class="table" id="table_data">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
@@ -42,26 +42,18 @@
                                         </tr>
                                         @endif
                                         @foreach ($buys as $key => $buy)
-                                        @php
-                                        $tipe;
-                                        if ($buy->type == 1) {
-                                        $tipe = 'Beli';
-                                        }elseif ($buy->type == 2) {
-                                        $tipe = 'Jual';
-                                        }elseif ($buy->type == 3) {
-                                        $tipe = 'Transfer';
-                                        }
-                                        @endphp
                                         <tr>
-                                            <th scope="row" rowspan="5">{{$key+1}}</th>
-                                            <td rowspan="5">{{$buy->nominal}}</td>
+                                            <th scope="row">{{$key+1}}</th>
+                                            <td>{{$buy->nominal}}</td>
                                             <td>
-                                                Tipe transaksi : {{$tipe}}
+                                                User yang membeli : {{$buy->user->phone ?? ''}}<br>
+                                                Nominal : {{$buy->nominal}}<br>
+                                                Waktu Transaksi : {{$buy->created_at}}
                                             </td>
-                                            <td rowspan="5">
-                                                <div class="badge badge-warning">Pending</div>
+                                            <td>
+                                                <div class="badge badge-success">Selesai</div>
                                             </td>
-                                            <td rowspan="5">
+                                            <td>
                                                 <form action="{{ route('confirmation.transaction', ['id'=>$buy->id]) }}" method="POST">
                                                     @method('POST')
                                                     @csrf
@@ -69,30 +61,12 @@
                                                 </form>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                Nominal : {{$buy->nominal}}
-                                            </td>
-                                        </tr>
-                                        <td>
-                                            Transfer dari : {{$buy->user->phone ?? ''}}
-                                        </td>
-                                        <tr>
-                                            <td>
-                                                Transfer Untuk : {{$buy->destinationNumber ?? ''}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Waktu Transaksi : {{$buy->created_at}}
-                                            </td>
-                                        </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
                             <div id="jual" class="container tab-pane fade"><br>
-                                <table class="table table-bordered">
+                                <table class="table" id="table_data">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
@@ -109,26 +83,18 @@
                                         </tr>
                                         @endif
                                         @foreach ($sells as $key => $sell)
-                                        @php
-                                        $tipe;
-                                        if ($sell->type == 1) {
-                                        $tipe = 'Beli';
-                                        }elseif ($sell->type == 2) {
-                                        $tipe = 'Jual';
-                                        }elseif ($sell->type == 3) {
-                                        $tipe = 'Transfer';
-                                        }
-                                        @endphp
                                         <tr>
-                                            <th scope="row" rowspan="5">{{$key+1}}</th>
-                                            <td rowspan="5">{{$sell->nominal}}</td>
+                                            <th scope="row">{{$key+1}}</th>
+                                            <td>{{$sell->nominal}}</td>
                                             <td>
-                                                Tipe transaksi : {{$tipe}}
+                                                User yang menjual : {{$sell->user->phone ?? ''}}<br>
+                                                Nominal : {{$sell->nominal}}<br>
+                                                Waktu Transaksi : {{$sell->created_at}}
                                             </td>
-                                            <td rowspan="5">
-                                                <div class="badge badge-warning">Pending</div>
+                                            <td>
+                                                <div class="badge badge-success">Selesai</div>
                                             </td>
-                                            <td rowspan="5">
+                                            <td>
                                                 <form action="{{ route('confirmation.transaction', ['id'=>$sell->id]) }}" method="POST">
                                                     @method('POST')
                                                     @csrf
@@ -138,15 +104,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                Nominal : {{$sell->nominal}}
-                                            </td>
-                                        </tr>
-                                        <td>
-                                            Transfer dari : {{$sell->user->phone ?? ''}}
-                                        </td>
-                                        <tr>
-                                            <td>
-                                                Transfer Untuk : {{$sell->destinationNumber ?? ''}}
+                                                User yang menjual : {{$sell->user->phone ?? ''}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -159,7 +117,7 @@
                                 </table>
                             </div>
                             <div id="transfer" class="container tab-pane fade"><br>
-                                <table class="table table-bordered">
+                                <table class="table" id="table_data">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
@@ -176,26 +134,19 @@
                                         </tr>
                                         @endif
                                         @foreach ($transfers as $key => $transfer)
-                                        @php
-                                        $tipe;
-                                        if ($transfer->type == 1) {
-                                        $tipe = 'Beli';
-                                        }elseif ($transfer->type == 2) {
-                                        $tipe = 'Jual';
-                                        }elseif ($transfer->type == 3) {
-                                        $tipe = 'Transfer';
-                                        }
-                                        @endphp
                                         <tr>
-                                            <th scope="row" rowspan="5">{{$key+1}}</th>
-                                            <td rowspan="5">{{$transfer->nominal}}</td>
+                                            <th scope="row">{{$key+1}}</th>
+                                            <td>{{$transfer->nominal}}</td>
                                             <td>
-                                                Tipe transaksi : {{$tipe}}
+                                                Transfer dari : {{$transfer->user->phone ?? ''}} ({{$transfer->user->name}})<br>
+                                                Transfer Untuk : {{$transfer->destinationNumber ?? ''}} ({{$transfer->userDestinationByNumber->name}})<br>
+                                                Nominal : {{$transfer->nominal}}<br>
+                                                Waktu Transaksi : {{$transfer->created_at}}
                                             </td>
-                                            <td rowspan="5">
+                                            <td>
                                                 <div class="badge badge-warning">Pending</div>
                                             </td>
-                                            <td rowspan="5">
+                                            <td>
                                                 <form action="{{ route('confirmation.transaction', ['id'=>$transfer->id]) }}" method="POST">
                                                     @method('POST')
                                                     @csrf
@@ -203,40 +154,9 @@
                                                 </form>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                Nominal : {{$transfer->nominal}}
-                                            </td>
-                                        </tr>
-                                        <td>
-                                            Transfer dari : {{$transfer->user->phone ?? ''}}
-                                        </td>
-                                        <tr>
-                                            <td>
-                                                Transfer Untuk : {{$transfer->destinationNumber ?? ''}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Waktu Transaksi : {{$transfer->created_at}}
-                                            </td>
-                                        </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer overflow-auto">
-                        <div class="tab-content">
-                            <div id="jual" class="container tab-pane active"><br>
-                                {!!$buys->links()!!}
-                            </div>
-                            <div id="beli" class="container tab-pane fade"><br>
-                                {!!$sells->links()!!}
-                            </div>
-                            <div id="transfer" class="container tab-pane fade"><br>
-                                {!!$transfers->links()!!}
                             </div>
                         </div>
                     </div>

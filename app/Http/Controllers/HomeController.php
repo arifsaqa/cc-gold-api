@@ -51,51 +51,51 @@ class HomeController extends Controller
     }
     public function buyPrice()
     {
-        $buy_price = BuyPrice::paginate(7);
+        $buy_price = BuyPrice::all();
         return view('pages.buy_price.index', compact('buy_price'));
     }
     public function sellPrice()
     {
-        $sell_price = SellPrice::paginate(7);
+        $sell_price = SellPrice::all();
         return view('pages.sell_price.index', compact('sell_price'));
     }
     public function transactionPending()
     {
-        $buys = Transaction::where('status', 0)->where('type', 1)->paginate(5);
-        $sells = Transaction::where('status', 0)->where('type', 2)->paginate(5);
-        $transfers = Transaction::where('status', 0)->where('type', 3)->paginate(5);
+        $buys = Transaction::where('status', 0)->where('type', 1)->get();
+        $sells = Transaction::where('status', 0)->where('type', 2)->get();
+        $transfers = Transaction::where('status', 0)->where('type', 3)->get();
         return view('pages.transaction.pending', compact('buys', 'sells', 'transfers'));
     }
     public function transactionCompleted()
     {
-        $buys = Transaction::where('status', 1)->where('type', 1)->paginate(5);
-        $sells = Transaction::where('status', 1)->where('type', 2)->paginate(5);
-        $transfers = Transaction::where('status', 1)->where('type', 3)->paginate(5);
+        $buys = Transaction::where('status', 1)->where('type', 1)->get();
+        $sells = Transaction::where('status', 1)->where('type', 2)->get();
+        $transfers = Transaction::where('status', 1)->where('type', 3)->get();
         return view('pages.transaction.completed', compact('buys', 'sells', 'transfers'));
     }
     public function promotions()
     {
-        $promos = Promo::paginate(5);
+        $promos = Promo::all();
         return view('pages.promo.index', compact('promos'));
     }
     public function users()
     {
-        $users = User::where('role', '!=', 1)->paginate(7);
+        $users = User::where('role', '!=', 1)->all();
         return view('pages.pengaturan.users', compact('users'));
     }
     public function paymentMethods()
     {
-        $payment_methods = PaymentMethod::paginate(5);
+        $payment_methods = PaymentMethod::all();
         return view('pages.pengaturan.payment', compact('payment_methods'));
     }
     public function faqs()
     {
-        $faqs = Faq::paginate(5);
+        $faqs = Faq::all();
         return view('pages.pengaturan.faq', compact('faqs'));
     }
     public function policies()
     {
-        $policies = Policy::paginate(5);
+        $policies = Policy::all();
         return view('pages.pengaturan.policy', compact('policies'));
     }
 }

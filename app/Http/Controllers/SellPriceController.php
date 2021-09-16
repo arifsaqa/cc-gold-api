@@ -112,7 +112,11 @@ class SellPriceController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = SellPrice::find($id);
+        return response()->json([
+            'status' => 1,
+            'data' => $data
+        ]);
     }
 
     /**
@@ -124,7 +128,17 @@ class SellPriceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'price' => 'required|string',
+        ]);
+        $sellPrice = SellPrice::find($id);
+        $sellPrice->price = $request->price;
+        $sellPrice->updated_at = Carbon::now();
+        $savedData = $sellPrice->save();
+
+        if ($savedData) {
+            return redirect()->back()->with('success', 'data telah diubah');
+        }
     }
 
     /**
