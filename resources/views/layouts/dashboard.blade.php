@@ -58,9 +58,23 @@
   @yield('script')
   <script>
     $(document).ready(function() {
-        $('#table_data').DataTable();
-        $('#table_data1').DataTable();
-        $('#table_data2').DataTable();
+        $('#table_data').DataTable({
+            responsive: true
+        });
+
+        $('#table_data1').DataTable({
+            responsive: true
+        });
+
+        $('#table_data2').DataTable({
+            responsive: true
+        });
+
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            $($.fn.dataTable.tables(true)).DataTable()
+            .columns.adjust()
+            .responsive.recalc();
+        });
     });
 </script>
 </body>
