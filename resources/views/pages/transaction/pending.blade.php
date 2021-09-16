@@ -51,7 +51,7 @@
                                                 Waktu Transaksi : {{$buy->created_at}}
                                             </td>
                                             <td>
-                                                <div class="badge badge-success">Selesai</div>
+                                                <div class="badge badge-warning">Pending</div>
                                             </td>
                                             <td>
                                                 <form action="{{ route('confirmation.transaction', ['id'=>$buy->id]) }}" method="POST">
@@ -92,7 +92,7 @@
                                                 Waktu Transaksi : {{$sell->created_at}}
                                             </td>
                                             <td>
-                                                <div class="badge badge-success">Selesai</div>
+                                                <div class="badge badge-warning">Pending</div>
                                             </td>
                                             <td>
                                                 <form action="{{ route('confirmation.transaction', ['id'=>$sell->id]) }}" method="POST">
