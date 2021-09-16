@@ -66,7 +66,7 @@
                                 </table>
                             </div>
                             <div id="jual" class="container tab-pane fade"><br>
-                                <table class="table" id="table_data2">
+                                <table class="table" id="table_data">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
