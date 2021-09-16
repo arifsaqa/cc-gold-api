@@ -15,10 +15,10 @@
                             <a class="nav-link active" data-toggle="tab" href="#beli">Transaksi Beli</a>
                             </li>
                             <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#jual">Transaksi Jual</a>
+                            <a class="nav-link" data-toggle="tab" href="#jual" onclick="getTable()">Transaksi Jual</a>
                             </li>
                             <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#transfer">Transaksi Transfer</a>
+                            <a class="nav-link" data-toggle="tab" href="#transfer" onclick="getTable()">Transaksi Transfer</a>
                             </li>
                         </ul>
                     </div>

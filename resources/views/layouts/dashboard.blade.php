@@ -60,6 +60,9 @@
     $(document).ready(function() {
         $('#table_data').DataTable();
     });
+    function getTable(){
+        $('#table_data').DataTable();
+    }
 </script>
 </body>
 </html>
