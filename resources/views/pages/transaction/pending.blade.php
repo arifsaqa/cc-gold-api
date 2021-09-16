@@ -25,7 +25,7 @@
                     <div class="card-body overflow-auto">
                         <div class="tab-content">
                             <div id="beli" class="container tab-pane active"><br>
-                                <table class="table" id="table_data">
+                                <table id="table_data"  class="display" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
@@ -66,7 +66,7 @@
                                 </table>
                             </div>
                             <div id="jual" class="container tab-pane fade"><br>
-                                <table class="table" id="table_data1">
+                                <table id="table_data1" class="display" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
@@ -107,7 +107,7 @@
                                 </table>
                             </div>
                             <div id="transfer" class="container tab-pane fade"><br>
-                                <table class="table" id="table_data2">
+                                <table id="table_data2"  class="display" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
