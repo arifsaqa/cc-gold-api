@@ -10,30 +10,30 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                 <div class="card card-statistic-1">
                     <div class="card-icon bg-primary">
-                    <i class="far fa-user"></i>
+                        <i class="fas fa-hand-holding-usd"></i>
                     </div>
                     <div class="card-wrap">
-                    <div class="card-header">
-                        <h4>Harga Beli</h4>
-                    </div>
-                    <div class="card-body">
-                        {{$buy_latest->price ?? 0}}
-                    </div>
+                        <div class="card-header">
+                            <h4>Harga Beli</h4>
+                        </div>
+                        <div class="card-body">
+                            {{$buy_latest->price ?? 0}}
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                 <div class="card card-statistic-1">
                     <div class="card-icon bg-danger">
-                    <i class="far fa-newspaper"></i>
+                        <i class="fas fa-file-invoice-dollar"></i>
                     </div>
                     <div class="card-wrap">
-                    <div class="card-header">
-                        <h4>Harga Jual</h4>
-                    </div>
-                    <div class="card-body">
-                        {{$sell_latest->price ?? 0}}
-                    </div>
+                        <div class="card-header">
+                            <h4>Harga Jual</h4>
+                        </div>
+                        <div class="card-body">
+                            {{$sell_latest->price ?? 0}}
+                        </div>
                     </div>
                 </div>
             </div>
