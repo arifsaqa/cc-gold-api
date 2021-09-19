@@ -151,6 +151,14 @@ class TransactionController extends Controller
 
         $total = $transaction->total;
     }
+    public function failedStatus($id)
+    {
+        $transaction =  Transaction::where('id', '=', $id)->first();
+        $transaction->status = 2;
+        $transaction->message = "Transaksi ditolak mohon hubungi Admin";
+        $transaction->save();
+        return redirect()->back()->with('success', 'berhasil menolak transaksi');
+    }
     public function updateStatus($id)
     {
         try {

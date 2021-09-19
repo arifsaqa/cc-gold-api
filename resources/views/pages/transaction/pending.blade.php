@@ -55,6 +55,11 @@
                                                 <div class="badge badge-warning">Pending</div>
                                             </td>
                                             <td>
+                                                <form action="{{ route('failed.transaction', ['id'=>$buy->id]) }}" method="POST">
+                                                    @method('POST')
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-danger">Tolak</button>
+                                                </form>
                                                 <form action="{{ route('confirmation.transaction', ['id'=>$buy->id]) }}" method="POST">
                                                     @method('POST')
                                                     @csrf
@@ -97,6 +102,11 @@
                                                 <div class="badge badge-warning">Pending</div>
                                             </td>
                                             <td>
+                                                <form action="{{ route('failed.transaction', ['id'=>$sell->id]) }}" method="POST">
+                                                    @method('POST')
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-danger">Tolak</button>
+                                                </form>
                                                 <form action="{{ route('confirmation.transaction', ['id'=>$sell->id]) }}" method="POST">
                                                     @method('POST')
                                                     @csrf
@@ -140,6 +150,11 @@
                                                 <div class="badge badge-warning">Pending</div>
                                             </td>
                                             <td>
+                                                <form action="{{ route('failed.transaction', ['id'=>$transfer->id]) }}" method="POST">
+                                                    @method('POST')
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-danger">Tolak</button>
+                                                </form>
                                                 <form action="{{ route('confirmation.transaction', ['id'=>$transfer->id]) }}" method="POST">
                                                     @method('POST')
                                                     @csrf
