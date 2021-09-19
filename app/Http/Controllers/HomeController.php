@@ -78,7 +78,7 @@ class HomeController extends Controller
         $buys = Transaction::where('status', 2)->where('type', 1)->get();
         $sells = Transaction::where('status', 2)->where('type', 2)->get();
         $transfers = Transaction::where('status', 2)->where('type', 3)->get();
-        return view('pages.transaction.completed', compact('buys', 'sells', 'transfers'));
+        return view('pages.transaction.failed', compact('buys', 'sells', 'transfers'));
     }
     public function promotions()
     {
