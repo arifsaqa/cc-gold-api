@@ -59,5 +59,5 @@ Route::get('/transaction/pending', [HomeController::class, 'transactionPending']
 Route::get('/transaction/completed', [HomeController::class, 'transactionCompleted'])->name('transaction.completed');
 Route::get('/transaction/failed', [HomeController::class, 'transactionFailed'])->name('transaction.failed');
 Route::post('/transaction/confirm/{id}', [TransactionController::class, 'updateStatus'])->name('confirmation.transaction');
-Route::post('/transaction/reject/{id}', [TransactionController::class, 'failedStatus'])->name('failed.transaction');
+Route::get('/transaction/reject/{id}', [TransactionController::class, 'failedStatus'])->name('failed.transaction');
 
