@@ -46,7 +46,7 @@
                                             <th scope="row">{{$key+1}}</th>
                                             <td>{{$buy->nominal}}</td>
                                             <td>
-                                                User yang membeli : {{$buy->user->phone ?? ''}}<br>
+                                                User yang membeli : {{$buy->user->phone ?? ''}} ({{$buy->user->name}})<br>
                                                 Nominal : {{$buy->nominal}}<br>
                                                 Waktu Transaksi : {{$buy->created_at}}
                                             </td>
@@ -87,7 +87,7 @@
                                             <th scope="row">{{$key+1}}</th>
                                             <td>{{$sell->nominal}}</td>
                                             <td>
-                                                User yang menjual : {{$sell->user->phone ?? ''}}<br>
+                                                User yang menjual : {{$sell->user->phone ?? ''}} ({{$sell->user->name}})<br>
                                                 Nominal : {{$sell->nominal}}<br>
                                                 Waktu Transaksi : {{$sell->created_at}}
                                             </td>
