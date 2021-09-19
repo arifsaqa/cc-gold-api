@@ -24,7 +24,7 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                 <div class="card card-statistic-1">
-                    <div class="card-icon bg-danger">
+                    <div class="card-icon bg-secondary">
                         <i class="fas fa-file-invoice-dollar"></i>
                     </div>
                     <div class="card-wrap">
