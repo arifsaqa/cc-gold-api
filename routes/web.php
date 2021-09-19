@@ -34,6 +34,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/buy/price', [HomeController::class, 'buyPrice'])->name('buyprice');
 Route::post('/buy/create', [BuyPriceController::class, 'create'])->name('buycreate');
+Route::resource('buy', BuyPriceController::class);
 
 Route::get('/sell/price', [HomeController::class, 'sellPrice'])->name('sellprice');
 Route::post('/sell/create', [SellPriceController::class, 'create'])->name('sellcreate');
