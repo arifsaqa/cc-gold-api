@@ -50,7 +50,7 @@ class HomeController extends Controller
         $transaction_pending = Transaction::where('status', 0)->get();
         $transaction_completed = Transaction::where('status', 1)->get();
         $transaction_failed = Transaction::where('status', 2)->get();
-        return view('pages.index', compact('buy_latest', 'sell_latest', 'transactions', 'transaction_pending', 'transaction_failed', 'users'));
+        return view('pages.index', compact('buy_latest', 'sell_latest', 'transactions', 'transaction_pending', 'transaction_failed', 'transaction_completed', 'users'));
     }
     public function buyPrice()
     {
