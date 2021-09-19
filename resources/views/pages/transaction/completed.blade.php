@@ -48,7 +48,8 @@
                                             <td>
                                                 User yang membeli : {{$buy->user->phone ?? ''}} ({{$buy->user->name}})<br>
                                                 Nominal : {{$buy->nominal}}<br>
-                                                Waktu Transaksi : {{$buy->created_at}}
+                                                Waktu Transaksi : {{$buy->created_at}}<br>
+                                                Kode unik Transaksi : {{$buy->barcode}}
                                             </td>
                                             <td>
                                                 <div class="badge badge-success">Selesai</div>
@@ -81,7 +82,8 @@
                                             <td>
                                                 User yang menjual : {{$sell->user->phone ?? ''}} ({{$sell->user->name}})<br>
                                                 Nominal : {{$sell->nominal}}<br>
-                                                Waktu Transaksi : {{$sell->created_at}}
+                                                Waktu Transaksi : {{$sell->created_at}}<br>
+                                                Kode unik Transaksi : {{$sell->barcode}}
                                             </td>
                                             <td>
                                                 <div class="badge badge-success">Selesai</div>
@@ -115,7 +117,8 @@
                                                 Transfer dari : {{$transfer->user->phone ?? ''}} ({{$transfer->user->name}})<br>
                                                 Transfer Untuk : {{$transfer->destinationNumber ?? ''}} ({{$transfer->userDestinationByNumber->name}})<br>
                                                 Nominal : {{$transfer->nominal}}<br>
-                                                Waktu Transaksi : {{$transfer->created_at}}
+                                                Waktu Transaksi : {{$transfer->created_at}}<br>
+                                                Kode unik Transaksi : {{$transfer->barcode}}
                                             </td>
                                             <td>
                                                 <div class="badge badge-success">Selesai</div>
