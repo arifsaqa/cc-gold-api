@@ -40,15 +40,15 @@
             <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                 <div class="card card-statistic-1">
                     <div class="card-icon bg-success">
-                    <i class="far fa-file"></i>
+                        <i class="fas fa-check-circle"></i>
                     </div>
                     <div class="card-wrap">
-                    <div class="card-header">
-                        <h4>Transaksi Berhasil</h4>
-                    </div>
-                    <div class="card-body">
-                        {{count($transaction_completed)}}
-                    </div>
+                        <div class="card-header">
+                            <h4>Transaksi Berhasil</h4>
+                        </div>
+                        <div class="card-body">
+                            {{count($transaction_completed)}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -58,12 +58,12 @@
                         <i class="fas fa-times-circle"></i>
                     </div>
                     <div class="card-wrap">
-                    <div class="card-header">
-                        <h4>Transaksi Gagal</h4>
-                    </div>
-                    <div class="card-body">
-                        {{count($transaction_failed)}}
-                    </div>
+                        <div class="card-header">
+                            <h4>Transaksi Gagal</h4>
+                        </div>
+                        <div class="card-body">
+                            {{count($transaction_failed)}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -73,12 +73,12 @@
                         <i class="fas fa-exclamation-circle"></i>
                     </div>
                     <div class="card-wrap">
-                    <div class="card-header">
-                        <h4>Transaksi Pending</h4>
-                    </div>
-                    <div class="card-body">
-                        {{count($transaction_pending)}}
-                    </div>
+                        <div class="card-header">
+                            <h4>Transaksi Pending</h4>
+                        </div>
+                        <div class="card-body">
+                            {{count($transaction_pending)}}
+                        </div>
                     </div>
                 </div>
             </div>
