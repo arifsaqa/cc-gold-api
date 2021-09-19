@@ -47,7 +47,10 @@ class HomeController extends Controller
         $sell_latest = SellPrice::latest('created_at')->first();
         $transactions = Transaction::all();
         $users = User::all();
-        return view('pages.index', compact('buy_latest', 'sell_latest', 'transactions', 'users'));
+        $transaction_pending = Transaction::where('status', 0)->get();
+        $transaction_completed = Transaction::where('status', 1)->get();
+        $transaction_failed = Transaction::where('status', 2)->get();
+        return view('pages.index', compact('buy_latest', 'sell_latest', 'transactions', 'transaction_pending', 'transaction_failed', 'users'));
     }
     public function buyPrice()
     {
