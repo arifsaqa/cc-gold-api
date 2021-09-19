@@ -51,12 +51,12 @@ class HomeController extends Controller
     }
     public function buyPrice()
     {
-        $buy_price = BuyPrice::orderByDesc('updated_at')->get();
+        $buy_price = BuyPrice::orderBy('created_at', 'DESC')->get();
         return view('pages.buy_price.index', compact('buy_price'));
     }
     public function sellPrice()
     {
-        $sell_price = SellPrice::orderByDesc('updated_at')->get();
+        $sell_price = SellPrice::orderBy('created_at', 'DESC')->get();
         return view('pages.sell_price.index', compact('sell_price'));
     }
     public function transactionPending()
