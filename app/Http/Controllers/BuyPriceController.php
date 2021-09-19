@@ -114,7 +114,11 @@ class BuyPriceController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = BuyPrice::find($id);
+        return response()->json([
+            'status' => 1,
+            'data' => $data
+        ]);
     }
 
     /**
@@ -126,7 +130,17 @@ class BuyPriceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'price' => 'required|string',
+        ]);
+        $buyPrice = BuyPrice::find($id);
+        $buyPrice->price = $request->price;
+        $buyPrice->updated_at = Carbon::now();
+        $savedData = $buyPrice->save();
+
+        if ($savedData) {
+            return redirect()->back()->with('success', 'data telah diubah');
+        }
     }
 
     /**
