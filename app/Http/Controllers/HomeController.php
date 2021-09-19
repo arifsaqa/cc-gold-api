@@ -80,7 +80,7 @@ class HomeController extends Controller
     }
     public function users()
     {
-        $users = User::where('role', '!=', 1)->all();
+        $users = User::where('role', '!=', 1)->get();
         return view('pages.pengaturan.users', compact('users'));
     }
     public function paymentMethods()
