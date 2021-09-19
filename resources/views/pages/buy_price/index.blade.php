@@ -34,7 +34,7 @@
                                 <tr>
                                     <th scope="row">{{$key+1}}</th>
                                     <td>{{$buy->price}}</td>
-                                    <td>{{$buy->created_at}}</td>
+                                    <td>{{$buy->updated_at}}</td>
                                     <td>
                                         <form action="{{ route('buy.destroy', ['buy'=>$buy->id]) }}" method="POST">
                                             @method('DELETE')
