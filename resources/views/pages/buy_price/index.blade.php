@@ -21,6 +21,7 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Harga</th>
                                     <th scope="col">Tanggal Update Harga</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -34,6 +35,14 @@
                                     <th scope="row">{{$key+1}}</th>
                                     <td>{{$buy->price}}</td>
                                     <td>{{$buy->created_at}}</td>
+                                    <td>
+                                        <form action="{{ route('buy.destroy', ['buy'=>$buy->id]) }}" method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="button" class="btn btn-warning" onclick="setIndex({{$buy->id}})"><i class="fas fa-edit"></i></button>
+                                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                        </form>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -71,11 +80,55 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="modal_edit" tabindex="-1" role="dialog" aria-labelledby="modal_edit" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="modal-set-resiLabel">Edit Data</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <form action="" method="POST" id="form-edit-buy" enctype="multipart/form-data">
+                    @csrf
+                    @method("PATCH")
+                    <div class="modal-body row">
+                        <div class="form-group col-md-12">
+                            <label for="">Harga Terbaru</label>
+                            <input type="text" class="form-control" name="price" id="price_edit">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+              </div>
+            </div>
+        </div>
         @endsection
         @section('script')
         <script>
             $('#addprice').on('click', () => {
                 $('#price').modal('show')
             });
+            function setIndex(id) {
+                // index = id;
+                // console.log(index);
+                var url = "{{route('buy.edit', ":id")}}";
+                url = url.replace(":id", id);
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    success: function(data) {
+                        console.log(data);
+                        $('#modal_edit').modal('show')
+                        $("#price_edit").val(data.data.price)
+                        var formAction = "{{route('buy.update', ":id")}}";
+                        formAction = formAction.replace(':id', id);
+                        $("#form-edit-buy").attr("action", formAction);
+                    },
+                });
+            };
         </script>
         @endsection
