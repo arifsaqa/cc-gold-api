@@ -31,6 +31,7 @@
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="/transaction/pending">Menunggu Persetujuan</a></li>
                 <li><a class="nav-link" href="/transaction/completed">Selesai</a></li>
+                <li><a class="nav-link" href="/transaction/failed">Gagal (Ditolak)</a></li>
               </ul>
             </li>
             <li class="menu-header">Pengaturan</li>
