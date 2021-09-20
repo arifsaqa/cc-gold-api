@@ -13,9 +13,7 @@
             <div class="dropdown-menu dropdown-menu-right">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button type="button" class="btn text-danger">
-                        <i class="fas fa-sign-out-alt"></i> Logout
-                    </button>
+                    <button type="submit" class="btn text-danger"><i class="fas fa-sign-out-alt"></i> Logout</button>
                 </form>
             </div>
           </li>
