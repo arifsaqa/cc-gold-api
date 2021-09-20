@@ -12,7 +12,7 @@
             <div class="d-sm-none d-lg-inline-block">{{Auth::user()->name}}</div></a>
             <div class="dropdown-menu dropdown-menu-right">
               <div class="dropdown-divider"></div>
-              <a href="{{ route('auth.logout')}}" class="dropdown-item has-icon text-danger">
+              <a href="{{Auth::logout()}}" class="dropdown-item has-icon text-danger">
                 <i class="fas fa-sign-out-alt"></i> Logout
               </a>
             </div>
