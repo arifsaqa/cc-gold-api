@@ -33,7 +33,7 @@
                                 @foreach ($buy_price as $key => $buy)
                                 <tr>
                                     <th scope="row">{{$key+1}}</th>
-                                    <td>{{Rp. number_format($buy->price)}}</td>
+                                    <td>Rp. {{number_format($buy->price)}}</td>
                                     <td>{{$buy->updated_at}}</td>
                                     <td>
                                         <form action="{{ route('buy.destroy', ['buy'=>$buy->id]) }}" method="POST">

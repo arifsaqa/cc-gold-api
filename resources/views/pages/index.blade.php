@@ -17,7 +17,7 @@
                             <h4>Harga Beli</h4>
                         </div>
                         <div class="card-body">
-                            {{Rp. number_format($buy_latest->price) ?? 0}}
+                            Rp. {{number_format($buy_latest->price) ?? 0}}
                         </div>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                             <h4>Harga Jual</h4>
                         </div>
                         <div class="card-body">
-                            {{Rp. number_format($sell_latest->price) ?? 0}}
+                            Rp. {{number_format($sell_latest->price) ?? 0}}
                         </div>
                     </div>
                 </div>
