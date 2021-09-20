@@ -30,7 +30,6 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Harga</th>
                                             <th scope="col">Informasi</th>
                                             <th scope="col">Status</th>
                                         </tr>
@@ -64,7 +63,6 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Harga</th>
                                             <th scope="col">Informasi</th>
                                             <th scope="col">Status</th>
                                         </tr>
@@ -98,7 +96,6 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Harga</th>
                                             <th scope="col">Informasi</th>
                                             <th scope="col">Status</th>
                                         </tr>
@@ -112,7 +109,6 @@
                                         @foreach ($transfers as $key => $transfer)
                                         <tr>
                                             <th scope="row">{{$key+1}}</th>
-                                            <td>{{$transfer->nominal}}</td>
                                             <td>
                                                 Transfer dari : {{$transfer->user->phone ?? ''}} ({{$transfer->user->name}})<br>
                                                 Transfer Untuk : {{$transfer->destinationNumber ?? ''}} ({{$transfer->userDestinationByNumber->name}})<br>

@@ -29,7 +29,6 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Harga</th>
                                             <th scope="col">Informasi</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Aksi</th>
@@ -72,7 +71,6 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Harga</th>
                                             <th scope="col">Informasi</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Aksi</th>
@@ -115,7 +113,6 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Harga</th>
                                             <th scope="col">Informasi</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Aksi</th>
