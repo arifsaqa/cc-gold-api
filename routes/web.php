@@ -55,7 +55,7 @@ Route::resource('faq', FaqController::class);
 Route::get('/policies', [HomeController::class, 'policies'])->name('policy');
 Route::resource('policy', PolicyController::class);
 
-Route::get('/user', [HomeController::class, 'users'])->name('users');
+Route::get('/users', [HomeController::class, 'users'])->name('users');
 Route::resource('user', UserController::class);
 
 Route::get('/transaction/pending', [HomeController::class, 'transactionPending'])->name('transaction.pending');
