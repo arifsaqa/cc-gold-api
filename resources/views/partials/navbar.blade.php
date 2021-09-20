@@ -11,10 +11,10 @@
             <img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
             <div class="d-sm-none d-lg-inline-block">{{Auth::user()->name}}</div></a>
             <div class="dropdown-menu dropdown-menu-right">
-              <div class="dropdown-divider"></div>
-              <a href="{{Auth::logout()}}" class="dropdown-item has-icon text-danger">
-                <i class="fas fa-sign-out-alt"></i> Logout
-              </a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="button" class="btn btn-primary">Logout</button>
+                </form>
             </div>
           </li>
         </ul>
