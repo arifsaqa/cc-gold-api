@@ -8,6 +8,7 @@ use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\PromoController;
 use App\Http\Controllers\SellPriceController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -55,6 +56,7 @@ Route::get('/policies', [HomeController::class, 'policies'])->name('policy');
 Route::resource('policy', PolicyController::class);
 
 Route::get('/user', [HomeController::class, 'users'])->name('users');
+Route::resource('user', UserController::class);
 
 Route::get('/transaction/pending', [HomeController::class, 'transactionPending'])->name('transaction.pending');
 Route::get('/transaction/completed', [HomeController::class, 'transactionCompleted'])->name('transaction.completed');
