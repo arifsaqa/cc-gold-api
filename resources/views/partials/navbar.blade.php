@@ -13,7 +13,7 @@
             <div class="dropdown-menu dropdown-menu-right">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button type="button" class="btn btn-primary">Logout</button>
+                    <button type="button" class="btn btn-danger">Logout</button>
                 </form>
             </div>
           </li>
