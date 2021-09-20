@@ -34,7 +34,7 @@
                                 <tr>
 
                                     <th scope="row">{{$key+1}}</th>
-                                    <td>Rp. {{number_format($sell->price)}}</td>
+                                    <td>Rp. {{monet_format("",$sell->price)}}</td>
                                     <td>{{$sell->updated_at}}</td>
                                     <td>
                                         <form action="{{ route('sell.destroy', ['sell'=>$sell->id]) }}" method="POST">
