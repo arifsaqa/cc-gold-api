@@ -58,17 +58,6 @@
         <form action="" method="POST" id="form-edit-user" enctype="multipart/form-data">
             @csrf
             @method("PATCH")
-            <div class="modal-header">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-            </div>
             <div class="modal-body row">
                 <div class="form-group col-md-12">
                     <label for="">Name</label>

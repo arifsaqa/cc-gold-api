@@ -76,24 +76,29 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
+        try {
+            $user = User::find($id);
 
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-        ]);
-
-        $user->name = $request->name;
-        $user->email = $request->email;
-        if ($request->password) {
             $request->validate([
-                'password' => 'required|min:6|max:6',
+                'name' => 'required',
+                'email' => 'required|email',
             ]);
-            $user->password = Hash::make($request->password);
-        }
-        $user->save();
 
-        return redirect()->back()->with('success', 'Berhasil update data');
+            $user->name = $request->name;
+            $user->email = $request->email;
+            if ($request->password) {
+                $request->validate([
+                    'password' => 'required|min:6|max:6',
+                ]);
+                $user->password = Hash::make($request->password);
+            }
+            $user->save();
+
+            return redirect()->back()->with('success', 'Berhasil update data');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th);
+        }
+
     }
 
     /**
