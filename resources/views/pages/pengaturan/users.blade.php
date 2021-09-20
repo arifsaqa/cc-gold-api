@@ -96,7 +96,6 @@
                         $('#modal_edit').modal('show')
                         $("#name_edit").val(data.data.name)
                         $("#email_edit").val(data.data.email)
-                        $("#password_edit").val(data.data.password)
                         var formAction = "{{route('user.update', ":id")}}";
                         formAction = formAction.replace(':id', id);
                         $("#form-edit-user").attr("action", formAction);

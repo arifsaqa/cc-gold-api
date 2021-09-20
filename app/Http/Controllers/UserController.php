@@ -78,9 +78,19 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+        ]);
+
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = Hash::make($request->password);
+        if ($request->password) {
+            $request->validate([
+                'password' => 'required|min:6|max:6',
+            ]);
+            $user->password = Hash::make($request->password);
+        }
         $user->save();
 
         return redirect()->back()->with('success', 'Berhasil update data');
