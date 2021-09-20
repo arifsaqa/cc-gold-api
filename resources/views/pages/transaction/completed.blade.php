@@ -30,6 +30,7 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
+                                            <th scope="col">Kode Transaksi</th>
                                             <th scope="col">Informasi</th>
                                             <th scope="col">Status</th>
                                         </tr>
@@ -43,12 +44,11 @@
                                         @foreach ($buys as $key => $buy)
                                         <tr>
                                             <th scope="row">{{$key+1}}</th>
-                                            <td>{{$buy->nominal}}</td>
+                                            <td>{{$buy->barcode}}</td>
                                             <td>
                                                 User yang membeli : {{$buy->user->phone ?? ''}} ({{$buy->user->name}})<br>
                                                 Nominal : Rp. {{number_format($buy->nominal,2 )}}<br>
-                                                Waktu Transaksi : {{$buy->created_at}}<br>
-                                                Kode unik Transaksi : {{$buy->barcode}}
+                                                Waktu Transaksi : {{$buy->created_at}}
                                             </td>
                                             <td>
                                                 <div class="badge badge-success">Selesai</div>
@@ -63,6 +63,7 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
+                                            <th scope="col">Kode Transaksi</th>
                                             <th scope="col">Informasi</th>
                                             <th scope="col">Status</th>
                                         </tr>
@@ -76,12 +77,11 @@
                                         @foreach ($sells as $key => $sell)
                                         <tr>
                                             <th scope="row">{{$key+1}}</th>
-                                            <td>{{$sell->nominal}}</td>
+                                            <td>{{$sell->barcode}}</td>
                                             <td>
                                                 User yang menjual : {{$sell->user->phone ?? ''}} ({{$sell->user->name}})<br>
                                                 Nominal : Rp. {{number_format($sell->nominal,2)}}<br>
-                                                Waktu Transaksi : {{$sell->created_at}}<br>
-                                                Kode unik Transaksi : {{$sell->barcode}}
+                                                Waktu Transaksi : {{$sell->created_at}}
                                             </td>
                                             <td>
                                                 <div class="badge badge-success">Selesai</div>
@@ -96,6 +96,7 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
+                                            <th scope="col">Kode Transaksi</th>
                                             <th scope="col">Informasi</th>
                                             <th scope="col">Status</th>
                                         </tr>
@@ -109,12 +110,12 @@
                                         @foreach ($transfers as $key => $transfer)
                                         <tr>
                                             <th scope="row">{{$key+1}}</th>
+                                            <td>{{$buy->barcode}}</td>
                                             <td>
                                                 Transfer dari : {{$transfer->user->phone ?? ''}} ({{$transfer->user->name}})<br>
                                                 Transfer Untuk : {{$transfer->destinationNumber ?? ''}} ({{$transfer->userDestinationByNumber->name}})<br>
                                                 Nominal : Rp. {{number_format($transfer->nominal,2)}}<br>
-                                                Waktu Transaksi : {{$transfer->created_at}}<br>
-                                                Kode unik Transaksi : {{$transfer->barcode}}
+                                                Waktu Transaksi : {{$transfer->created_at}}
                                             </td>
                                             <td>
                                                 <div class="badge badge-success">Selesai</div>

@@ -29,6 +29,7 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
+                                            <th scope="col">Kode Transaksi</th>
                                             <th scope="col">Informasi</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Aksi</th>
@@ -43,6 +44,7 @@
                                         @foreach ($buys as $key => $buy)
                                         <tr>
                                             <th scope="row">{{$key+1}}</th>
+                                            <td>{{$buy->barcode}}</td>
                                             <td>
                                                 User yang membeli : {{$buy->user->phone ?? ''}} ({{$buy->user->name}})<br>
                                                 Nominal : Rp. {{number_format($buy->nominal,2)}}<br>
@@ -70,6 +72,7 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
+                                            <th scope="col">Kode Transaksi</th>
                                             <th scope="col">Informasi</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Aksi</th>
@@ -84,6 +87,7 @@
                                         @foreach ($sells as $key => $sell)
                                         <tr>
                                             <th scope="row">{{$key+1}}</th>
+                                            <td>{{$sell->barcode}}</td>
                                             <td>
                                                 User yang menjual : {{$sell->user->phone ?? ''}} ({{$sell->user->name}})<br>
                                                 Nominal : Rp. {{number_format($sell->nominal,2)}}<br>
@@ -111,6 +115,7 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
+                                            <th scope="col">Kode Transaksi</th>
                                             <th scope="col">Informasi</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Aksi</th>
@@ -125,6 +130,7 @@
                                         @foreach ($transfers as $key => $transfer)
                                         <tr>
                                             <th scope="row">{{$key+1}}</th>
+                                            <td>{{$transfer->barcode}}</td>
                                             <td>
                                                 Transfer dari : {{$transfer->user->phone ?? ''}} ({{$transfer->user->name}})<br>
                                                 Transfer Untuk : {{$transfer->destinationNumber ?? ''}} ({{$transfer->userDestinationByNumber->name}})<br>
