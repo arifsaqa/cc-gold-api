@@ -43,7 +43,6 @@
                                         @foreach ($buys as $key => $buy)
                                         <tr>
                                             <th scope="row">{{$key+1}}</th>
-                                            <td>{{$buy->nominal}}</td>
                                             <td>
                                                 User yang membeli : {{$buy->user->phone ?? ''}} ({{$buy->user->name}})<br>
                                                 Nominal : Rp. {{number_format($buy->nominal,2)}}<br>
@@ -76,7 +75,6 @@
                                         @foreach ($sells as $key => $sell)
                                         <tr>
                                             <th scope="row">{{$key+1}}</th>
-                                            <td>{{$sell->nominal}}</td>
                                             <td>
                                                 User yang menjual : {{$sell->user->phone ?? ''}} ({{$sell->user->name}})<br>
                                                 Nominal : Rp. {{number_format($sell->nominal,2)}}<br>
@@ -109,7 +107,6 @@
                                         @foreach ($transfers as $key => $transfer)
                                         <tr>
                                             <th scope="row">{{$key+1}}</th>
-                                            <td>{{$transfer->nominal}}</td>
                                             <td>
                                                 Transfer dari : {{$transfer->user->phone ?? ''}} ({{$transfer->user->name}})<br>
                                                 Transfer Untuk : {{$transfer->destinationNumber ?? ''}} ({{$transfer->userDestinationByNumber->name}})<br>
